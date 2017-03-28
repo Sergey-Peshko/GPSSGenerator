@@ -9,8 +9,6 @@ namespace GPSSGenerator
 {
 	class Program
 	{
-		
-		
 		static void Main(string[] args)
 		{
 			Console.Write("input file name: ");

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="GlobalDemension\GlobalModel.cs" />
     <Compile Include="GlobalDemension\GlobalVariables.cs" />
+    <Compile Include="GlobalDemension\Pretreatment.cs" />
     <Compile Include="Nodes\INode.cs" />
     <Compile Include="Nodes\NodeFactory.cs" />
     <Compile Include="Nodes\SomeNode.cs" />

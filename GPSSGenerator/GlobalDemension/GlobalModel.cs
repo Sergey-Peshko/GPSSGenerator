@@ -22,18 +22,17 @@ namespace GPSSGenerator
 				GlobalVariables.data + way);
 			int numberOfNodes = Convert.ToInt32(sr.ReadLine());
 
-			nodes = new List<INode>();
-			List<string> nodesDesciption = new List<string>();
+			nodes = new List<INode>(numberOfNodes);
+			string[][] nodesDesciption = new string[numberOfNodes][];
 
 			for (int i = 0; i < numberOfNodes; i++)
 			{
 				string tmp = sr.ReadLine();
-				nodesDesciption.Add(tmp);
-				string[] mass = tmp.Split(' ');
-				Object[] param = new Object[mass.Length - 1];
-				Array.Copy(mass, 1, param, 0, param.Length);
-				nodes.Add(NodeFactory.CreateNode(mass[0], param));
+				string[] tmpMass = tmp.Split(' ');
+				nodesDesciption[i] = (tmpMass);
 			}
+
+			nodes = NodeFactory.CreateNodes(nodesDesciption);
 
 			int count = Convert.ToInt32(sr.ReadLine());
 			matrixs = new StreamModel[count];
@@ -51,9 +50,12 @@ namespace GPSSGenerator
 			OneWhoCircumventsMatrix circumventer = new OneWhoCircumventsMatrix(sw);
 			for (int i = 0; i < matrixs.Length; i++)
 			{
-				Console.WriteLine("Coments: Stream {0}", i);
-				sw.WriteLine("Coments: Stream {0}", i);
+				Console.WriteLine("START Stream #{0}", i);
+				sw.WriteLine("START Stream #{0}", i);
 				circumventer.CircumventsMatrix(matrixs[i]);
+				Console.WriteLine("END Stream #{0}", i);
+				sw.WriteLine("END Stream #{0}", i);
+				Console.WriteLine();
 			}
 			sw.Close();
 		}

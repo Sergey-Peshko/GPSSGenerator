@@ -13,13 +13,13 @@ namespace GPSSGenerator
 		private bool isNeedLabel;
 		private string description;
 		private double probability1;
-		private string label1;
-		private string label2;
+		private INode node1;
+		private INode node2;
 		public string Description
 		{
 			get
 			{
-				description = string.Format("TRANSFER {0},{2},{1}", probability1, label1, label2);
+				description = string.Format("TRANSFER {0},{2},{1}", probability1, node1.Label, node2.Label);
 				return description;
 			}
 
@@ -60,6 +60,47 @@ namespace GPSSGenerator
 			}
 		}
 
+		public double Probability1
+		{
+			get
+			{
+				return probability1;
+			}
+
+			set
+			{
+				probability1 = value;
+			}
+		}
+
+		internal INode Node1
+		{
+			get
+			{
+				return node1;
+			}
+
+			set
+			{
+				node1 = value;
+				value.IsNeedLabel = true;
+			}
+		}
+
+		internal INode Node2
+		{
+			get
+			{
+				return node2;
+			}
+
+			set
+			{
+				node2 = value;
+				value.IsNeedLabel = true;
+			}
+		}
+
 		public TransferNode()
 		{
 			this.name = "unknown transfer node";
@@ -68,30 +109,6 @@ namespace GPSSGenerator
 		{
 			this.name = name;
 			label = string.Format("Label_{0}", name);
-		}
-		/*
-							string name,
-							double probability1,
-							string label1,
-							string label2
-			 */
-		
-		public TransferNode(params Object[] param)
-		{
-			this.name = (string)param[0];
-			this.probability1 = (double)param[1];
-			this.label1 = (string)param[2];
-			this.label2 = (string)param[3];
-			label = string.Format("Label_{0}", name);
-			//description = string.Format("{0}\tTRANSFER {1},{3},{2}", label, probability1, label1, label2);
-		}
-		public void SetParam(double probability1,
-							string label1,
-							string label2)
-		{
-			this.probability1 = probability1;
-			this.label1 = label1;
-			this.label2 = label2;
 		}
 	}
 }

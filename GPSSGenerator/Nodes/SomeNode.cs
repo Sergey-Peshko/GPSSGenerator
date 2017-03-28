@@ -60,11 +60,9 @@ namespace GPSSGenerator
 		{
 			this.name = "unknown node";
 		}
-		public SomeNode(params Object[] param)
+		public SomeNode(string name)
 		{
-			if (param.Length != 1)
-				throw new Exception("can't constract SomeNode");
-			this.name = (string)param[0];
+			this.name = name;
 			label = string.Format("Lable_{0}", name);
 		}
 	}

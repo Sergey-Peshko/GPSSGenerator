@@ -33,11 +33,11 @@ namespace GPSSGenerator
 		{
 			color[pos] = 1;
 			Console.WriteLine("{0}\t{1}", m.Nodes[pos].IsNeedLabel?
-				String.Format("Stream_{0}", m.Index) + m.Nodes[pos].Label :
+				m.Nodes[pos].Label :
 				""
 				, m.Nodes[pos].Description);
 			sw.WriteLine("{0}\t{1}", m.Nodes[pos].IsNeedLabel ?
-				String.Format("Stream_{0}", m.Index) + m.Nodes[pos].Label :
+				m.Nodes[pos].Label :
 				""
 				, m.Nodes[pos].Description);
 			for (int i = 0; i < m.Graph[pos].Count; i++)
