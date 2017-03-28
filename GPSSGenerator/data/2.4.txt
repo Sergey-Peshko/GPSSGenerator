@@ -1,0 +1,14 @@
+5
+SomeNode S1
+SomeNode b1
+SomeNode b2
+SomeNode b3
+SomeNode S2
+1
+5
+0 1 2 3 4
+0 1 0 0 0
+0 0 1 0 0
+0 0.55 0 0.45 0
+0 0 0.4 0 0.6
+0 0 0 0 0
