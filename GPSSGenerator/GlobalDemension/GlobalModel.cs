@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using GPSSGenerator.GlobalDemension;
 
 namespace GPSSGenerator
 {
@@ -46,7 +47,17 @@ namespace GPSSGenerator
 		}
 		public void MakeCode()
 		{
-			StreamWriter sw = new StreamWriter(GlobalVariables.rez + way);
+			string tmpGpss = MakeTmpGpssCode();
+			string markeredGpss = AddStreamMarkers(tmpGpss);
+			string declarations = Pretreatment.MakeDeclarations(nodes, GlobalVariables.data + way);
+			string finalGpss = GlueTogether(declarations, markeredGpss);
+			Console.WriteLine("finalGpss in file {0}", finalGpss);
+		}
+
+		private string MakeTmpGpssCode()
+		{
+			string rez_way = GlobalVariables.rez + "tmpGpss" + way;
+			StreamWriter sw = new StreamWriter(rez_way);
 			OneWhoCircumventsMatrix circumventer = new OneWhoCircumventsMatrix(sw);
 			for (int i = 0; i < matrixs.Length; i++)
 			{
@@ -58,6 +69,19 @@ namespace GPSSGenerator
 				Console.WriteLine();
 			}
 			sw.Close();
+			return rez_way;
+		}
+		private string AddStreamMarkers(string wayTmpGpssCode)
+		{
+			string rez_way = GlobalVariables.rez + "markeredGpss" + way;
+
+			return rez_way;
+		}
+		private string GlueTogether(string declarations, string markeredGpss)
+		{
+			string rez_way = GlobalVariables.rez + way;
+
+			return rez_way;
 		}
 		
 	}
