@@ -83,6 +83,12 @@ namespace GPSSGenerator
 
 			return rez_way;
 		}
-		
+		private string MakeDeclarations()
+		{
+			string rez_way = GlobalVariables.rez + "declarations" + way;
+
+			return rez_way;
+		}
+
 	}
 }

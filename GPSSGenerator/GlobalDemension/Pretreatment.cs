@@ -8,11 +8,11 @@ namespace GPSSGenerator.GlobalDemension
 {
 	class Pretreatment
 	{
-		public static string MakeDeclarations(List<INode> nodes, string way)
+		public static bool Analise(List<INode> nodes, string way)
 		{
-			string rez_way = GlobalVariables.rez + "declarations" + way;
+			bool flag = true;
 
-			return rez_way;
+			return flag;
 		}
 		/*
 		private int InsertTransfers(int currNode)
