@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
+using GPSSGenerator.Nodes;
 
-namespace GPSSGenerator
+namespace GPSSGenerator.StreamDimension
 {
 	class StreamModel
 	{

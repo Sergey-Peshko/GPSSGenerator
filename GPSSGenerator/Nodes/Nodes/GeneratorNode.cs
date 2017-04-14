@@ -4,24 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPSSGenerator.Nodes
+namespace GPSSGenerator.Nodes.Nodes
 {
-	class SomeNode : INode
+	class GeneratorNode : INode
 	{
 		private string name;
-		private string description;
 		private string label;
 		private bool isNeedLabel;
-		public string Description
-		{
-			get
-			{
-				description = "";
-				description += name;
-				return description;
-			}
-
-		}
+		private bool isNeedDeclaration;
+		private string description;
 
 		public string Name
 		{
@@ -35,6 +26,7 @@ namespace GPSSGenerator.Nodes
 				name = value;
 			}
 		}
+
 		public string Label
 		{
 			get
@@ -42,6 +34,10 @@ namespace GPSSGenerator.Nodes
 				return label;
 			}
 
+			set
+			{
+				label = value;
+			}
 		}
 
 		public bool IsNeedLabel
@@ -56,14 +52,31 @@ namespace GPSSGenerator.Nodes
 				isNeedLabel = value;
 			}
 		}
-		public SomeNode()
+
+		public string Description
 		{
-			this.name = "unknown node";
+			get
+			{
+				return description;
+			}
+
+			set
+			{
+				description = value;
+			}
 		}
-		public SomeNode(string name)
+
+		public bool IsNeedDeclaration
 		{
-			this.name = name;
-			label = string.Format("Lable_{0}", name);
+			get
+			{
+				return isNeedDeclaration;
+			}
+
+			set
+			{
+				isNeedDeclaration = value;
+			}
 		}
 	}
 }

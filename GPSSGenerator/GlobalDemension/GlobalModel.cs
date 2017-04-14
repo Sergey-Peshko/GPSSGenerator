@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using GPSSGenerator.GlobalDemension;
+using GPSSGenerator.StreamDimension;
+using GPSSGenerator.Nodes;
 
-namespace GPSSGenerator
+namespace GPSSGenerator.GlobalDimension
 {
 	class GlobalModel
 	{

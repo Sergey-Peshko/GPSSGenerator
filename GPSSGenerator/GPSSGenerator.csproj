@@ -46,10 +46,13 @@
     <Compile Include="GlobalDemension\GlobalModel.cs" />
     <Compile Include="GlobalDemension\GlobalVariables.cs" />
     <Compile Include="GlobalDemension\Pretreatment.cs" />
+    <Compile Include="Nodes\Distributions\ExponentialDistribution.cs" />
+    <Compile Include="Nodes\Distributions\IDistribution.cs" />
+    <Compile Include="Nodes\Nodes\GeneratorNode.cs" />
     <Compile Include="Nodes\INode.cs" />
     <Compile Include="Nodes\NodeFactory.cs" />
     <Compile Include="Nodes\SomeNode.cs" />
-    <Compile Include="Nodes\TransferNode.cs" />
+    <Compile Include="Nodes\Nodes\TransferNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamDemension\OneWhoCircumventsMatrix.cs" />

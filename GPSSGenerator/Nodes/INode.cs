@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPSSGenerator
+namespace GPSSGenerator.Nodes
 {
 	interface INode
 	{
@@ -12,5 +12,6 @@ namespace GPSSGenerator
 		string Label { get; }
 		string Description { get; }
 		bool IsNeedLabel { set; get; }
+		bool IsNeedDeclaration { set; get; }
 	}
 }
