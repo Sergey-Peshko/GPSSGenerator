@@ -81,7 +81,7 @@ namespace GPSSGenerator.StreamDimension
 		{
 			for (int i = 0; i < nodes.Count; i++)
 			{
-				Console.WriteLine("{0}\t{1}", i + 1, nodes[i].Name);
+				Console.WriteLine("{0}\t{1}", i + 1, nodes[i].Id);
 			}
 			for (int i = 0; i < nodes.Count; i++)
 			{

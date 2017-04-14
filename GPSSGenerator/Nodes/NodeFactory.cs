@@ -83,8 +83,9 @@ namespace GPSSGenerator.Nodes
 			else if (param[0] == "FACILITY")
 			{
 				Facility f = new Facility(param[1]);
-				string[] distributionParam = new string[param.Length - 2];
-				Array.Copy(param, 2, distributionParam, 0, distributionParam.Length);
+				f.NameOfFacility = param[2];
+				string[] distributionParam = new string[param.Length - 3];
+				Array.Copy(param, 3, distributionParam, 0, distributionParam.Length);
 				IDistribution distribution = DistributionFactory.CreateDistribution(distributionParam);
 				f.Distribution = distribution;
 				return f;
