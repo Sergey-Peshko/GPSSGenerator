@@ -49,14 +49,11 @@
     <Compile Include="Nodes\Distributions\ExponentialDistribution.cs" />
     <Compile Include="Nodes\Distributions\IDistribution.cs" />
     <Compile Include="Nodes\Nodes\EndStatistic.cs" />
-    <Compile Include="Nodes\Nodes\FacilityMultyChannel.cs" />
-    <Compile Include="Nodes\Nodes\FacilityOneChannelAbsolute.cs" />
-    <Compile Include="Nodes\Nodes\FacilityOneChannelRelative .cs" />
+    <Compile Include="Nodes\Nodes\Facilities\Facility.cs" />
     <Compile Include="Nodes\Nodes\GeneratorNode.cs" />
     <Compile Include="Nodes\INode.cs" />
     <Compile Include="Nodes\NodeFactory.cs" />
     <Compile Include="Nodes\Nodes\QTable.cs" />
-    <Compile Include="Nodes\Nodes\ReceptionOfFacility.cs" />
     <Compile Include="Nodes\Nodes\StartStatistic.cs" />
     <Compile Include="Nodes\Nodes\Terminate.cs" />
     <Compile Include="Nodes\SomeNode.cs" />
@@ -69,7 +66,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Nodes\Nodes\Facilities\CheckIners\" />
+    <Folder Include="Nodes\Nodes\Facilities\CheckOuters\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

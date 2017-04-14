@@ -8,14 +8,11 @@ namespace GPSSGenerator.Nodes.Nodes
 {
 	class Transfer : INode
 	{
-		private string name;
-		private string label;
-		private bool isNeedLabel;
-		private string description;
 		private double probability1;
 		private INode node1;
 		private INode node2;
-		public string Description
+
+		override public string Description 
 		{
 			get
 			{
@@ -23,41 +20,6 @@ namespace GPSSGenerator.Nodes.Nodes
 				return description;
 			}
 
-		}
-
-		public string Name
-		{
-			get
-			{
-				return name;
-			}
-
-			set
-			{
-				name = value;
-			}
-		}
-
-		public string Label
-		{
-			get
-			{
-				return isNeedLabel ? label : "";
-			}
-
-		}
-
-		public bool IsNeedLabel
-		{
-			get
-			{
-				return isNeedLabel;
-			}
-
-			set
-			{
-				isNeedLabel = value;
-			}
 		}
 
 		public double Probability1
@@ -103,8 +65,9 @@ namespace GPSSGenerator.Nodes.Nodes
 
 		public Transfer()
 		{
-			this.name = "unknown transfer node";
+			this.name = "unknown Transfer node";
 		}
+
 		public Transfer(string name)
 		{
 			this.name = name;

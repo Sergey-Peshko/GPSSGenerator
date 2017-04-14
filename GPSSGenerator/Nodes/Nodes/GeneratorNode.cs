@@ -3,80 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GPSSGenerator.Nodes.Distributions;
 
 namespace GPSSGenerator.Nodes.Nodes
 {
 	class GeneratorNode : INode
 	{
-		private string name;
-		private string label;
-		private bool isNeedLabel;
-		private bool isNeedDeclaration;
-		private string description;
-
-		public string Name
+		IDistribution distribution;
+		public override string Description
 		{
 			get
 			{
-				return name;
-			}
-
-			set
-			{
-				name = value;
-			}
-		}
-
-		public string Label
-		{
-			get
-			{
-				return label;
-			}
-
-			set
-			{
-				label = value;
-			}
-		}
-
-		public bool IsNeedLabel
-		{
-			get
-			{
-				return isNeedLabel;
-			}
-
-			set
-			{
-				isNeedLabel = value;
-			}
-		}
-
-		public string Description
-		{
-			get
-			{
+				description = String.Format("GENERATE ({0})", distribution.Description);
 				return description;
 			}
-
-			set
-			{
-				description = value;
-			}
 		}
 
-		public bool IsNeedDeclaration
+		internal IDistribution Distribution
 		{
 			get
 			{
-				return isNeedDeclaration;
+				return distribution;
 			}
 
 			set
 			{
-				isNeedDeclaration = value;
+				distribution = value;
 			}
+		}
+
+		public GeneratorNode()
+		{
+			this.name = "unknown GeneratorNode node";
+		}
+
+		public GeneratorNode(string name)
+		{
+			this.name = name;
+			label = string.Format("Label_{0}", name);
 		}
 	}
 }

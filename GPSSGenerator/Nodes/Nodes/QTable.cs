@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Nodes.Nodes
 {
-	class QTable
+	class QTable : INode
 	{
+		public override string Description
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
 	}
 }

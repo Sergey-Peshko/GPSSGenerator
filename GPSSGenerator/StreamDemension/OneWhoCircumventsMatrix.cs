@@ -32,14 +32,8 @@ namespace GPSSGenerator.StreamDimension
 		private void dfs1(int pos, StreamModel m, ref int[] color)
 		{
 			color[pos] = 1;
-			Console.WriteLine("{0}\t{1}", m.Nodes[pos].IsNeedLabel?
-				m.Nodes[pos].Label :
-				""
-				, m.Nodes[pos].Description);
-			sw.WriteLine("{0}\t{1}", m.Nodes[pos].IsNeedLabel ?
-				m.Nodes[pos].Label :
-				""
-				, m.Nodes[pos].Description);
+			Console.WriteLine("{0}\t{1}", m.Nodes[pos].Label, m.Nodes[pos].Description);
+			sw.WriteLine("{0}\t{1}", m.Nodes[pos].Label, m.Nodes[pos].Description);
 			for (int i = 0; i < m.Graph[pos].Count; i++)
 			{
 				if (m.Graph[pos][i] > 0)

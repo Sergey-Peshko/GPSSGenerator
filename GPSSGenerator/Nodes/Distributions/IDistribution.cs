@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Nodes.Distributions
 {
-	interface IDistribution
+	abstract class IDistribution
 	{
+		protected string description;
+		protected int numberOfGenerator;
+
+		abstract public string Description { get; }
 	}
 }
