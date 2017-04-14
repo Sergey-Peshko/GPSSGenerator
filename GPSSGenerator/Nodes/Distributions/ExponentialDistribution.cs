@@ -31,5 +31,10 @@ namespace GPSSGenerator.Nodes.Distributions
 				mathematicalExpectation = value;
 			}
 		}
+
+		public ExponentialDistribution()
+		{
+
+		}
 	}
 }

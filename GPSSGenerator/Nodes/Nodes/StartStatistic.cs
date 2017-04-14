@@ -33,13 +33,13 @@ namespace GPSSGenerator.Nodes.Nodes
 
 		public StartStatistic()
 		{
-			this.name = "unknown StartStatistic node";
+			this.id = "unknown StartStatistic node";
 		}
 
-		public StartStatistic(string name)
+		public StartStatistic(string id)
 		{
-			this.name = name;
-			label = string.Format("Label_{0}", name);
+			this.id = id;
+			label = string.Format("Label_{0}", id);
 		}
 	}
 }

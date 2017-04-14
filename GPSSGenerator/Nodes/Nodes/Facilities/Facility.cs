@@ -8,7 +8,7 @@ using GPSSGenerator.Nodes.Nodes.Facilities;
 
 namespace GPSSGenerator.Nodes.Nodes.Facilities
 {
-	class Facility : INode
+	class Facility : IFacility
 	{
 		private IDistribution distribution;
 		private INode checkIner;
@@ -64,13 +64,13 @@ namespace GPSSGenerator.Nodes.Nodes.Facilities
 
 		public Facility()
 		{
-			this.name = "unknown node";
+			this.id = "unknown node";
 		}
 
-		public Facility(string name)
+		public Facility(string id)
 		{
-			this.name = name;
-			label = string.Format("Lable_{0}", name);
+			this.id = id;
+			label = string.Format("Lable_{0}", id);
 		}
 	}
 }

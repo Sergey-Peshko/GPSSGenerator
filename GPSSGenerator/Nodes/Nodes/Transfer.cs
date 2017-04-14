@@ -65,13 +65,13 @@ namespace GPSSGenerator.Nodes.Nodes
 
 		public Transfer()
 		{
-			this.name = "unknown Transfer node";
+			this.id = "unknown Transfer node";
 		}
 
-		public Transfer(string name)
+		public Transfer(string id)
 		{
-			this.name = name;
-			label = string.Format("Label_{0}", name);
+			this.id = id;
+			label = string.Format("Label_{0}", id);
 		}
 	}
 }

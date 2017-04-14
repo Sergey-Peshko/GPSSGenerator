@@ -8,7 +8,7 @@ namespace GPSSGenerator.Nodes
 {
 	abstract class INode
 	{
-		protected string name;
+		protected string id;
 		protected string label;
 		protected bool isNeedLabel;
 		protected string description;
@@ -17,16 +17,16 @@ namespace GPSSGenerator.Nodes
 
 		abstract public string Description { get; }
 
-		public string Name
+		public string Id
 		{
 			get
 			{
-				return name;
+				return id;
 			}
 
 			set
 			{
-				name = value;
+				id = value;
 			}
 		}
 

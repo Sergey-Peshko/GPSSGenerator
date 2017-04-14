@@ -50,9 +50,9 @@ namespace GPSSGenerator.GlobalDimension
 		{
 			string tmpGpss = MakeTmpGpssCode();
 			string markeredGpss = AddStreamMarkers(tmpGpss);
-			string declarations = Pretreatment.MakeDeclarations(nodes, GlobalVariables.data + way);
-			string finalGpss = GlueTogether(declarations, markeredGpss);
-			Console.WriteLine("finalGpss in file {0}", finalGpss);
+			//string declarations = Pretreatment.MakeDeclarations(nodes, GlobalVariables.data + way);
+			//string finalGpss = GlueTogether(declarations, markeredGpss);
+			//Console.WriteLine("finalGpss in file {0}", finalGpss);
 		}
 
 		private string MakeTmpGpssCode()

@@ -12,5 +12,18 @@ namespace GPSSGenerator.Nodes.Distributions
 		protected int numberOfGenerator;
 
 		abstract public string Description { get; }
+
+		public int NumberOfGenerator
+		{
+			get
+			{
+				return numberOfGenerator;
+			}
+
+			set
+			{
+				numberOfGenerator = value;
+			}
+		}
 	}
 }

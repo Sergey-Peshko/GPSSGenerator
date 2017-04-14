@@ -31,13 +31,13 @@ namespace GPSSGenerator.Nodes.Nodes
 		}
 		public EndStatistic()
 		{
-			this.name = "unknown EndStatistic node";
+			this.id = "unknown EndStatistic node";
 		}
 
-		public EndStatistic(string name)
+		public EndStatistic(string id)
 		{
-			this.name = name;
-			label = string.Format("Label_{0}", name);
+			this.id = id;
+			label = string.Format("Label_{0}", id);
 		}
 	}
 }

@@ -1,7 +1,9 @@
 3
-SomeNode S1
-SomeNode b1
-SomeNode S2
+GENERATOR g1 EXPONENTIAL 0 5
+SEIZE seize1 b1
+FACILITY facility1 b1 EXPONENTIAL 1 6
+RELEASE release1 b1
+TERMINATE terminate1 1
 1
 3
 0 1 2

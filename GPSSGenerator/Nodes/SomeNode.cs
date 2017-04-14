@@ -13,7 +13,7 @@ namespace GPSSGenerator.Nodes
 			get
 			{
 				description = "";
-				description += name;
+				description += id;
 				return description;
 			}
 
@@ -21,13 +21,13 @@ namespace GPSSGenerator.Nodes
 
 		public SomeNode()
 		{
-			this.name = "unknown node";
+			this.id = "unknown node";
 		}
 
-		public SomeNode(string name)
+		public SomeNode(string id)
 		{
-			this.name = name;
-			label = string.Format("Lable_{0}", name);
+			this.id = id;
+			label = string.Format("Lable_{0}", id);
 		}
 	}
 }

@@ -46,11 +46,15 @@
     <Compile Include="GlobalDemension\GlobalModel.cs" />
     <Compile Include="GlobalDemension\GlobalVariables.cs" />
     <Compile Include="GlobalDemension\Pretreatment.cs" />
+    <Compile Include="Nodes\Distributions\DistributionFactory.cs" />
     <Compile Include="Nodes\Distributions\ExponentialDistribution.cs" />
     <Compile Include="Nodes\Distributions\IDistribution.cs" />
     <Compile Include="Nodes\Nodes\EndStatistic.cs" />
+    <Compile Include="Nodes\Nodes\Facilities\CheckIners\StartOneChannelRelative.cs" />
+    <Compile Include="Nodes\Nodes\Facilities\CheckOuters\EndOneChannelRelative.cs" />
     <Compile Include="Nodes\Nodes\Facilities\Facility.cs" />
-    <Compile Include="Nodes\Nodes\GeneratorNode.cs" />
+    <Compile Include="Nodes\Nodes\Facilities\IFacility.cs" />
+    <Compile Include="Nodes\Nodes\Generator.cs" />
     <Compile Include="Nodes\INode.cs" />
     <Compile Include="Nodes\NodeFactory.cs" />
     <Compile Include="Nodes\Nodes\QTable.cs" />
@@ -66,10 +70,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Nodes\Nodes\Facilities\CheckIners\" />
-    <Folder Include="Nodes\Nodes\Facilities\CheckOuters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

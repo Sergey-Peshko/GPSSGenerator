@@ -7,7 +7,7 @@ using GPSSGenerator.Nodes.Distributions;
 
 namespace GPSSGenerator.Nodes.Nodes
 {
-	class GeneratorNode : INode
+	class Generator : INode
 	{
 		IDistribution distribution;
 		public override string Description
@@ -32,14 +32,14 @@ namespace GPSSGenerator.Nodes.Nodes
 			}
 		}
 
-		public GeneratorNode()
+		public Generator()
 		{
-			this.name = "unknown GeneratorNode node";
+			this.id = "unknown GeneratorNode node";
 		}
 
-		public GeneratorNode(string name)
+		public Generator(string name)
 		{
-			this.name = name;
+			this.id = name;
 			label = string.Format("Label_{0}", name);
 		}
 	}
