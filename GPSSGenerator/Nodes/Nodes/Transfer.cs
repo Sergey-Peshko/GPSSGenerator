@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Nodes.Nodes
 {
-	class TransferNode : INode
+	class Transfer : INode
 	{
 		private string name;
 		private string label;
@@ -101,11 +101,11 @@ namespace GPSSGenerator.Nodes.Nodes
 			}
 		}
 
-		public TransferNode()
+		public Transfer()
 		{
 			this.name = "unknown transfer node";
 		}
-		public TransferNode(string name)
+		public Transfer(string name)
 		{
 			this.name = name;
 			label = string.Format("Label_{0}", name);

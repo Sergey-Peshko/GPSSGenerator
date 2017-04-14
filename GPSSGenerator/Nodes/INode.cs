@@ -12,6 +12,7 @@ namespace GPSSGenerator.Nodes
 		string Label { get; }
 		string Description { get; }
 		bool IsNeedLabel { set; get; }
+		bool canItHaveLabel { set; get; }
 		bool IsNeedDeclaration { set; get; }
 	}
 }

@@ -28,10 +28,10 @@ namespace GPSSGenerator.GlobalDimension
 				}
 			}
 			double remainingPersents = 1;
-			TransferNode[] transfers = new TransferNode[transitions.Count - 1];
+			Transfer[] transfers = new Transfer[transitions.Count - 1];
 			for(int i=0;i< transfers.Length; i++)
 			{
-				transfers[i] = new TransferNode(string.Format("T{0}", GlobalVariables.counterOfTransfers++));
+				transfers[i] = new Transfer(string.Format("T{0}", GlobalVariables.counterOfTransfers++));
 				if (i > 0)
 					transfers[i].IsNeedLabel = true;
 			}

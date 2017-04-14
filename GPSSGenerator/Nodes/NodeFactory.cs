@@ -23,10 +23,10 @@ namespace GPSSGenerator.Nodes
 		{
 			for(int i = 0; i < description.Length; i++)
 			{
-				if(description[i][0] == "TransferNode")
+				if(description[i][0] == "Transfer")
 				{
-					((TransferNode)nodes[i]).Node1 = nodes[FindNode(nodes, description[i][3])];
-					((TransferNode)nodes[i]).Node2 = nodes[FindNode(nodes, description[i][4])];
+					((Transfer)nodes[i]).Node1 = nodes[FindNode(nodes, description[i][3])];
+					((Transfer)nodes[i]).Node2 = nodes[FindNode(nodes, description[i][4])];
 				}
 			}
 		}
@@ -45,9 +45,9 @@ namespace GPSSGenerator.Nodes
 			{
 				return new SomeNode(param[1]);
 			}
-			if (param[0] == "TransferNode")
+			if (param[0] == "Transfer")
 			{
-				TransferNode tmpT = new TransferNode(param[1]);
+				Transfer tmpT = new Transfer(param[1]);
 				tmpT.Probability1 = Convert.ToDouble(param[2]);
 				return tmpT;
 			}
