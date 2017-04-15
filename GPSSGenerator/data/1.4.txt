@@ -1,12 +1,16 @@
-4
-SomeNode S1
-SomeNode b1
-SomeNode S2
-TransferNode t1 0.1 b1 S2
+6
+GENERATOR g1 EXPONENTIAL 0 5
+SEIZE seize1 b1
+FACILITY facility1 b1 EXPONENTIAL 1 6
+RELEASE release1 b1
+TERMINATE terminate1 1
+TRANSFER t1 0.1 seize1 terminate1
 1
-4
-0 1 2 3
-0 1 0 0
-0 0 0 1
-0 0 0 0
-0 1 1 0
+6
+0 1 2 3 4 5
+0 1 0 0 0 0
+0 0 1 0 0 0
+0 0 0 1 0 0
+0 0 0 0 0 1
+0 0 0 0 0 0
+0 1 0 0 1 0

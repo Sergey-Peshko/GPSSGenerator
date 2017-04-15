@@ -27,7 +27,7 @@ namespace GPSSGenerator.Nodes
 		{
 			for(int i = 0; i < description.Length; i++)
 			{
-				if(description[i][0] == "Transfer")
+				if(description[i][0] == "TRANSFER")
 				{
 					((Transfer)nodes[i]).Node1 = nodes[FindNode(nodes, description[i][3])];
 					((Transfer)nodes[i]).Node2 = nodes[FindNode(nodes, description[i][4])];
