@@ -29,11 +29,20 @@ namespace GPSSGenerator.StreamDimension
 				}
 			}
 		}
+		private void printNode(string label, List<string> description)
+		{
+			Console.WriteLine("{0}\t{1}", label, description[0]);
+			sw.WriteLine("{0}\t{1}", label, description[0]);
+			for(int i = 1; i < description.Count; i++)
+			{
+				Console.WriteLine("\t{0}", description[i]);
+				sw.WriteLine("\t{0}", description[i]);
+			}
+		}
 		private void dfs1(int pos, StreamModel m, ref int[] color)
 		{
 			color[pos] = 1;
-			Console.WriteLine("{0}\t{1}", m.Nodes[pos].Label, m.Nodes[pos].Description);
-			sw.WriteLine("{0}\t{1}", m.Nodes[pos].Label, m.Nodes[pos].Description);
+			printNode(m.Nodes[pos].Label, m.Nodes[pos].Description);
 			for (int i = 0; i < m.Graph[pos].Count; i++)
 			{
 				if (m.Graph[pos][i] > 0)

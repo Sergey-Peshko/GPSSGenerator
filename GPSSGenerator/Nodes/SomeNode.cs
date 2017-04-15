@@ -8,12 +8,12 @@ namespace GPSSGenerator.Nodes
 {
 	class SomeNode : INode
 	{
-		override public string Description
+		override public List<string> Description
 		{
 			get
 			{
-				description = "";
-				description += id;
+				description = new List<string>();
+				description.Add("" + id);
 				return description;
 			}
 

@@ -10,11 +10,13 @@ namespace GPSSGenerator.Nodes.Nodes
 	class Generator : INode
 	{
 		IDistribution distribution;
-		public override string Description
+		StartStatistic startFullStatistic;
+		public override List<string> Description
 		{
 			get
 			{
-				description = String.Format("GENERATE ({0})", distribution.Description);
+				description.Add(String.Format("GENERATE ({0})", distribution.Description));
+				description.AddRange(startFullStatistic.Description);
 				return description;
 			}
 		}
@@ -32,15 +34,28 @@ namespace GPSSGenerator.Nodes.Nodes
 			}
 		}
 
+		internal StartStatistic StartFullStatistic
+		{
+			get
+			{
+				return startFullStatistic;
+			}
+
+			set
+			{
+				startFullStatistic = value;
+			}
+		}
+
 		public Generator()
 		{
 			this.id = "unknown GeneratorNode node";
 		}
 
-		public Generator(string name)
+		public Generator(string id)
 		{
-			this.id = name;
-			label = string.Format("Label_{0}", name);
+			canItHaveLabel = false;
+			this.id = id;
 		}
 	}
 }

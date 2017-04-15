@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 using GPSSGenerator.Nodes.Nodes;
 using GPSSGenerator.Nodes.Distributions;
 using GPSSGenerator.Nodes.Nodes.Facilities;
-using GPSSGenerator.Nodes.Nodes.Facilities.CheckIners;
-using GPSSGenerator.Nodes.Nodes.Facilities.CheckOuters;
 
 namespace GPSSGenerator.Nodes
 {
 	class NodeFactory
 	{
+		static private StartStatistic startFull;
+		static private EndStatistic endFull;
+
 		static public List<INode> CreateNodes(string[][] nodes)
 		{
+			startFull = new StartStatistic("cfs");
+			startFull.NameOfStatistic = "net";
+			endFull = new EndStatistic("cfe");
+			endFull.NameOfStatistic = "net";
+
+
 			List<INode> rezult = new List<INode>(nodes.Length);
 			for(int i = 0; i < nodes.Length; i++)
 			{
@@ -59,6 +66,7 @@ namespace GPSSGenerator.Nodes
 			{
 				Terminate tmpT = new Terminate(param[1]);
 				tmpT.Count = Convert.ToInt32(param[2]);
+				tmpT.EndFullStatistic = endFull;
 				return tmpT;
 			}
 			else if (param[0] == "GENERATOR")
@@ -68,7 +76,33 @@ namespace GPSSGenerator.Nodes
 				Array.Copy(param, 2, distributionParam, 0, distributionParam.Length);
 				IDistribution distribution = DistributionFactory.CreateDistribution(distributionParam);
 				tmpG.Distribution = distribution;
+				tmpG.StartFullStatistic = startFull;
 				return tmpG;
+			}
+			else if (param[0] == "FACILITY_ONE_CHANNEL_RELATIVE")
+			{
+				OneChannelRelative ocr = new OneChannelRelative(param[1]);
+				string[] distributionParam = new string[param.Length - 2];
+				Array.Copy(param, 2, distributionParam, 0, distributionParam.Length);
+				IDistribution distribution = DistributionFactory.CreateDistribution(distributionParam);
+				ocr.Distribution = distribution;
+				List<StartStatistic> lsst = new List<StartStatistic>();
+				StartStatistic smu = new StartStatistic();
+				smu.NameOfStatistic = String.Format("{0}_STREAM#", param[1]);
+				StartStatistic sw = new StartStatistic();
+				sw.NameOfStatistic = String.Format("{0}_STREAM#_queue", param[1]);
+				lsst.Add(smu);
+				lsst.Add(sw);
+				List<EndStatistic> lest = new List<EndStatistic>();
+				EndStatistic emu = new EndStatistic();
+				emu.NameOfStatistic = String.Format("{0}_STREAM#", param[1]);
+				EndStatistic ew = new EndStatistic();
+				ew.NameOfStatistic = String.Format("{0}_STREAM#_queue", param[1]);
+				lest.Add(emu);
+				lest.Add(ew);
+				ocr.ListStartStatistic = lsst;
+				ocr.ListEndStatistic = lest;
+				return ocr;
 			}
 			/*
 			else if (param[0] == "START_STATISTIC")
@@ -80,28 +114,6 @@ namespace GPSSGenerator.Nodes
 
 			}
 			*/
-			else if (param[0] == "FACILITY")
-			{
-				Facility f = new Facility(param[1]);
-				f.NameOfFacility = param[2];
-				string[] distributionParam = new string[param.Length - 3];
-				Array.Copy(param, 3, distributionParam, 0, distributionParam.Length);
-				IDistribution distribution = DistributionFactory.CreateDistribution(distributionParam);
-				f.Distribution = distribution;
-				return f;
-			}
-			else if (param[0] == "SEIZE")
-			{
-				StartOneChannelRelative ocr = new StartOneChannelRelative(param[1]);
-				ocr.NameOfFacility = param[2];
-				return ocr;
-			}
-			else if (param[0] == "RELEASE")
-			{
-				EndOneChannelRelative ocr = new EndOneChannelRelative(param[1]);
-				ocr.NameOfFacility = param[2];
-				return ocr;
-			}
 			else
 				throw new Exception("can't create Node");
 		}

@@ -9,11 +9,13 @@ namespace GPSSGenerator.Nodes.Nodes
 	class Terminate : INode
 	{
 		private int count;
-		public override string Description
+		private EndStatistic endFullStatistic;
+		public override List<string> Description
 		{
 			get
 			{
-				description = String.Format("TERMINATE {0}", count);
+				description.AddRange(endFullStatistic.Description);
+				description.Add(String.Format("TERMINATE {0}", count));
 				return description;
 			}
 		}
@@ -31,6 +33,18 @@ namespace GPSSGenerator.Nodes.Nodes
 			}
 		}
 
+		public EndStatistic EndFullStatistic
+		{
+			get
+			{
+				return endFullStatistic;
+			}
+
+			set
+			{
+				endFullStatistic = value;
+			}
+		}
 		public Terminate()
 		{
 			this.id = "unknown Terminate node";
@@ -39,7 +53,7 @@ namespace GPSSGenerator.Nodes.Nodes
 		public Terminate(string id)
 		{
 			this.id = id;
-			label = string.Format("Label_{0}", id);
+			label = string.Format("label_{0}_STREAM#", id);
 		}
 	}
 }

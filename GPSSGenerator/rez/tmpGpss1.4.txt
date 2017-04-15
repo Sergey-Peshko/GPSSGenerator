@@ -1,8 +1,14 @@
 START Stream #0
 	GENERATE (EXPONENTIAL (0,0,5))
-Label_seize1	SEIZE b1
-	ADVANCE (EXPONENTIAL (1,0,6))
+	QUEUE net
+label_b1_STREAM#	QUEUE b1_STREAM#
+	QUEUE b1_STREAM#_queue
+	SEIZE b1
+	DEPART b1_STREAM#_queue
+	ADVANCE (EXPONENTIAL (0,0,5))
 	RELEASE b1
-	TRANSFER 0.1,Label_terminate1,Label_seize1
-Label_terminate1	TERMINATE 1
+	DEPART b1_STREAM#
+	TRANSFER 0.1,label_b1_STREAM#,label_s2_STREAM#
+label_s2_STREAM#	DEPART net
+	TERMINATE 1
 END Stream #0

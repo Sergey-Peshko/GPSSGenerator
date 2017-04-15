@@ -12,11 +12,11 @@ namespace GPSSGenerator.Nodes.Nodes
 		private INode node1;
 		private INode node2;
 
-		override public string Description 
+		override public List<string> Description 
 		{
 			get
 			{
-				description = string.Format("TRANSFER {0},{2},{1}", probability1, node1.Label, node2.Label);
+				description.Add(string.Format("TRANSFER {0},{2},{1}", probability1, node1.Label, node2.Label));
 				return description;
 			}
 
@@ -71,7 +71,7 @@ namespace GPSSGenerator.Nodes.Nodes
 		public Transfer(string id)
 		{
 			this.id = id;
-			label = string.Format("Label_{0}", id);
+			label = string.Format("label_{0}", id);
 		}
 	}
 }

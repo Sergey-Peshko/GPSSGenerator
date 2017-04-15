@@ -9,11 +9,11 @@ namespace GPSSGenerator.Nodes.Nodes
 	class EndStatistic : INode
 	{
 		private string nameOfStatistic;
-		public override string Description
+		public override List<string> Description
 		{
 			get
 			{
-				description = String.Format("DEPART {0}", nameOfStatistic);
+				description.Add(String.Format("DEPART {0}", nameOfStatistic));
 				return description;
 			}
 		}

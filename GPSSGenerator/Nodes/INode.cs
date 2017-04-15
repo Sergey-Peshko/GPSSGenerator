@@ -10,12 +10,12 @@ namespace GPSSGenerator.Nodes
 	{
 		protected string id;
 		protected string label;
-		protected bool isNeedLabel;
-		protected string description;
-		protected bool isNeedDeclaration;
-		protected bool canItHaveLabel;
+		protected bool isNeedLabel = false;
+		protected List<string> description = new List<string>();
+		protected bool isNeedDeclaration = false;
+		protected bool canItHaveLabel = true;
 
-		abstract public string Description { get; }
+		abstract public List<string> Description { get; }
 
 		public string Id
 		{
@@ -57,11 +57,6 @@ namespace GPSSGenerator.Nodes
 			get
 			{
 				return canItHaveLabel;
-			}
-
-			set
-			{
-				canItHaveLabel = value;
 			}
 		}
 

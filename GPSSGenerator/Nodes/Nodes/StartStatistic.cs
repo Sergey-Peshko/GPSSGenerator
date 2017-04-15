@@ -9,11 +9,11 @@ namespace GPSSGenerator.Nodes.Nodes
 	class StartStatistic : INode
 	{
 		private string nameOfStatistic;
-		public override string Description
+		public override List<string> Description
 		{
 			get
 			{
-				description = String.Format("QUEUE {0}", nameOfStatistic);
+				description.Add(String.Format("QUEUE {0}", nameOfStatistic));
 				return description;
 			}
 		}

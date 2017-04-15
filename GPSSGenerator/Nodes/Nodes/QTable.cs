@@ -8,12 +8,24 @@ namespace GPSSGenerator.Nodes.Nodes
 {
 	class QTable : INode
 	{
-		public override string Description
+		public override List<string> Description
 		{
 			get
 			{
 				throw new NotImplementedException();
 			}
+		}
+
+		public QTable()
+		{
+			this.id = "unknown GeneratorNode node";
+		}
+
+		public QTable(string id)
+		{
+			isNeedDeclaration = true;
+			canItHaveLabel = false;
+			this.id = id;
 		}
 	}
 }
