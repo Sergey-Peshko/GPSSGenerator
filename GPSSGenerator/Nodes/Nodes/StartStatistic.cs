@@ -13,7 +13,10 @@ namespace GPSSGenerator.Nodes.Nodes
 		{
 			get
 			{
-				description.Add(String.Format("QUEUE {0}", nameOfStatistic));
+				if (description.Count == 0)
+				{
+					description.Add(String.Format("QUEUE {0}", nameOfStatistic));
+				}
 				return description;
 			}
 		}

@@ -14,8 +14,11 @@ namespace GPSSGenerator.Nodes.Nodes
 		{
 			get
 			{
-				description.AddRange(endFullStatistic.Description);
-				description.Add(String.Format("TERMINATE {0}", count));
+				if (description.Count == 0)
+				{
+					description.AddRange(endFullStatistic.Description);
+					description.Add(String.Format("TERMINATE {0}", count));
+				}
 				return description;
 			}
 		}

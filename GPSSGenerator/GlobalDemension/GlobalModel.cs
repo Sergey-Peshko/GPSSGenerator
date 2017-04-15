@@ -62,11 +62,11 @@ namespace GPSSGenerator.GlobalDimension
 			OneWhoCircumventsMatrix circumventer = new OneWhoCircumventsMatrix(sw);
 			for (int i = 0; i < matrixs.Length; i++)
 			{
-				Console.WriteLine("START Stream #{0}", i);
-				sw.WriteLine("START Stream #{0}", i);
+				Console.WriteLine("START_STREAM#{0}", i);
+				sw.WriteLine("START_STREAM#{0}", i);
 				circumventer.CircumventsMatrix(matrixs[i]);
-				Console.WriteLine("END Stream #{0}", i);
-				sw.WriteLine("END Stream #{0}", i);
+				Console.WriteLine("END_STREAM#{0}", i);
+				sw.WriteLine("END_STREAM#{0}", i);
 				Console.WriteLine();
 			}
 			sw.Close();

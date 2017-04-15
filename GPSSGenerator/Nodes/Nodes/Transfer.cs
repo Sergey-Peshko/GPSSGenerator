@@ -16,7 +16,10 @@ namespace GPSSGenerator.Nodes.Nodes
 		{
 			get
 			{
-				description.Add(string.Format("TRANSFER {0},{2},{1}", probability1, node1.Label, node2.Label));
+				if (description.Count == 0)
+				{
+					description.Add(string.Format("TRANSFER {0},{2},{1}", probability1, node1.Label, node2.Label));
+				}
 				return description;
 			}
 

@@ -12,13 +12,16 @@ namespace GPSSGenerator.Nodes.Nodes.Facilities
 		{
 			get
 			{
-				for (int i = 0; i < sStat.Count; i++)
-					description.AddRange(sStat[i].Description);
-				description.Add(String.Format("SEIZE {0}", id));
-				description.AddRange(eStat[1].Description);
-				description.Add(String.Format("ADVANCE ({0})", distribution.Description));
-				description.Add(String.Format("RELEASE {0}", id));
-				description.AddRange(eStat[0].Description);
+				if (description.Count == 0)
+				{
+					for (int i = 0; i < sStat.Count; i++)
+						description.AddRange(sStat[i].Description);
+					description.Add(String.Format("SEIZE {0}", id));
+					description.AddRange(eStat[1].Description);
+					description.Add(String.Format("ADVANCE ({0})", distribution.Description));
+					description.Add(String.Format("RELEASE {0}", id));
+					description.AddRange(eStat[0].Description);
+				}
 				return description;
 			}
 		}

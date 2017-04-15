@@ -16,9 +16,9 @@ namespace GPSSGenerator.Nodes
 
 		static public List<INode> CreateNodes(string[][] nodes)
 		{
-			startFull = new StartStatistic("cfs");
+			startFull = new StartStatistic();
 			startFull.NameOfStatistic = "net";
-			endFull = new EndStatistic("cfe");
+			endFull = new EndStatistic();
 			endFull.NameOfStatistic = "net";
 
 
