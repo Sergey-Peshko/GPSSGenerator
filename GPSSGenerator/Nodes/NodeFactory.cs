@@ -27,9 +27,10 @@ namespace GPSSGenerator.Nodes
 			{
 				rezult.Add(CreateNode(nodes[i]));
 			}
-			SetDependencies(nodes, rezult);
+			//SetDependencies(nodes, rezult);
 			return rezult;
 		}
+		/*
 		static private void SetDependencies(string[][] description, List<INode> nodes)
 		{
 			for(int i = 0; i < description.Length; i++)
@@ -50,18 +51,21 @@ namespace GPSSGenerator.Nodes
 			}
 			return -1;
 		}
+		*/
 		static private INode CreateNode(string[] param)
 		{
 			if (param[0] == "SomeNode")
 			{
 				return new SomeNode(param[1]);
 			}
+			/*
 			else if (param[0] == "TRANSFER")
 			{
 				Transfer tmpT = new Transfer(param[1]);
 				tmpT.Probability1 = Convert.ToDouble(param[2]);
 				return tmpT;
 			}
+			*/
 			else if (param[0] == "TERMINATE")
 			{
 				Terminate tmpT = new Terminate(param[1]);
@@ -104,16 +108,20 @@ namespace GPSSGenerator.Nodes
 				ocr.ListEndStatistic = lest;
 				return ocr;
 			}
-			/*
+			
 			else if (param[0] == "START_STATISTIC")
 			{
-
+				StartStatistic s = new StartStatistic(param[1]);
+				s.NameOfStatistic = param[2];
+				return s;
 			}
 			else if (param[0] == "END_STATISTIC")
 			{
-
+				EndStatistic e = new EndStatistic(param[1]);
+				e.NameOfStatistic = param[2];
+				return e;
 			}
-			*/
+			
 			else
 				throw new Exception("can't create Node");
 		}
