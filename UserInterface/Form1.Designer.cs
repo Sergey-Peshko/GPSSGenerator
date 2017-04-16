@@ -36,16 +36,13 @@
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupBoxCommonParam = new System.Windows.Forms.GroupBox();
+			this.buttonEdit = new System.Windows.Forms.Button();
+			this.buttonApply = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
 			this.numericNumberOfTransactions = new System.Windows.Forms.NumericUpDown();
-			this.numericNumberOfStreams = new System.Windows.Forms.NumericUpDown();
-			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.comboBoxTypeOfNet = new System.Windows.Forms.ComboBox();
 			this.groupBoxStreams = new System.Windows.Forms.GroupBox();
-			this.buttonDescribeStream = new System.Windows.Forms.Button();
-			this.numericChooseStream = new System.Windows.Forms.NumericUpDown();
-			this.label4 = new System.Windows.Forms.Label();
 			this.groupBoxNodes = new System.Windows.Forms.GroupBox();
 			this.buttonShowFullDescription = new System.Windows.Forms.Button();
 			this.buttonEditNode = new System.Windows.Forms.Button();
@@ -53,14 +50,14 @@
 			this.buttonAddNode = new System.Windows.Forms.Button();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.buttonGenerate = new System.Windows.Forms.Button();
-			this.buttonApply = new System.Windows.Forms.Button();
-			this.buttonEdit = new System.Windows.Forms.Button();
+			this.listBox1 = new System.Windows.Forms.ListBox();
+			this.buttonEditStream = new System.Windows.Forms.Button();
+			this.buttonDeleteStream = new System.Windows.Forms.Button();
+			this.buttonAddStream = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.groupBoxCommonParam.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericNumberOfTransactions)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericNumberOfStreams)).BeginInit();
 			this.groupBoxStreams.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericChooseStream)).BeginInit();
 			this.groupBoxNodes.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
@@ -122,21 +119,37 @@
 			this.groupBoxCommonParam.Controls.Add(this.buttonApply);
 			this.groupBoxCommonParam.Controls.Add(this.label3);
 			this.groupBoxCommonParam.Controls.Add(this.numericNumberOfTransactions);
-			this.groupBoxCommonParam.Controls.Add(this.numericNumberOfStreams);
-			this.groupBoxCommonParam.Controls.Add(this.label2);
 			this.groupBoxCommonParam.Controls.Add(this.label1);
 			this.groupBoxCommonParam.Controls.Add(this.comboBoxTypeOfNet);
 			this.groupBoxCommonParam.Location = new System.Drawing.Point(12, 47);
 			this.groupBoxCommonParam.Name = "groupBoxCommonParam";
-			this.groupBoxCommonParam.Size = new System.Drawing.Size(277, 154);
+			this.groupBoxCommonParam.Size = new System.Drawing.Size(277, 109);
 			this.groupBoxCommonParam.TabIndex = 1;
 			this.groupBoxCommonParam.TabStop = false;
 			this.groupBoxCommonParam.Text = "Общие Параметры";
 			// 
+			// buttonEdit
+			// 
+			this.buttonEdit.Location = new System.Drawing.Point(6, 77);
+			this.buttonEdit.Name = "buttonEdit";
+			this.buttonEdit.Size = new System.Drawing.Size(93, 23);
+			this.buttonEdit.TabIndex = 7;
+			this.buttonEdit.Text = "редактировать";
+			this.buttonEdit.UseVisualStyleBackColor = true;
+			// 
+			// buttonApply
+			// 
+			this.buttonApply.Location = new System.Drawing.Point(196, 77);
+			this.buttonApply.Name = "buttonApply";
+			this.buttonApply.Size = new System.Drawing.Size(75, 23);
+			this.buttonApply.TabIndex = 6;
+			this.buttonApply.Text = "применить";
+			this.buttonApply.UseVisualStyleBackColor = true;
+			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(7, 99);
+			this.label3.Location = new System.Drawing.Point(8, 48);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(108, 13);
 			this.label3.TabIndex = 5;
@@ -144,31 +157,15 @@
 			// 
 			// numericNumberOfTransactions
 			// 
-			this.numericNumberOfTransactions.Location = new System.Drawing.Point(122, 97);
+			this.numericNumberOfTransactions.Location = new System.Drawing.Point(122, 46);
 			this.numericNumberOfTransactions.Name = "numericNumberOfTransactions";
 			this.numericNumberOfTransactions.Size = new System.Drawing.Size(121, 20);
 			this.numericNumberOfTransactions.TabIndex = 4;
 			// 
-			// numericNumberOfStreams
-			// 
-			this.numericNumberOfStreams.Location = new System.Drawing.Point(122, 71);
-			this.numericNumberOfStreams.Name = "numericNumberOfStreams";
-			this.numericNumberOfStreams.Size = new System.Drawing.Size(121, 20);
-			this.numericNumberOfStreams.TabIndex = 3;
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(7, 74);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(116, 13);
-			this.label2.TabIndex = 2;
-			this.label2.Text = "Количество потоков: ";
-			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(7, 47);
+			this.label1.Location = new System.Drawing.Point(7, 24);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(109, 13);
 			this.label1.TabIndex = 1;
@@ -177,47 +174,23 @@
 			// comboBoxTypeOfNet
 			// 
 			this.comboBoxTypeOfNet.FormattingEnabled = true;
-			this.comboBoxTypeOfNet.Location = new System.Drawing.Point(122, 44);
+			this.comboBoxTypeOfNet.Location = new System.Drawing.Point(122, 19);
 			this.comboBoxTypeOfNet.Name = "comboBoxTypeOfNet";
 			this.comboBoxTypeOfNet.Size = new System.Drawing.Size(121, 21);
 			this.comboBoxTypeOfNet.TabIndex = 0;
 			// 
 			// groupBoxStreams
 			// 
-			this.groupBoxStreams.Controls.Add(this.buttonDescribeStream);
-			this.groupBoxStreams.Controls.Add(this.numericChooseStream);
-			this.groupBoxStreams.Controls.Add(this.label4);
-			this.groupBoxStreams.Location = new System.Drawing.Point(12, 207);
+			this.groupBoxStreams.Controls.Add(this.buttonEditStream);
+			this.groupBoxStreams.Controls.Add(this.buttonDeleteStream);
+			this.groupBoxStreams.Controls.Add(this.buttonAddStream);
+			this.groupBoxStreams.Controls.Add(this.listBox1);
+			this.groupBoxStreams.Location = new System.Drawing.Point(12, 162);
 			this.groupBoxStreams.Name = "groupBoxStreams";
-			this.groupBoxStreams.Size = new System.Drawing.Size(277, 76);
+			this.groupBoxStreams.Size = new System.Drawing.Size(277, 121);
 			this.groupBoxStreams.TabIndex = 2;
 			this.groupBoxStreams.TabStop = false;
 			this.groupBoxStreams.Text = "Описание Потоков";
-			// 
-			// buttonDescribeStream
-			// 
-			this.buttonDescribeStream.Location = new System.Drawing.Point(6, 47);
-			this.buttonDescribeStream.Name = "buttonDescribeStream";
-			this.buttonDescribeStream.Size = new System.Drawing.Size(75, 23);
-			this.buttonDescribeStream.TabIndex = 2;
-			this.buttonDescribeStream.Text = "Описать";
-			this.buttonDescribeStream.UseVisualStyleBackColor = true;
-			// 
-			// numericChooseStream
-			// 
-			this.numericChooseStream.Location = new System.Drawing.Point(180, 18);
-			this.numericChooseStream.Name = "numericChooseStream";
-			this.numericChooseStream.Size = new System.Drawing.Size(62, 20);
-			this.numericChooseStream.TabIndex = 1;
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(7, 20);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(167, 13);
-			this.label4.TabIndex = 0;
-			this.label4.Text = "Выберите поток для описания: ";
 			// 
 			// groupBoxNodes
 			// 
@@ -287,23 +260,40 @@
 			this.buttonGenerate.Text = "Сгенерировать код";
 			this.buttonGenerate.UseVisualStyleBackColor = true;
 			// 
-			// buttonApply
+			// listBox1
 			// 
-			this.buttonApply.Location = new System.Drawing.Point(196, 125);
-			this.buttonApply.Name = "buttonApply";
-			this.buttonApply.Size = new System.Drawing.Size(75, 23);
-			this.buttonApply.TabIndex = 6;
-			this.buttonApply.Text = "применить";
-			this.buttonApply.UseVisualStyleBackColor = true;
+			this.listBox1.FormattingEnabled = true;
+			this.listBox1.Location = new System.Drawing.Point(6, 19);
+			this.listBox1.Name = "listBox1";
+			this.listBox1.Size = new System.Drawing.Size(163, 95);
+			this.listBox1.TabIndex = 0;
 			// 
-			// buttonEdit
+			// buttonEditStream
 			// 
-			this.buttonEdit.Location = new System.Drawing.Point(7, 125);
-			this.buttonEdit.Name = "buttonEdit";
-			this.buttonEdit.Size = new System.Drawing.Size(93, 23);
-			this.buttonEdit.TabIndex = 7;
-			this.buttonEdit.Text = "редактировать";
-			this.buttonEdit.UseVisualStyleBackColor = true;
+			this.buttonEditStream.Location = new System.Drawing.Point(175, 55);
+			this.buttonEditStream.Name = "buttonEditStream";
+			this.buttonEditStream.Size = new System.Drawing.Size(102, 23);
+			this.buttonEditStream.TabIndex = 6;
+			this.buttonEditStream.Text = "Редактировать";
+			this.buttonEditStream.UseVisualStyleBackColor = true;
+			// 
+			// buttonDeleteStream
+			// 
+			this.buttonDeleteStream.Location = new System.Drawing.Point(175, 84);
+			this.buttonDeleteStream.Name = "buttonDeleteStream";
+			this.buttonDeleteStream.Size = new System.Drawing.Size(102, 23);
+			this.buttonDeleteStream.TabIndex = 5;
+			this.buttonDeleteStream.Text = "Удалить";
+			this.buttonDeleteStream.UseVisualStyleBackColor = true;
+			// 
+			// buttonAddStream
+			// 
+			this.buttonAddStream.Location = new System.Drawing.Point(175, 26);
+			this.buttonAddStream.Name = "buttonAddStream";
+			this.buttonAddStream.Size = new System.Drawing.Size(102, 23);
+			this.buttonAddStream.TabIndex = 4;
+			this.buttonAddStream.Text = "Добавить";
+			this.buttonAddStream.UseVisualStyleBackColor = true;
 			// 
 			// MainFrame
 			// 
@@ -324,10 +314,7 @@
 			this.groupBoxCommonParam.ResumeLayout(false);
 			this.groupBoxCommonParam.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericNumberOfTransactions)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericNumberOfStreams)).EndInit();
 			this.groupBoxStreams.ResumeLayout(false);
-			this.groupBoxStreams.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericChooseStream)).EndInit();
 			this.groupBoxNodes.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
@@ -347,14 +334,9 @@
 		private System.Windows.Forms.GroupBox groupBoxCommonParam;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ComboBox comboBoxTypeOfNet;
-		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.NumericUpDown numericNumberOfTransactions;
-		private System.Windows.Forms.NumericUpDown numericNumberOfStreams;
 		private System.Windows.Forms.GroupBox groupBoxStreams;
-		private System.Windows.Forms.Button buttonDescribeStream;
-		private System.Windows.Forms.NumericUpDown numericChooseStream;
-		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.GroupBox groupBoxNodes;
 		private System.Windows.Forms.Button buttonEditNode;
 		private System.Windows.Forms.Button buttonDeleteNode;
@@ -364,6 +346,10 @@
 		private System.Windows.Forms.Button buttonGenerate;
 		private System.Windows.Forms.Button buttonEdit;
 		private System.Windows.Forms.Button buttonApply;
+		private System.Windows.Forms.Button buttonEditStream;
+		private System.Windows.Forms.Button buttonDeleteStream;
+		private System.Windows.Forms.Button buttonAddStream;
+		private System.Windows.Forms.ListBox listBox1;
 	}
 }
 

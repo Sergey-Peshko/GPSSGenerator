@@ -58,10 +58,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlobalDemension\GlobalModel.cs" />
-    <Compile Include="GlobalDemension\GlobalVariables.cs" />
-    <Compile Include="GlobalDemension\NetSettingscs.cs" />
-    <Compile Include="GlobalDemension\Pretreatment.cs" />
+    <Compile Include="GlobalDimension\GlobalModel.cs" />
+    <Compile Include="GlobalDimension\GlobalVariables.cs" />
+    <Compile Include="GlobalDimension\NetSettings.cs" />
     <Compile Include="Nodes\Distributions\DistributionFactory.cs" />
     <Compile Include="Nodes\Distributions\ExponentialDistribution.cs" />
     <Compile Include="Nodes\Distributions\IDistribution.cs" />

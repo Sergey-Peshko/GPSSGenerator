@@ -12,48 +12,51 @@ namespace GPSSGenerator.GlobalDimension
 	class GlobalModel
 	{
 		private List<INode> nodes;
-		private StreamModel[] matrixs;
+		private List<StreamModel> streamModels;
+		private NetSettings settings;
 
 		private string way;
+
+		public NetSettings Settings
+		{
+			get
+			{
+				return settings;
+			}
+
+			set
+			{
+				settings = value;
+			}
+		}
+
+		public List<StreamModel> StreamModels
+		{
+			get
+			{
+				return streamModels;
+			}
+
+		}
+
+		public List<INode> Nodes
+		{
+			get
+			{
+				return nodes;
+			}
+		}
 
 		public GlobalModel() { }
 		public GlobalModel(string way) { this.way = way; }
 
-
-		public void Read()
-		{
-			StreamReader sr = new StreamReader(
-				GlobalVariables.data + way);
-			int numberOfNodes = Convert.ToInt32(sr.ReadLine());
-
-			nodes = new List<INode>(numberOfNodes);
-			string[][] nodesDesciption = new string[numberOfNodes][];
-
-			for (int i = 0; i < numberOfNodes; i++)
-			{
-				string tmp = sr.ReadLine();
-				string[] tmpMass = tmp.Split(' ');
-				nodesDesciption[i] = (tmpMass);
-			}
-
-			nodes = NodeFactory.CreateNodes(nodesDesciption);
-
-			int count = Convert.ToInt32(sr.ReadLine());
-			matrixs = new StreamModel[count];
-
-			for (int i = 0; i < count; i++)
-			{
-				matrixs[i] = new StreamModel(i);
-				matrixs[i].Read(ref sr, nodes);
-			}
-
-		}
 		public void MakeCode()
 		{
 			string tmpGpss = MakeTmpGpssCode();
 			string markeredGpss = AddStreamMarkers(tmpGpss);
-			//string declarations = Pretreatment.MakeDeclarations(nodes, GlobalVariables.data + way);
-			//string finalGpss = GlueTogether(declarations, markeredGpss);
+			string declarations = MakeDeclarations();
+			string finalGpss = GlueTogether(declarations, markeredGpss);
+			//добавить START
 			//Console.WriteLine("finalGpss in file {0}", finalGpss);
 		}
 
@@ -62,11 +65,11 @@ namespace GPSSGenerator.GlobalDimension
 			string rez_way = GlobalVariables.rez + "tmpGpss" + way;
 			StreamWriter sw = new StreamWriter(rez_way);
 			OneWhoCircumventsMatrix circumventer = new OneWhoCircumventsMatrix(sw);
-			for (int i = 0; i < matrixs.Length; i++)
+			for (int i = 0; i < streamModels.Count; i++)
 			{
 				Console.WriteLine("START_STREAM#{0}", i);
 				sw.WriteLine("START_STREAM#{0}", i);
-				circumventer.CircumventsMatrix(matrixs[i]);
+				circumventer.CircumventsMatrix(streamModels[i]);
 				Console.WriteLine("END_STREAM#{0}", i);
 				sw.WriteLine("END_STREAM#{0}", i);
 				Console.WriteLine();
