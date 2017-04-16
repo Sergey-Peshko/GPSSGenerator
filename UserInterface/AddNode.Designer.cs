@@ -31,14 +31,14 @@
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.label7 = new System.Windows.Forms.Label();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.comboBoxTypeOfNode = new System.Windows.Forms.ComboBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.dataGridView2 = new System.Windows.Forms.DataGridView();
 			this.label1 = new System.Windows.Forms.Label();
-			this.comboBox2 = new System.Windows.Forms.ComboBox();
+			this.comboBoxTypeOfDistribution = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
@@ -52,7 +52,7 @@
 			// 
 			this.groupBox3.Controls.Add(this.dataGridView1);
 			this.groupBox3.Controls.Add(this.label7);
-			this.groupBox3.Controls.Add(this.comboBox1);
+			this.groupBox3.Controls.Add(this.comboBoxTypeOfNode);
 			this.groupBox3.Controls.Add(this.label6);
 			this.groupBox3.Controls.Add(this.textBox1);
 			this.groupBox3.Controls.Add(this.label5);
@@ -82,13 +82,14 @@
 			this.label7.TabIndex = 4;
 			this.label7.Text = "Параметры узла: ";
 			// 
-			// comboBox1
+			// comboBoxTypeOfNode
 			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(71, 43);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(121, 21);
-			this.comboBox1.TabIndex = 3;
+			this.comboBoxTypeOfNode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxTypeOfNode.FormattingEnabled = true;
+			this.comboBoxTypeOfNode.Location = new System.Drawing.Point(71, 43);
+			this.comboBoxTypeOfNode.Name = "comboBoxTypeOfNode";
+			this.comboBoxTypeOfNode.Size = new System.Drawing.Size(121, 21);
+			this.comboBoxTypeOfNode.TabIndex = 3;
 			// 
 			// label6
 			// 
@@ -119,7 +120,7 @@
 			// 
 			this.groupBox1.Controls.Add(this.dataGridView2);
 			this.groupBox1.Controls.Add(this.label1);
-			this.groupBox1.Controls.Add(this.comboBox2);
+			this.groupBox1.Controls.Add(this.comboBoxTypeOfDistribution);
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Enabled = false;
 			this.groupBox1.Location = new System.Drawing.Point(12, 193);
@@ -148,13 +149,14 @@
 			this.label1.TabIndex = 8;
 			this.label1.Text = "Параметры Распределения:  ";
 			// 
-			// comboBox2
+			// comboBoxTypeOfDistribution
 			// 
-			this.comboBox2.FormattingEnabled = true;
-			this.comboBox2.Location = new System.Drawing.Point(126, 13);
-			this.comboBox2.Name = "comboBox2";
-			this.comboBox2.Size = new System.Drawing.Size(121, 21);
-			this.comboBox2.TabIndex = 7;
+			this.comboBoxTypeOfDistribution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxTypeOfDistribution.FormattingEnabled = true;
+			this.comboBoxTypeOfDistribution.Location = new System.Drawing.Point(126, 13);
+			this.comboBoxTypeOfDistribution.Name = "comboBoxTypeOfDistribution";
+			this.comboBoxTypeOfDistribution.Size = new System.Drawing.Size(121, 21);
+			this.comboBoxTypeOfDistribution.TabIndex = 7;
 			// 
 			// label2
 			// 
@@ -194,6 +196,7 @@
 			this.Controls.Add(this.groupBox3);
 			this.Name = "AddNode";
 			this.Text = "Добавление узла";
+			this.Load += new System.EventHandler(this.AddNode_Load);
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -209,14 +212,14 @@
 		private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.ComboBox comboBoxTypeOfNode;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.DataGridView dataGridView2;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.ComboBox comboBox2;
+		private System.Windows.Forms.ComboBox comboBoxTypeOfDistribution;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;

@@ -38,11 +38,12 @@
 			this.groupBoxCommonParam = new System.Windows.Forms.GroupBox();
 			this.buttonEdit = new System.Windows.Forms.Button();
 			this.buttonApply = new System.Windows.Forms.Button();
-			this.label3 = new System.Windows.Forms.Label();
 			this.numericNumberOfTransactions = new System.Windows.Forms.NumericUpDown();
-			this.label1 = new System.Windows.Forms.Label();
-			this.comboBoxTypeOfNet = new System.Windows.Forms.ComboBox();
 			this.groupBoxStreams = new System.Windows.Forms.GroupBox();
+			this.buttonEditStream = new System.Windows.Forms.Button();
+			this.buttonDeleteStream = new System.Windows.Forms.Button();
+			this.buttonAddStream = new System.Windows.Forms.Button();
+			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.groupBoxNodes = new System.Windows.Forms.GroupBox();
 			this.buttonShowFullDescription = new System.Windows.Forms.Button();
 			this.buttonEditNode = new System.Windows.Forms.Button();
@@ -50,16 +51,16 @@
 			this.buttonAddNode = new System.Windows.Forms.Button();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.buttonGenerate = new System.Windows.Forms.Button();
-			this.listBox1 = new System.Windows.Forms.ListBox();
-			this.buttonEditStream = new System.Windows.Forms.Button();
-			this.buttonDeleteStream = new System.Windows.Forms.Button();
-			this.buttonAddStream = new System.Windows.Forms.Button();
+			this.numericTime = new System.Windows.Forms.NumericUpDown();
+			this.radioButton1 = new System.Windows.Forms.RadioButton();
+			this.radioButton2 = new System.Windows.Forms.RadioButton();
 			this.menuStrip1.SuspendLayout();
 			this.groupBoxCommonParam.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericNumberOfTransactions)).BeginInit();
 			this.groupBoxStreams.SuspendLayout();
 			this.groupBoxNodes.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericTime)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -68,7 +69,7 @@
             this.fileToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(656, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(667, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -115,15 +116,15 @@
 			// 
 			// groupBoxCommonParam
 			// 
+			this.groupBoxCommonParam.Controls.Add(this.radioButton2);
+			this.groupBoxCommonParam.Controls.Add(this.radioButton1);
+			this.groupBoxCommonParam.Controls.Add(this.numericTime);
 			this.groupBoxCommonParam.Controls.Add(this.buttonEdit);
 			this.groupBoxCommonParam.Controls.Add(this.buttonApply);
-			this.groupBoxCommonParam.Controls.Add(this.label3);
 			this.groupBoxCommonParam.Controls.Add(this.numericNumberOfTransactions);
-			this.groupBoxCommonParam.Controls.Add(this.label1);
-			this.groupBoxCommonParam.Controls.Add(this.comboBoxTypeOfNet);
 			this.groupBoxCommonParam.Location = new System.Drawing.Point(12, 47);
 			this.groupBoxCommonParam.Name = "groupBoxCommonParam";
-			this.groupBoxCommonParam.Size = new System.Drawing.Size(277, 109);
+			this.groupBoxCommonParam.Size = new System.Drawing.Size(277, 113);
 			this.groupBoxCommonParam.TabIndex = 1;
 			this.groupBoxCommonParam.TabStop = false;
 			this.groupBoxCommonParam.Text = "Общие Параметры";
@@ -136,6 +137,7 @@
 			this.buttonEdit.TabIndex = 7;
 			this.buttonEdit.Text = "редактировать";
 			this.buttonEdit.UseVisualStyleBackColor = true;
+			this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
 			// 
 			// buttonApply
 			// 
@@ -145,39 +147,15 @@
 			this.buttonApply.TabIndex = 6;
 			this.buttonApply.Text = "применить";
 			this.buttonApply.UseVisualStyleBackColor = true;
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(8, 48);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(108, 13);
-			this.label3.TabIndex = 5;
-			this.label3.Text = "Кол-во транзактов: ";
+			this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
 			// 
 			// numericNumberOfTransactions
 			// 
-			this.numericNumberOfTransactions.Location = new System.Drawing.Point(122, 46);
+			this.numericNumberOfTransactions.Location = new System.Drawing.Point(150, 25);
 			this.numericNumberOfTransactions.Name = "numericNumberOfTransactions";
 			this.numericNumberOfTransactions.Size = new System.Drawing.Size(121, 20);
 			this.numericNumberOfTransactions.TabIndex = 4;
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(7, 24);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(109, 13);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "Выберите тип сети: ";
-			// 
-			// comboBoxTypeOfNet
-			// 
-			this.comboBoxTypeOfNet.FormattingEnabled = true;
-			this.comboBoxTypeOfNet.Location = new System.Drawing.Point(122, 19);
-			this.comboBoxTypeOfNet.Name = "comboBoxTypeOfNet";
-			this.comboBoxTypeOfNet.Size = new System.Drawing.Size(121, 21);
-			this.comboBoxTypeOfNet.TabIndex = 0;
+			this.numericNumberOfTransactions.Visible = false;
 			// 
 			// groupBoxStreams
 			// 
@@ -191,6 +169,42 @@
 			this.groupBoxStreams.TabIndex = 2;
 			this.groupBoxStreams.TabStop = false;
 			this.groupBoxStreams.Text = "Описание Потоков";
+			// 
+			// buttonEditStream
+			// 
+			this.buttonEditStream.Location = new System.Drawing.Point(175, 55);
+			this.buttonEditStream.Name = "buttonEditStream";
+			this.buttonEditStream.Size = new System.Drawing.Size(102, 23);
+			this.buttonEditStream.TabIndex = 6;
+			this.buttonEditStream.Text = "Редактировать";
+			this.buttonEditStream.UseVisualStyleBackColor = true;
+			// 
+			// buttonDeleteStream
+			// 
+			this.buttonDeleteStream.Location = new System.Drawing.Point(175, 84);
+			this.buttonDeleteStream.Name = "buttonDeleteStream";
+			this.buttonDeleteStream.Size = new System.Drawing.Size(102, 23);
+			this.buttonDeleteStream.TabIndex = 5;
+			this.buttonDeleteStream.Text = "Удалить";
+			this.buttonDeleteStream.UseVisualStyleBackColor = true;
+			// 
+			// buttonAddStream
+			// 
+			this.buttonAddStream.Location = new System.Drawing.Point(175, 26);
+			this.buttonAddStream.Name = "buttonAddStream";
+			this.buttonAddStream.Size = new System.Drawing.Size(102, 23);
+			this.buttonAddStream.TabIndex = 4;
+			this.buttonAddStream.Text = "Добавить";
+			this.buttonAddStream.UseVisualStyleBackColor = true;
+			this.buttonAddStream.Click += new System.EventHandler(this.buttonAddStream_Click);
+			// 
+			// listBox1
+			// 
+			this.listBox1.FormattingEnabled = true;
+			this.listBox1.Location = new System.Drawing.Point(6, 19);
+			this.listBox1.Name = "listBox1";
+			this.listBox1.Size = new System.Drawing.Size(163, 95);
+			this.listBox1.TabIndex = 0;
 			// 
 			// groupBoxNodes
 			// 
@@ -253,53 +267,48 @@
 			// 
 			// buttonGenerate
 			// 
-			this.buttonGenerate.Location = new System.Drawing.Point(262, 296);
+			this.buttonGenerate.Location = new System.Drawing.Point(258, 289);
 			this.buttonGenerate.Name = "buttonGenerate";
 			this.buttonGenerate.Size = new System.Drawing.Size(131, 23);
 			this.buttonGenerate.TabIndex = 4;
 			this.buttonGenerate.Text = "Сгенерировать код";
 			this.buttonGenerate.UseVisualStyleBackColor = true;
 			// 
-			// listBox1
+			// numericTime
 			// 
-			this.listBox1.FormattingEnabled = true;
-			this.listBox1.Location = new System.Drawing.Point(6, 19);
-			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(163, 95);
-			this.listBox1.TabIndex = 0;
+			this.numericTime.Location = new System.Drawing.Point(150, 51);
+			this.numericTime.Name = "numericTime";
+			this.numericTime.Size = new System.Drawing.Size(121, 20);
+			this.numericTime.TabIndex = 8;
+			this.numericTime.Visible = false;
 			// 
-			// buttonEditStream
+			// radioButton1
 			// 
-			this.buttonEditStream.Location = new System.Drawing.Point(175, 55);
-			this.buttonEditStream.Name = "buttonEditStream";
-			this.buttonEditStream.Size = new System.Drawing.Size(102, 23);
-			this.buttonEditStream.TabIndex = 6;
-			this.buttonEditStream.Text = "Редактировать";
-			this.buttonEditStream.UseVisualStyleBackColor = true;
+			this.radioButton1.AutoSize = true;
+			this.radioButton1.Location = new System.Drawing.Point(6, 25);
+			this.radioButton1.Name = "radioButton1";
+			this.radioButton1.Size = new System.Drawing.Size(126, 17);
+			this.radioButton1.TabIndex = 10;
+			this.radioButton1.TabStop = true;
+			this.radioButton1.Text = "Кол-во транзактов: ";
+			this.radioButton1.UseVisualStyleBackColor = true;
 			// 
-			// buttonDeleteStream
+			// radioButton2
 			// 
-			this.buttonDeleteStream.Location = new System.Drawing.Point(175, 84);
-			this.buttonDeleteStream.Name = "buttonDeleteStream";
-			this.buttonDeleteStream.Size = new System.Drawing.Size(102, 23);
-			this.buttonDeleteStream.TabIndex = 5;
-			this.buttonDeleteStream.Text = "Удалить";
-			this.buttonDeleteStream.UseVisualStyleBackColor = true;
-			// 
-			// buttonAddStream
-			// 
-			this.buttonAddStream.Location = new System.Drawing.Point(175, 26);
-			this.buttonAddStream.Name = "buttonAddStream";
-			this.buttonAddStream.Size = new System.Drawing.Size(102, 23);
-			this.buttonAddStream.TabIndex = 4;
-			this.buttonAddStream.Text = "Добавить";
-			this.buttonAddStream.UseVisualStyleBackColor = true;
+			this.radioButton2.AutoSize = true;
+			this.radioButton2.Location = new System.Drawing.Point(6, 51);
+			this.radioButton2.Name = "radioButton2";
+			this.radioButton2.Size = new System.Drawing.Size(101, 17);
+			this.radioButton2.TabIndex = 11;
+			this.radioButton2.TabStop = true;
+			this.radioButton2.Text = "Время работы:";
+			this.radioButton2.UseVisualStyleBackColor = true;
 			// 
 			// MainFrame
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(656, 331);
+			this.ClientSize = new System.Drawing.Size(667, 330);
 			this.Controls.Add(this.buttonGenerate);
 			this.Controls.Add(this.groupBoxNodes);
 			this.Controls.Add(this.groupBoxStreams);
@@ -317,6 +326,7 @@
 			this.groupBoxStreams.ResumeLayout(false);
 			this.groupBoxNodes.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericTime)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -332,9 +342,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.GroupBox groupBoxCommonParam;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.ComboBox comboBoxTypeOfNet;
-		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.NumericUpDown numericNumberOfTransactions;
 		private System.Windows.Forms.GroupBox groupBoxStreams;
 		private System.Windows.Forms.GroupBox groupBoxNodes;
@@ -350,6 +357,9 @@
 		private System.Windows.Forms.Button buttonDeleteStream;
 		private System.Windows.Forms.Button buttonAddStream;
 		private System.Windows.Forms.ListBox listBox1;
+		private System.Windows.Forms.NumericUpDown numericTime;
+		private System.Windows.Forms.RadioButton radioButton2;
+		private System.Windows.Forms.RadioButton radioButton1;
 	}
 }
 

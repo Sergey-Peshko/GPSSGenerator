@@ -47,7 +47,11 @@ namespace GPSSGenerator.GlobalDimension
 			}
 		}
 
-		public GlobalModel() { }
+		public GlobalModel()
+		{
+			nodes = new List<INode>();
+			streamModels = new List<StreamModel>();
+		}
 		public GlobalModel(string way) { this.way = way; }
 
 		public void MakeCode()

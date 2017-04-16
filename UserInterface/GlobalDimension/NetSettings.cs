@@ -8,9 +8,9 @@ namespace GPSSGenerator.GlobalDimension
 {
 	class NetSettings
 	{
-		private string typeOfNet;
-		private int numberOfStreams;
 		private int numberOfTransactions;
+		private int numberOfTime;
+		private bool isTime;
 
 		public int NumberOfTransactions
 		{
@@ -22,19 +22,6 @@ namespace GPSSGenerator.GlobalDimension
 			set
 			{
 				numberOfTransactions = value;
-			}
-		}
-
-		public string TypeOfNet
-		{
-			get
-			{
-				return typeOfNet;
-			}
-
-			set
-			{
-				typeOfNet = value;
 			}
 		}
 	}
