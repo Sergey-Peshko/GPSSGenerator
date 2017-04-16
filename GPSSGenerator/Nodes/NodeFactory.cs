@@ -83,9 +83,9 @@ namespace GPSSGenerator.Nodes
 				tmpG.StartFullStatistic = startFull;
 				return tmpG;
 			}
-			else if (param[0] == "FACILITY_ONE_CHANNEL_RELATIVE")
+			else if (param[0] == "FACILITY_ONECHANNEL_RELATIVE")
 			{
-				OneChannelRelative ocr = new OneChannelRelative(param[1]);
+				OneChannelRelative ocr = new OneChannelRelative(param[1]);	
 				string[] distributionParam = new string[param.Length - 2];
 				Array.Copy(param, 2, distributionParam, 0, distributionParam.Length);
 				IDistribution distribution = DistributionFactory.CreateDistribution(distributionParam);
@@ -108,7 +108,32 @@ namespace GPSSGenerator.Nodes
 				ocr.ListEndStatistic = lest;
 				return ocr;
 			}
-			
+			else if (param[0] == "FACILITY_MULTYCHANNEL")
+			{
+				MultyChannel ocr = new MultyChannel(param[1]);
+				ocr.NumberOfChannel = Convert.ToInt32(param[2]);
+				string[] distributionParam = new string[param.Length - 3];
+				Array.Copy(param, 3, distributionParam, 0, distributionParam.Length);
+				IDistribution distribution = DistributionFactory.CreateDistribution(distributionParam);
+				ocr.Distribution = distribution;
+				List<StartStatistic> lsst = new List<StartStatistic>();
+				StartStatistic smu = new StartStatistic();
+				smu.NameOfStatistic = String.Format("{0}_STREAM#", param[1]);
+				StartStatistic sw = new StartStatistic();
+				sw.NameOfStatistic = String.Format("{0}_STREAM#_queue", param[1]);
+				lsst.Add(smu);
+				lsst.Add(sw);
+				List<EndStatistic> lest = new List<EndStatistic>();
+				EndStatistic emu = new EndStatistic();
+				emu.NameOfStatistic = String.Format("{0}_STREAM#", param[1]);
+				EndStatistic ew = new EndStatistic();
+				ew.NameOfStatistic = String.Format("{0}_STREAM#_queue", param[1]);
+				lest.Add(emu);
+				lest.Add(ew);
+				ocr.ListStartStatistic = lsst;
+				ocr.ListEndStatistic = lest;
+				return ocr;
+			}
 			else if (param[0] == "START_STATISTIC")
 			{
 				StartStatistic s = new StartStatistic(param[1]);

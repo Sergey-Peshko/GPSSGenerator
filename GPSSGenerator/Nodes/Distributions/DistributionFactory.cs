@@ -17,6 +17,14 @@ namespace GPSSGenerator.Nodes.Distributions
 				ed.MathematicalExpectation = (float)Convert.ToDouble(param[2]);
 				return ed;
 			}
+			if (param[0] == "UNIFORM")
+			{
+				UniformDistribution d = new UniformDistribution();
+				d.NumberOfGenerator = Convert.ToInt32(param[1]);
+				d.A = (float)Convert.ToDouble(param[2]);
+				d.B = (float)Convert.ToDouble(param[3]);
+				return d;
+			}
 			else
 			{
 				throw new Exception("can't create Distribution");

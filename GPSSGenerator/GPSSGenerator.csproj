@@ -49,12 +49,15 @@
     <Compile Include="Nodes\Distributions\DistributionFactory.cs" />
     <Compile Include="Nodes\Distributions\ExponentialDistribution.cs" />
     <Compile Include="Nodes\Distributions\IDistribution.cs" />
+    <Compile Include="Nodes\Distributions\UniformDistribution.cs" />
     <Compile Include="Nodes\Nodes\EndStatistic.cs" />
     <Compile Include="Nodes\Nodes\Facilities\IFacility.cs" />
+    <Compile Include="Nodes\Nodes\Facilities\MultyChannel.cs" />
     <Compile Include="Nodes\Nodes\Facilities\OneChannelRelative.cs" />
     <Compile Include="Nodes\Nodes\Generator.cs" />
     <Compile Include="Nodes\INode.cs" />
     <Compile Include="Nodes\NodeFactory.cs" />
+    <Compile Include="Nodes\IDeclarative.cs" />
     <Compile Include="Nodes\Nodes\QTable.cs" />
     <Compile Include="Nodes\Nodes\StartStatistic.cs" />
     <Compile Include="Nodes\Nodes\Terminate.cs" />
