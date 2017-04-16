@@ -10,22 +10,11 @@ using System.Windows.Forms;
 
 namespace UserInterface
 {
-	public partial class MainFrame : Form
+	public partial class AddNode : Form
 	{
-		public MainFrame()
+		public AddNode()
 		{
 			InitializeComponent();
-		}
-
-		private void Form1_Load(object sender, EventArgs e)
-		{
-
-		}
-
-		private void addButton_Click(object sender, EventArgs e)
-		{
-			AddNode addNode = new AddNode();
-			addNode.Show();
 		}
 	}
 }
