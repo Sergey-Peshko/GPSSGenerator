@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.GlobalDimension
 {
-	class NetSettings
+	public class NetSettings
 	{
 		private int numberOfTransactions;
 		private int amountOfTime;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Nodes
 {
-	abstract class INode
+	public abstract class INode
 	{
 		protected string id;
 		protected string label;
@@ -14,6 +14,8 @@ namespace GPSSGenerator.Nodes
 		protected List<string> description = new List<string>();
 		protected bool isNeedDeclaration = false;
 		protected bool canItHaveLabel = true;
+
+		protected List<INode> nextNodes = new List<INode>();
 
 		abstract public List<string> Description { get; }
 
@@ -70,6 +72,19 @@ namespace GPSSGenerator.Nodes
 			set
 			{
 				isNeedDeclaration = value;
+			}
+		}
+
+		public List<INode> NextNodes
+		{
+			get
+			{
+				return nextNodes;
+			}
+
+			set
+			{
+				nextNodes = value;
 			}
 		}
 	}

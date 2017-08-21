@@ -9,8 +9,6 @@ namespace GPSSGenerator.GlobalDimension
 	class GlobalVariables
 	{
 		public static int counterOfTransfers = 0;
-		public static string data = "C:\\Users\\peshk\\Documents\\Visual Studio 2015\\Projects\\GPSSGenerator\\UserInterface\\data\\";
-		public static string rez = "C:\\Users\\peshk\\Documents\\Visual Studio 2015\\Projects\\GPSSGenerator\\UserInterface\\rez\\";
 		public static string[] typesOfNode = {
 			"CLOSED_GENERATOR",
 			"GENERATOR",

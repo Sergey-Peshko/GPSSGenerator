@@ -11,9 +11,8 @@ using GPSSGenerator.GlobalDimension;
 
 namespace GPSSGenerator.StreamDimension
 {
-	class StreamModel
+	public class StreamModel
 	{
-		private List<List<double>> graph;
 		private List<INode> nodes;
 		private int index;
 
@@ -33,14 +32,6 @@ namespace GPSSGenerator.StreamDimension
 			}
 		}
 
-		public List<List<double>> Graph
-		{
-			get
-			{
-				return graph;
-			}
-		}
-
 		public List<INode> Nodes
 		{
 			get
@@ -48,54 +39,41 @@ namespace GPSSGenerator.StreamDimension
 				return nodes;
 			}
 		}
-		public StreamModel(int index)
+		public StreamModel(int index, INode[] originalNodes, float[,] graph)
 		{
 			this.index = index;
-		}
-		public void Read(ref StreamReader sr, List<INode> sourseList)
-		{
-			int numberOfNodes = Convert.ToInt32(sr.ReadLine());
-			nodes = new List<INode>();
 
-			string nodesInexes = sr.ReadLine();
-			string[] nodesInexesMass = nodesInexes.Split(' ');
-			for(int i=0;i< numberOfNodes;i++)
+			if (graph.GetLength(0) != graph.GetLength(1))
 			{
-				nodes.Add(sourseList[Convert.ToInt32(nodesInexesMass[i])]);
+				throw new Exception("graph is not square!");
 			}
 
-			graph = new List<List<double>>();
-			for (int i = 0; i < numberOfNodes; i++)
+			if(originalNodes.Length != graph.Length)
 			{
-				string tmp = sr.ReadLine();
-				string[] mass = tmp.Split(' ');
-				List<double> links = new List<double>();
-				for (int j = 0; j < numberOfNodes; j++)
-				{
-					links.Add(Convert.ToDouble(mass[j]));
-				}
-				graph.Add(links);
+				throw new Exception("graph size and namber of original nodes is not identical!");
 			}
 
-			AnalisOfMatrix();
+			BuildStreamNodes(originalNodes, graph);
 		}
+		
 		public void Show()
 		{
 			for (int i = 0; i < nodes.Count; i++)
 			{
-				Console.WriteLine("{0}\t{1}", i + 1, nodes[i].Id);
-			}
-			for (int i = 0; i < nodes.Count; i++)
-			{
-				Console.WriteLine();
-				for (int j = 0; j < nodes.Count; j++)
+				Console.WriteLine("{0}.\t{1}", i + 1, nodes[i].Id);
+				Console.WriteLine("next: ");
+				for (int j = 0; j < nodes[i].NextNodes.Count; j++)
 				{
-					Console.Write("{0}\t", graph[i][j]);
+					Console.Write("{0}.\t{1}", j + 1, nodes[i].NextNodes[j].Id);
 				}
 			}
-			Console.WriteLine();
 		}
-		private void AnalisOfMatrix()
+		private void BuildStreamNodes(INode[] originalNodes, float[,] graph)
+		{
+			nodes = new List<INode>();
+
+		}
+		private void AnalisOfMatrix(float[][] graph)
 		{
 			for (int i = 0; i < graph.Count; i++)
 			{

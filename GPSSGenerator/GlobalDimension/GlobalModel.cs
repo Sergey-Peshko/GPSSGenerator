@@ -9,9 +9,8 @@ using GPSSGenerator.Nodes;
 
 namespace GPSSGenerator.GlobalDimension
 {
-	class GlobalModel
+	public class GlobalModel
 	{
-		private List<INode> nodes;
 		private List<StreamModel> streamModels;
 		private NetSettings settings;
 
@@ -37,14 +36,6 @@ namespace GPSSGenerator.GlobalDimension
 				return streamModels;
 			}
 
-		}
-
-		public List<INode> Nodes
-		{
-			get
-			{
-				return nodes;
-			}
 		}
 
 		public GlobalModel()
