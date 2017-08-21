@@ -14,58 +14,29 @@ namespace GPSSGenerator.Nodes
 		static private StartStatistic startFull;
 		static private EndStatistic endFull;
 
-		static public List<INode> CreateNodes(string[][] nodes)
-		{
+		static NodeFactory(){
 			startFull = new StartStatistic();
 			startFull.NameOfStatistic = "net";
 			endFull = new EndStatistic();
 			endFull.NameOfStatistic = "net";
+		}
 
-
+		static public List<INode> CreateNodes(string[][] nodes)
+		{
 			List<INode> rezult = new List<INode>(nodes.Length);
 			for(int i = 0; i < nodes.Length; i++)
 			{
 				rezult.Add(CreateNode(nodes[i]));
 			}
-			//SetDependencies(nodes, rezult);
 			return rezult;
 		}
-		/*
-		static private void SetDependencies(string[][] description, List<INode> nodes)
-		{
-			for(int i = 0; i < description.Length; i++)
-			{
-				if(description[i][0] == "TRANSFER")
-				{
-					((Transfer)nodes[i]).Node1 = nodes[FindNode(nodes, description[i][3])];
-					((Transfer)nodes[i]).Node2 = nodes[FindNode(nodes, description[i][4])];
-				}
-			}
-		}
-		static private int FindNode(List<INode> nodes, string id)
-		{
-			for(int i = 0; i < nodes.Count; i++)
-			{
-				if (nodes[i].Id == id)
-					return i;
-			}
-			return -1;
-		}
-		*/
+		
 		static private INode CreateNode(string[] param)
 		{
 			if (param[0] == "SomeNode")
 			{
 				return new SomeNode(param[1]);
 			}
-			/*
-			else if (param[0] == "TRANSFER")
-			{
-				Transfer tmpT = new Transfer(param[1]);
-				tmpT.Probability1 = Convert.ToDouble(param[2]);
-				return tmpT;
-			}
-			*/
 			else if (param[0] == "TERMINATE")
 			{
 				Terminate tmpT = new Terminate(param[1]);

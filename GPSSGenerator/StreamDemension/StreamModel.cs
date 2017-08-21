@@ -119,7 +119,6 @@ namespace GPSSGenerator.StreamDimension
 						break;
 					}
 				}
-
 			}
 		}
 
@@ -147,14 +146,7 @@ namespace GPSSGenerator.StreamDimension
 			{
 				double percents = (double)(transitions[i].Value * 1) / remainingPersents;
 				remainingPersents -= transitions[i].Value;
-				/*
-				transfers[i].SetParam(percents,
-					String.Format("Stream_{0}", index) + nodes[transitions[i].Key].Label,
-					i == transitions.Count - 2 ?
-					String.Format("Stream_{0}", index) + nodes[transitions[transitions.Count - 1].Key].Label :
-					String.Format("Stream_{0}", index) + transfers[i + 1].Label
-					);
-				*/
+				
 				transfers[i].Probability1 = percents;
 				transfers[i].Node1 = nodes[transitions[i].Key];
 				if(i == transitions.Count - 2)
@@ -165,7 +157,6 @@ namespace GPSSGenerator.StreamDimension
 				{
 					transfers[i].Node2 = transfers[i + 1];
 				}
-				//nodes[transitions[i].Key].IsNeedLabel = true;
 
 				List<double> tmp = new List<double>();
 

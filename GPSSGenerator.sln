@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPSSGenerator", "GPSSGenerator\GPSSGenerator.csproj", "{01669C70-594D-4C59-88D9-47CBC452B4F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPSSGeneratorCore", "GPSSGenerator\GPSSGeneratorCore.csproj", "{01669C70-594D-4C59-88D9-47CBC452B4F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "UserInterface\UserInterface.csproj", "{6610A9DC-BB42-43BB-A3F0-02541E3203F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFromInterface", "UserInterface\WinFromInterface.csproj", "{6610A9DC-BB42-43BB-A3F0-02541E3203F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleInterface", "ConsoleInterface\ConsoleInterface.csproj", "{69D60894-BDD5-4AB3-9073-07F92B5A3B9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6610A9DC-BB42-43BB-A3F0-02541E3203F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6610A9DC-BB42-43BB-A3F0-02541E3203F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6610A9DC-BB42-43BB-A3F0-02541E3203F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69D60894-BDD5-4AB3-9073-07F92B5A3B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69D60894-BDD5-4AB3-9073-07F92B5A3B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69D60894-BDD5-4AB3-9073-07F92B5A3B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69D60894-BDD5-4AB3-9073-07F92B5A3B9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

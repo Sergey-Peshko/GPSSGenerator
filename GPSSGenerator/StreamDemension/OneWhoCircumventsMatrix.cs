@@ -20,14 +20,7 @@ namespace GPSSGenerator.StreamDimension
 			int[] color = new int[m.NumberOfNodes];
 			dfs1(0, m, ref color);
 
-
-			for (int i = 0; i < m.NumberOfNodes; i++)
-			{
-				if (color[i] == 0)
-				{
-					dfs1(i, m, ref color);
-				}
-			}
+			
 		}
 		private void printNode(string label, List<string> description)
 		{
@@ -50,12 +43,6 @@ namespace GPSSGenerator.StreamDimension
 					{
 						dfs1(i, m, ref color);
 					}
-			}
-
-			for (int i = 0; i < m.Graph[pos].Count; i++)
-			{
-				if (color[i] == 0)
-					dfs1(i, m, ref color);
 			}
 
 			color[pos] = 2;

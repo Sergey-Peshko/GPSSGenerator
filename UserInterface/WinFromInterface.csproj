@@ -7,8 +7,8 @@
     <ProjectGuid>{6610A9DC-BB42-43BB-A3F0-02541E3203F9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UserInterface</RootNamespace>
-    <AssemblyName>UserInterface</AssemblyName>
+    <RootNamespace>WinFromInterface</RootNamespace>
+    <AssemblyName>WinFromInterface</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -58,30 +58,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlobalDimension\GlobalModel.cs" />
-    <Compile Include="GlobalDimension\GlobalVariables.cs" />
-    <Compile Include="GlobalDimension\NetSettings.cs" />
-    <Compile Include="Nodes\Distributions\DistributionFactory.cs" />
-    <Compile Include="Nodes\Distributions\ExponentialDistribution.cs" />
-    <Compile Include="Nodes\Distributions\IDistribution.cs" />
-    <Compile Include="Nodes\Distributions\UniformDistribution.cs" />
-    <Compile Include="Nodes\IDeclarative.cs" />
-    <Compile Include="Nodes\INode.cs" />
-    <Compile Include="Nodes\NodeFactory.cs" />
-    <Compile Include="Nodes\Nodes\EndStatistic.cs" />
-    <Compile Include="Nodes\Nodes\Facilities\IFacility.cs" />
-    <Compile Include="Nodes\Nodes\Facilities\MultyChannel.cs" />
-    <Compile Include="Nodes\Nodes\Facilities\OneChannelRelative.cs" />
-    <Compile Include="Nodes\Nodes\Generator.cs" />
-    <Compile Include="Nodes\Nodes\QTable.cs" />
-    <Compile Include="Nodes\Nodes\StartStatistic.cs" />
-    <Compile Include="Nodes\Nodes\Terminate.cs" />
-    <Compile Include="Nodes\Nodes\Transfer.cs" />
-    <Compile Include="Nodes\SomeNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StreamDemension\OneWhoCircumventsMatrix.cs" />
-    <Compile Include="StreamDemension\StreamModel.cs" />
     <Compile Include="StreamDescription.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +80,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="StreamDescription.resx">
       <DependentUpon>StreamDescription.cs</DependentUpon>

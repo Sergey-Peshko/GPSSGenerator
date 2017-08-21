@@ -24,7 +24,7 @@ namespace UserInterface
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			comboBoxTypeOfNet.DataSource = GlobalVariables.typesOfNet;
+		
 		}
 
 		private void addButton_Click(object sender, EventArgs e)
@@ -42,7 +42,6 @@ namespace UserInterface
 		{
 			NetSettings netSettings = new NetSettings();
 			netSettings.NumberOfTransactions = (int)numericNumberOfTransactions.Value;
-			netSettings.TypeOfNet = (string)comboBoxTypeOfNet.SelectedItem;
 		}
 
 		private void buttonAddStream_Click(object sender, EventArgs e)
