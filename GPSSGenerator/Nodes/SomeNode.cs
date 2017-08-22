@@ -27,7 +27,6 @@ namespace GPSSGenerator.Nodes
 		public SomeNode(string id)
 		{
 			this.id = id;
-			label = string.Format("Lable_{0}", id);
 		}
 	}
 }

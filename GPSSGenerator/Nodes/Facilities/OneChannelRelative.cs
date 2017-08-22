@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPSSGenerator.Nodes.Nodes.Facilities
+namespace GPSSGenerator.Nodes.Facilities
 {
 	class OneChannelRelative : IFacility
 	{
@@ -35,6 +35,13 @@ namespace GPSSGenerator.Nodes.Nodes.Facilities
 		{
 			this.id = id;
 			label = string.Format("label_{0}_STREAM#", id);
+		}
+
+		public override StreamNodeDecorator GetNewInstanseOfIStreamNodeWithINodeData()
+		{
+			OneChannelRelative newNode = new OneChannelRelative();
+			INode.Copy(this, newNode);
+			return newNode;
 		}
 	}
 }

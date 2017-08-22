@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPSSGenerator.Nodes.Nodes
+namespace GPSSGenerator.Nodes.Statistics
 {
-	class QTable : INode, IDeclarative
+	class QTable : StreamNodeDecorator, IDeclarative
 	{
 		private string nameOfStatistic;
 		private int b;
@@ -106,6 +106,13 @@ namespace GPSSGenerator.Nodes.Nodes
 			isNeedDeclaration = true;
 			canItHaveLabel = false;
 			this.id = id;
+		}
+
+		public override StreamNodeDecorator GetNewInstanseOfIStreamNodeWithINodeData()
+		{
+			QTable newNode = new QTable();
+			INode.Copy(this, newNode);
+			return newNode;
 		}
 	}
 }

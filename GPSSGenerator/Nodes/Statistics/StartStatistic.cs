@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPSSGenerator.Nodes.Nodes
+namespace GPSSGenerator.Nodes.Statistics
 {
-	class StartStatistic : INode
+	class StartStatistic : StreamNodeDecorator
 	{
 		private string nameOfStatistic;
 		public override List<string> Description
@@ -43,6 +43,13 @@ namespace GPSSGenerator.Nodes.Nodes
 		{
 			this.id = id;
 			label = string.Format("Label_{0}", id);
+		}
+
+		public override StreamNodeDecorator GetNewInstanseOfIStreamNodeWithINodeData()
+		{
+			StartStatistic newNode = new StartStatistic();
+			INode.Copy(this, newNode);
+			return newNode;
 		}
 	}
 }

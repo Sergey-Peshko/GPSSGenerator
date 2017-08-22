@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
 using GPSSGenerator.Nodes;
-using GPSSGenerator.Nodes.Nodes;
+using GPSSGenerator.Nodes.Transfers;
+using GPSSGenerator.Nodes.Generators;
 using GPSSGenerator.GlobalDimension;
 
 namespace GPSSGenerator.StreamDimension
@@ -43,17 +44,7 @@ namespace GPSSGenerator.StreamDimension
 		{
 			this.index = index;
 
-			if (graph.GetLength(0) != graph.GetLength(1))
-			{
-				throw new Exception("graph is not square!");
-			}
-
-			if(originalNodes.Length != graph.Length)
-			{
-				throw new Exception("graph size and namber of original nodes is not identical!");
-			}
-
-			BuildStreamNodes(originalNodes, graph);
+			AnalizeAndBuildStreamNodes(originalNodes, graph);
 		}
 		
 		public void Show()
@@ -68,23 +59,63 @@ namespace GPSSGenerator.StreamDimension
 				}
 			}
 		}
-		private void BuildStreamNodes(INode[] originalNodes, float[,] graph)
+		private void BuildStreamNode(int pos, INode[] originalNodes, float[,] graph)
 		{
-			nodes = new List<INode>();
+			StreamNodeDecorator node = originalNodes[pos].GetNewInstanseOfIStreamNodeWithINodeData();
+
+			nodes.Add();
 
 		}
-		private void AnalisOfMatrix(float[][] graph)
+
+		private void AnalizeAndBuildStreamNodes(INode[] originalNodes, float[,] graph)
 		{
-			for (int i = 0; i < graph.Count; i++)
+			if (graph.GetLength(0) != graph.GetLength(1))
 			{
-				double counter = 0;
-				for (int j = 0; j < graph[i].Count; j++)
+				throw new Exception("graph is not square!");
+			}
+
+			if (originalNodes.Length != graph.Length)
+			{
+				throw new Exception("graph size and namber of original nodes is not identical!");
+			}
+
+			for (int i = 0; i < graph.Length; i++)
+			{
+				float counter = 0;
+				for (int j = 0; j < graph.Length; j++)
 				{
-					counter += graph[i][j];
+					counter += graph[i, j];
 				}
 				if (counter != 1 && counter != 0)
-					throw new Exception("Matrix wrong");
+					throw new Exception(string.Format("Line {0} is wrong in matrix!", i + 1));
 			}
+
+			int startNode = -1;
+
+			for (int i = 0; i < originalNodes.Length; i++)
+			{
+				if ((originalNodes[i] is Generator) || (originalNodes[i] is ClosedGenerator))
+				{
+					startNode = i;
+					break;
+				}
+			}
+
+			if (startNode == -1)
+			{
+				throw new Exception("can't build stream, there isn't any generator!");
+			}
+
+			nodes = new List<INode>();
+
+			BuildStreamNode(startNode, originalNodes, graph);
+
+		}
+
+		/*
+		private void AnalisOfMatrix(float[][] graph)
+		{
+			
 
 			int count = graph.Count;
 			for (int i = 0; i < count; i++)
@@ -169,5 +200,6 @@ namespace GPSSGenerator.StreamDimension
 
 			return transfers.Length;
 		}
+		*/
 	}
 }

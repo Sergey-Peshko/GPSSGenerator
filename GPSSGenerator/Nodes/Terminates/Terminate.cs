@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GPSSGenerator.Nodes.Statistics;
 
-namespace GPSSGenerator.Nodes.Nodes
+namespace GPSSGenerator.Nodes.Terminates
 {
-	class Terminate : INode
+	class Terminate : StreamNodeDecorator
 	{
 		private int count;
 		private EndStatistic endFullStatistic;
@@ -57,6 +58,13 @@ namespace GPSSGenerator.Nodes.Nodes
 		{
 			this.id = id;
 			label = string.Format("label_{0}_STREAM#", id);
+		}
+
+		public override StreamNodeDecorator GetNewInstanseOfIStreamNodeWithINodeData()
+		{
+			Terminate terminate = new Terminate();
+			INode.Copy(this, terminate);
+			return terminate;
 		}
 	}
 }

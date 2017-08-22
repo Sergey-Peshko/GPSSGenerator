@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GPSSGenerator.Nodes.Distributions;
+using GPSSGenerator.Distributions;
+using GPSSGenerator.Nodes.Statistics;
 
-namespace GPSSGenerator.Nodes.Nodes
+namespace GPSSGenerator.Nodes.Generators
 {
-	class Generator : INode
+	class Generator : StreamNodeDecorator
 	{
 		IDistribution distribution;
 		StartStatistic startFullStatistic;
@@ -59,6 +60,13 @@ namespace GPSSGenerator.Nodes.Nodes
 		{
 			canItHaveLabel = false;
 			this.id = id;
+		}
+
+		public override StreamNodeDecorator GetNewInstanseOfIStreamNodeWithINodeData()
+		{
+			Generator newNode = new Generator();
+			INode.Copy(this, newNode);
+			return newNode;
 		}
 	}
 }

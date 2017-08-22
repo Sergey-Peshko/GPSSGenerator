@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPSSGenerator.Nodes.Nodes.Facilities
+namespace GPSSGenerator.Nodes.Facilities
 {
 	class MultyChannel : IFacility, IDeclarative
 	{
@@ -60,6 +60,13 @@ namespace GPSSGenerator.Nodes.Nodes.Facilities
 			isNeedDeclaration = true;
 			this.id = id;
 			label = string.Format("label_{0}_STREAM#", id);
+		}
+
+		public override StreamNodeDecorator GetNewInstanseOfIStreamNodeWithINodeData()
+		{
+			MultyChannel newNode = new MultyChannel();
+			INode.Copy(this, newNode);
+			return newNode;
 		}
 	}
 }

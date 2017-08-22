@@ -9,14 +9,9 @@ namespace GPSSGenerator.Nodes
 	public abstract class INode
 	{
 		protected string id;
-		protected string label;
-		protected bool isNeedLabel = false;
 		protected List<string> description = new List<string>();
 		protected bool isNeedDeclaration = false;
 		protected bool canItHaveLabel = true;
-
-		protected List<INode> nextNodes = new List<INode>();
-
 		abstract public List<string> Description { get; }
 
 		public string Id
@@ -29,28 +24,6 @@ namespace GPSSGenerator.Nodes
 			set
 			{
 				id = value;
-			}
-		}
-
-		public string Label
-		{
-			get
-			{
-				return isNeedLabel ? label : "";
-			}
-
-		}
-
-		public bool IsNeedLabel
-		{
-			get
-			{
-				return isNeedLabel;
-			}
-
-			set
-			{
-				isNeedLabel = value;
 			}
 		}
 
@@ -75,17 +48,5 @@ namespace GPSSGenerator.Nodes
 			}
 		}
 
-		public List<INode> NextNodes
-		{
-			get
-			{
-				return nextNodes;
-			}
-
-			set
-			{
-				nextNodes = value;
-			}
-		}
 	}
 }

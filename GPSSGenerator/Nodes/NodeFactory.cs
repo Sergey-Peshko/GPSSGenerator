@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GPSSGenerator.Nodes.Nodes;
-using GPSSGenerator.Nodes.Distributions;
-using GPSSGenerator.Nodes.Nodes.Facilities;
+using GPSSGenerator.Nodes.Transfers;
+using GPSSGenerator.Distributions;
+using GPSSGenerator.Nodes.Facilities;
+using GPSSGenerator.Nodes.Generators;
+using GPSSGenerator.Nodes.Statistics;
+using GPSSGenerator.Nodes.Terminates;
+
 
 namespace GPSSGenerator.Nodes
 {

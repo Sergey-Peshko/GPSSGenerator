@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPSSGenerator.Nodes.Nodes
+namespace GPSSGenerator.Nodes.Transfers
 {
 	class Transfer : INode
 	{

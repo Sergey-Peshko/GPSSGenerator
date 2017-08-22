@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GPSSGenerator.Nodes.Distributions;
+using GPSSGenerator.Distributions;
+using GPSSGenerator.Nodes.Statistics;
 
-namespace GPSSGenerator.Nodes.Nodes.Facilities
+namespace GPSSGenerator.Nodes.Facilities
 {
-	abstract class IFacility : INode
+	abstract class IFacility : StreamNodeDecorator
 	{
 		protected IDistribution distribution;
 		protected List<StartStatistic> sStat;

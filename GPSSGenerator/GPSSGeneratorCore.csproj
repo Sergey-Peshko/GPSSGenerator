@@ -55,6 +55,7 @@
     <Compile Include="Distributions\UniformDistribution.cs" />
     <Compile Include="Nodes\IDeclarative.cs" />
     <Compile Include="Nodes\INode.cs" />
+    <Compile Include="Nodes\StreamNodeDecorator.cs" />
     <Compile Include="Nodes\NodeFactory.cs" />
     <Compile Include="Nodes\Generators\ClosedGenerator.cs" />
     <Compile Include="Nodes\Statistics\EndStatistic.cs" />
