@@ -3,29 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes.Transfers
 {
-	class Transfer : INode
+	class Transfer : Node
 	{
-		private double probability1;
-		private INode node1;
-		private INode node2;
+		private float probability1;
+		private StreamNode node1;
+		private StreamNode node2;
 
-		override public List<string> Description 
-		{
-			get
-			{
-				if (description.Count == 0)
-				{
-					description.Add(string.Format("TRANSFER {0},{2},{1}", probability1, node1.Label, node2.Label));
-				}
-				return description;
-			}
-
-		}
-
-		public double Probability1
+		public float Probability1
 		{
 			get
 			{
@@ -38,7 +26,7 @@ namespace GPSSGenerator.Nodes.Transfers
 			}
 		}
 
-		internal INode Node1
+		internal StreamNode Node1
 		{
 			get
 			{
@@ -48,11 +36,10 @@ namespace GPSSGenerator.Nodes.Transfers
 			set
 			{
 				node1 = value;
-				value.IsNeedLabel = true;
 			}
 		}
 
-		internal INode Node2
+		internal StreamNode Node2
 		{
 			get
 			{
@@ -62,7 +49,6 @@ namespace GPSSGenerator.Nodes.Transfers
 			set
 			{
 				node2 = value;
-				value.IsNeedLabel = true;
 			}
 		}
 
@@ -74,7 +60,15 @@ namespace GPSSGenerator.Nodes.Transfers
 		public Transfer(string id)
 		{
 			this.id = id;
-			label = string.Format("label_{0}", id);
+		}
+
+		public override List<string> buildDescription(StreamModel streamModel)
+		{
+			List<string> description = new List<string>();
+
+			description.Add(string.Format("TRANSFER {0},{2},{1}", probability1, node1.Label, node2.Label));
+
+			return description;
 		}
 	}
 }

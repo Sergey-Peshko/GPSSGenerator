@@ -8,11 +8,12 @@ using GPSSGenerator.Nodes.Statistics;
 
 namespace GPSSGenerator.Nodes.Facilities
 {
-	abstract class IFacility : StreamNodeDecorator
+	abstract class Facility : Node
 	{
 		protected IDistribution distribution;
-		protected List<StartStatistic> sStat;
-		protected List<EndStatistic> eStat;
+
+		protected IntervalStatistic netLevelFull;
+		protected IntervalStatistic netLevelQueue;
 
 		public IDistribution Distribution
 		{
@@ -20,36 +21,21 @@ namespace GPSSGenerator.Nodes.Facilities
 			{
 				return distribution;
 			}
-
-			set
-			{
-				distribution = value;
-			}
 		}
 
-		public List<StartStatistic> ListStartStatistic
+		public IntervalStatistic NetLevelFull
 		{
 			get
 			{
-				return sStat;
-			}
-
-			set
-			{
-				sStat = value;
+				return netLevelFull;
 			}
 		}
 
-		public List<EndStatistic> ListEndStatistic
+		public IntervalStatistic NetLevelQueue
 		{
 			get
 			{
-				return eStat;
-			}
-
-			set
-			{
-				eStat = value;
+				return netLevelQueue;
 			}
 		}
 	}

@@ -5,40 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes.Generators
 {
-	class ClosedGenerator : StreamNodeDecorator
+	class ClosedGenerator : Generator
 	{
 		int numberOfTransactions;
-		StartStatistic startFullStatistic;
-		public override List<string> Description
-		{
-			get
-			{
-				if (description.Count == 0)
-				{
-					description.Add(String.Format("GENERATE ,,,{0}", numberOfTransactions));
-					description.AddRange(startFullStatistic.Description);
-				}
-				return description;
-			}
-		}
-
-	
-
-		internal StartStatistic StartFullStatistic
-		{
-			get
-			{
-				return startFullStatistic;
-			}
-
-			set
-			{
-				startFullStatistic = value;
-			}
-		}
 
 		public int NumberOfTransactions
 		{
@@ -60,15 +33,21 @@ namespace GPSSGenerator.Nodes.Generators
 
 		public ClosedGenerator(string id)
 		{
-			canItHaveLabel = false;
 			this.id = id;
+			netLevelIntervalStatistic = new IntervalStatistic(string.Format("net", id));
 		}
 
-		public override StreamNodeDecorator GetNewInstanseOfIStreamNodeWithINodeData()
+		public override List<string> buildDescription(StreamModel streamModel)
 		{
-			ClosedGenerator newNode = new ClosedGenerator();
-			INode.Copy(this, newNode);
-			return newNode;
+			List<string> description = new List<string>();
+
+			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}", id, streamModel.Index));
+
+			description.Add(String.Format("GENERATE ,,,{0}", numberOfTransactions));
+			description.Add(netLevelIntervalStatistic.getStart());
+			description.Add(streamLevelIntervalStatistic.getStart());
+
+			return description;
 		}
 	}
 }

@@ -14,7 +14,7 @@ namespace GPSSGenerator.StreamDimension
 {
 	public class StreamModel
 	{
-		private List<INode> nodes;
+		private List<Entity> nodes;
 		private int index;
 
 		public int Index
@@ -33,14 +33,14 @@ namespace GPSSGenerator.StreamDimension
 			}
 		}
 
-		public List<INode> Nodes
+		public List<Entity> Nodes
 		{
 			get
 			{
 				return nodes;
 			}
 		}
-		public StreamModel(int index, INode[] originalNodes, float[,] graph)
+		public StreamModel(int index, Entity[] originalNodes, float[,] graph)
 		{
 			this.index = index;
 
@@ -59,15 +59,15 @@ namespace GPSSGenerator.StreamDimension
 				}
 			}
 		}
-		private void BuildStreamNode(int pos, INode[] originalNodes, float[,] graph)
+		private void BuildStreamNode(int pos, Entity[] originalNodes, float[,] graph)
 		{
-			StreamNodeDecorator node = originalNodes[pos].GetNewInstanseOfIStreamNodeWithINodeData();
+			StreamNode node = originalNodes[pos].GetNewInstanseOfIStreamNodeWithINodeData();
 
 			nodes.Add();
 
 		}
 
-		private void AnalizeAndBuildStreamNodes(INode[] originalNodes, float[,] graph)
+		private void AnalizeAndBuildStreamNodes(Entity[] originalNodes, float[,] graph)
 		{
 			if (graph.GetLength(0) != graph.GetLength(1))
 			{
@@ -94,7 +94,7 @@ namespace GPSSGenerator.StreamDimension
 
 			for (int i = 0; i < originalNodes.Length; i++)
 			{
-				if ((originalNodes[i] is Generator) || (originalNodes[i] is ClosedGenerator))
+				if ((originalNodes[i] is OpenGenerator) || (originalNodes[i] is ClosedGenerator))
 				{
 					startNode = i;
 					break;
@@ -106,7 +106,7 @@ namespace GPSSGenerator.StreamDimension
 				throw new Exception("can't build stream, there isn't any generator!");
 			}
 
-			nodes = new List<INode>();
+			nodes = new List<Entity>();
 
 			BuildStreamNode(startNode, originalNodes, graph);
 

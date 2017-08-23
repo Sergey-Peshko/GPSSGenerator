@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Nodes
 {
-	class SomeNode : INode
+	class SomeNode : Entity, IDescribed
 	{
-		override public List<string> Description
+		public List<string> Description
 		{
 			get
 			{
-				description = new List<string>();
+				List<string>  description = new List<string>();
 				description.Add("" + id);
 				return description;
 			}
@@ -28,5 +28,6 @@ namespace GPSSGenerator.Nodes
 		{
 			this.id = id;
 		}
+
 	}
 }

@@ -27,7 +27,7 @@ namespace ConsoleInterface
 			StreamReader sr = new StreamReader(path);
 			int numberOfNodes = Convert.ToInt32(sr.ReadLine());
 
-			globalModel.Nodes = new List<INode>(numberOfNodes);
+			globalModel.Nodes = new List<Entity>(numberOfNodes);
 			string[][] nodesDesciption = new string[numberOfNodes][];
 
 			for (int i = 0; i < numberOfNodes; i++)
@@ -49,10 +49,10 @@ namespace ConsoleInterface
 			}
 		}
 
-		public void Read(ref StreamReader sr, List<INode> sourseList)
+		public void Read(ref StreamReader sr, List<Entity> sourseList)
 		{
 			int numberOfNodes = Convert.ToInt32(sr.ReadLine());
-			nodes = new List<INode>();
+			nodes = new List<Entity>();
 
 			string nodesInexes = sr.ReadLine();
 			string[] nodesInexesMass = nodesInexes.Split(' ');

@@ -15,19 +15,19 @@ namespace GPSSGenerator.Nodes
 {
 	class NodeFactory
 	{
-		static private StartStatistic startFull;
+		static private IntervalStatistic startFull;
 		static private EndStatistic endFull;
 
 		static NodeFactory(){
-			startFull = new StartStatistic();
+			startFull = new IntervalStatistic();
 			startFull.NameOfStatistic = "net";
 			endFull = new EndStatistic();
 			endFull.NameOfStatistic = "net";
 		}
 
-		static public List<INode> CreateNodes(string[][] nodes)
+		static public List<Entity> CreateNodes(string[][] nodes)
 		{
-			List<INode> rezult = new List<INode>(nodes.Length);
+			List<Entity> rezult = new List<Entity>(nodes.Length);
 			for(int i = 0; i < nodes.Length; i++)
 			{
 				rezult.Add(CreateNode(nodes[i]));
@@ -35,7 +35,7 @@ namespace GPSSGenerator.Nodes
 			return rezult;
 		}
 		
-		static private INode CreateNode(string[] param)
+		static private Entity CreateNode(string[] param)
 		{
 			if (param[0] == "SomeNode")
 			{
@@ -50,7 +50,7 @@ namespace GPSSGenerator.Nodes
 			}
 			else if (param[0] == "GENERATOR")
 			{
-				Generator tmpG = new Generator(param[1]);
+				OpenGenerator tmpG = new OpenGenerator(param[1]);
 				string[] distributionParam = new string[param.Length - 2];
 				Array.Copy(param, 2, distributionParam, 0, distributionParam.Length);
 				IDistribution distribution = DistributionFactory.CreateDistribution(distributionParam);
@@ -60,15 +60,15 @@ namespace GPSSGenerator.Nodes
 			}
 			else if (param[0] == "FACILITY_ONECHANNEL_RELATIVE")
 			{
-				OneChannelRelative ocr = new OneChannelRelative(param[1]);	
+				OneChannelRelativeFacility ocr = new OneChannelRelativeFacility(param[1]);	
 				string[] distributionParam = new string[param.Length - 2];
 				Array.Copy(param, 2, distributionParam, 0, distributionParam.Length);
 				IDistribution distribution = DistributionFactory.CreateDistribution(distributionParam);
 				ocr.Distribution = distribution;
-				List<StartStatistic> lsst = new List<StartStatistic>();
-				StartStatistic smu = new StartStatistic();
+				List<IntervalStatistic> lsst = new List<IntervalStatistic>();
+				IntervalStatistic smu = new IntervalStatistic();
 				smu.NameOfStatistic = String.Format("{0}_STREAM#", param[1]);
-				StartStatistic sw = new StartStatistic();
+				IntervalStatistic sw = new IntervalStatistic();
 				sw.NameOfStatistic = String.Format("{0}_STREAM#_queue", param[1]);
 				lsst.Add(smu);
 				lsst.Add(sw);
@@ -85,16 +85,16 @@ namespace GPSSGenerator.Nodes
 			}
 			else if (param[0] == "FACILITY_MULTYCHANNEL")
 			{
-				MultyChannel ocr = new MultyChannel(param[1]);
+				MultyChannelFacility ocr = new MultyChannelFacility(param[1]);
 				ocr.NumberOfChannel = Convert.ToInt32(param[2]);
 				string[] distributionParam = new string[param.Length - 3];
 				Array.Copy(param, 3, distributionParam, 0, distributionParam.Length);
 				IDistribution distribution = DistributionFactory.CreateDistribution(distributionParam);
 				ocr.Distribution = distribution;
-				List<StartStatistic> lsst = new List<StartStatistic>();
-				StartStatistic smu = new StartStatistic();
+				List<IntervalStatistic> lsst = new List<IntervalStatistic>();
+				IntervalStatistic smu = new IntervalStatistic();
 				smu.NameOfStatistic = String.Format("{0}_STREAM#", param[1]);
-				StartStatistic sw = new StartStatistic();
+				IntervalStatistic sw = new IntervalStatistic();
 				sw.NameOfStatistic = String.Format("{0}_STREAM#_queue", param[1]);
 				lsst.Add(smu);
 				lsst.Add(sw);
@@ -111,7 +111,7 @@ namespace GPSSGenerator.Nodes
 			}
 			else if (param[0] == "START_STATISTIC")
 			{
-				StartStatistic s = new StartStatistic(param[1]);
+				IntervalStatistic s = new IntervalStatistic(param[1]);
 				s.NameOfStatistic = param[2];
 				return s;
 			}

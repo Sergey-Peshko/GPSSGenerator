@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GPSSGenerator.Distributions;
 using GPSSGenerator.Nodes.Statistics;
 using GPSSGenerator.StreamDimension;
 
-namespace GPSSGenerator.Nodes.Terminates
+namespace GPSSGenerator.Nodes.Generators
 {
-	class Terminate : Node
+	class OpenGenerator : Generator
 	{
-		private int count;
-		private IntervalStatistic netLevelIntervalStatistic;
+		IDistribution distribution;
 
-		public int Count
+		public IDistribution Distribution
 		{
 			get
 			{
-				return count;
+				return distribution;
 			}
 		}
 
-		public Terminate()
+		public OpenGenerator()
 		{
-			this.id = "unknown Terminate node";
+			this.id = "unknown GeneratorNode node";
 		}
 
-		public Terminate(string id)
+		public OpenGenerator(string id)
 		{
 			this.id = id;
 		}
@@ -37,9 +37,9 @@ namespace GPSSGenerator.Nodes.Terminates
 
 			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}", id, streamModel.Index));
 
-			description.Add(streamLevelIntervalStatistic.getFinish());
-			description.Add(netLevelIntervalStatistic.getFinish());
-			description.Add(String.Format("TERMINATE {0}", count));
+			description.Add(String.Format("GENERATE ({0})", distribution.Description));
+			description.Add(netLevelIntervalStatistic.getStart());
+			description.Add(streamLevelIntervalStatistic.getStart());
 
 			return description;
 		}

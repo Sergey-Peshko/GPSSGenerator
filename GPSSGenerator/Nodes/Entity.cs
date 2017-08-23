@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Nodes
 {
-	public interface IDeclarative
+	public abstract class Entity
 	{
-		List<string> buildDeclaration();
+		protected string id;
+
+		public string Id
+		{
+			get
+			{
+				return id;
+			}
+		}
+
 	}
 }

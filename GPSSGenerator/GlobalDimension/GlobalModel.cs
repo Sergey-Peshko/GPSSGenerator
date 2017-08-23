@@ -11,10 +11,9 @@ namespace GPSSGenerator.GlobalDimension
 {
 	public class GlobalModel
 	{
+		private List<Entity> entities;
 		private List<StreamModel> streamModels;
 		private NetSettings settings;
-
-		private string way;
 
 		public NetSettings Settings
 		{
@@ -40,7 +39,7 @@ namespace GPSSGenerator.GlobalDimension
 
 		public GlobalModel()
 		{
-			nodes = new List<INode>();
+			nodes = new List<Entity>();
 			streamModels = new List<StreamModel>();
 		}
 		public GlobalModel(string way) { this.way = way; }

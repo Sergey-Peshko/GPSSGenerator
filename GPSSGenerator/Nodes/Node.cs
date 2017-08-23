@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes
 {
-	public interface IDeclarative
+	abstract public class Node : Entity, IDescribed
 	{
-		List<string> buildDeclaration();
+		public abstract List<string> buildDescription(StreamModel streamModel);
 	}
 }
