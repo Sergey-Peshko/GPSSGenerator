@@ -26,22 +26,16 @@ namespace GPSSGenerator.Nodes.Generators
 			}
 		}
 
-		public ClosedGenerator()
+		public ClosedGenerator(string id, IntervalStatistic netLevelIntervalStatistic, int numberOfTransactions) : base(id, netLevelIntervalStatistic)
 		{
-			this.id = "unknown ClosedGenerator node";
+			this.numberOfTransactions = numberOfTransactions;
 		}
 
-		public ClosedGenerator(string id)
-		{
-			this.id = id;
-			netLevelIntervalStatistic = new IntervalStatistic(string.Format("net", id));
-		}
-
-		public override List<string> buildDescription(StreamModel streamModel)
+		public override List<string> buildDescription(int indexOfStream)
 		{
 			List<string> description = new List<string>();
 
-			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}", id, streamModel.Index));
+			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}_stat", id, indexOfStream), string.Format("net_{1}", id, indexOfStream));
 
 			description.Add(String.Format("GENERATE ,,,{0}", numberOfTransactions));
 			description.Add(netLevelIntervalStatistic.getStart());

@@ -68,9 +68,7 @@
     <Compile Include="Nodes\Statistics\IntervalStatistic.cs" />
     <Compile Include="Nodes\Terminates\Terminate.cs" />
     <Compile Include="Nodes\Transfers\Transfer.cs" />
-    <Compile Include="Nodes\SomeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StreamDemension\OneWhoCircumventsMatrix.cs" />
     <Compile Include="StreamDemension\StreamModel.cs" />
   </ItemGroup>
   <ItemGroup>

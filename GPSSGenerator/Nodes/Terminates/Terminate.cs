@@ -21,21 +21,19 @@ namespace GPSSGenerator.Nodes.Terminates
 			}
 		}
 
-		public Terminate()
+		public Terminate(string id, 
+			int count, 
+			IntervalStatistic netLevelIntervalStatistic) : base(id)
 		{
-			this.id = "unknown Terminate node";
+			this.count = count;
+			this.netLevelIntervalStatistic = netLevelIntervalStatistic;
 		}
 
-		public Terminate(string id)
-		{
-			this.id = id;
-		}
-
-		public override List<string> buildDescription(StreamModel streamModel)
+		public override List<string> buildDescription(int indexOfStream)
 		{
 			List<string> description = new List<string>();
 
-			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}", id, streamModel.Index));
+			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}_stat", id, indexOfStream), string.Format("net_{1}", id, indexOfStream));
 
 			description.Add(streamLevelIntervalStatistic.getFinish());
 			description.Add(netLevelIntervalStatistic.getFinish());

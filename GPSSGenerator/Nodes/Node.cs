@@ -9,6 +9,15 @@ namespace GPSSGenerator.Nodes
 {
 	abstract public class Node : Entity, IDescribed
 	{
-		public abstract List<string> buildDescription(StreamModel streamModel);
+		public Node()
+		{
+			this.id = "unknown node";
+		}
+
+		public Node(string id)
+		{
+			this.id = id;
+		}
+		public abstract List<string> buildDescription(int indexOfStream);
 	}
 }

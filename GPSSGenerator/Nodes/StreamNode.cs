@@ -9,20 +9,16 @@ namespace GPSSGenerator.Nodes
 {
 	public class StreamNode
 	{
-		private IDescribed node;
+		private Node node;
 
-		private List<StreamNode> nextNodes;
+		private List<StreamNode> nextNodes = new List<StreamNode>();
 		private string label;
 		private bool isNeedLabel = false;
 
-		public StreamNode(IDescribed node, 
-			StreamModel streamModel,
-			List<StreamNode> nextNodes,
+		public StreamNode(Node node, 
 			string label)
 		{
 			this.node = node;
-			this.streamModel = streamModel;
-			this.nextNodes = nextNodes;
 			this.label = label;
 		}
 
@@ -32,11 +28,6 @@ namespace GPSSGenerator.Nodes
 			{
 				return nextNodes;
 			}
-
-			set
-			{
-				nextNodes = value;
-			}
 		}
 
 		public string Label
@@ -44,11 +35,6 @@ namespace GPSSGenerator.Nodes
 			get
 			{
 				return label;
-			}
-
-			set
-			{
-				label = value;
 			}
 		}
 
@@ -65,16 +51,16 @@ namespace GPSSGenerator.Nodes
 			}
 		}
 
-		protected StreamModel StreamModel
+		public Node Node
 		{
 			get
 			{
-				return streamModel;
+				return node;
 			}
 
 			set
 			{
-				streamModel = value;
+				node = value;
 			}
 		}
 	}

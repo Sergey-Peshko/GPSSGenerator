@@ -18,21 +18,11 @@ namespace GPSSGenerator.Nodes.Statistics
 			{
 				return nameOfStatistic;
 			}
-
-			set
-			{
-				nameOfStatistic = value;
-			}
 		}
 
-		public IntervalStatistic()
+		public IntervalStatistic(string id, string nameOfStatistic) : base(id)
 		{
-			this.id = "unknown StartStatistic node";
-		}
-
-		public IntervalStatistic(string id)
-		{
-			this.id = id;
+			this.nameOfStatistic = nameOfStatistic;
 		}
 
 		public string getStart()
@@ -45,7 +35,7 @@ namespace GPSSGenerator.Nodes.Statistics
 			return String.Format("DEPART {0}", nameOfStatistic);
 		}
 
-		public override List<string> buildDescription(StreamModel streamModel)
+		public override List<string> buildDescription(int indexOfStream)
 		{
 			List<string> description = new List<string>();
 

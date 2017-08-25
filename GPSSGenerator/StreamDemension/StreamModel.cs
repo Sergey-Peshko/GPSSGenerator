@@ -14,7 +14,7 @@ namespace GPSSGenerator.StreamDimension
 {
 	public class StreamModel
 	{
-		private List<Entity> nodes;
+		private StreamNode root;
 		private int index;
 
 		public int Index
@@ -25,49 +25,51 @@ namespace GPSSGenerator.StreamDimension
 			}
 		}
 
-		public int NumberOfNodes
+		public StreamNode Root
 		{
 			get
 			{
-				return nodes.Count;
+				return root;
+			}
+
+			set
+			{
+				root = value;
 			}
 		}
 
-		public List<Entity> Nodes
-		{
-			get
-			{
-				return nodes;
-			}
-		}
-		public StreamModel(int index, Entity[] originalNodes, float[,] graph)
+		public StreamModel(int index, Node[] originalNodes, float[,] graph)
 		{
 			this.index = index;
 
 			AnalizeAndBuildStreamNodes(originalNodes, graph);
 		}
-		
+
+		public List<string> buildStreamDescription()
+		{
+
+		}
+
+		public List<string> buildStreamDescriptionRec()
+		{
+
+		}
+
 		public void Show()
 		{
-			for (int i = 0; i < nodes.Count; i++)
+			ShowRec(root);
+		}
+
+		private void ShowRec(StreamNode node)
+		{
+			Console.WriteLine(node.Node.Id);
+			for(int i = 0; i < node.NextNodes.Count; i++)
 			{
-				Console.WriteLine("{0}.\t{1}", i + 1, nodes[i].Id);
-				Console.WriteLine("next: ");
-				for (int j = 0; j < nodes[i].NextNodes.Count; j++)
-				{
-					Console.Write("{0}.\t{1}", j + 1, nodes[i].NextNodes[j].Id);
-				}
+				ShowRec(node.NextNodes[i]);
 			}
 		}
-		private void BuildStreamNode(int pos, Entity[] originalNodes, float[,] graph)
-		{
-			StreamNode node = originalNodes[pos].GetNewInstanseOfIStreamNodeWithINodeData();
 
-			nodes.Add();
-
-		}
-
-		private void AnalizeAndBuildStreamNodes(Entity[] originalNodes, float[,] graph)
+		private void AnalizeAndBuildStreamNodes(Node[] originalNodes, float[,] graph)
 		{
 			if (graph.GetLength(0) != graph.GetLength(1))
 			{
@@ -106,100 +108,123 @@ namespace GPSSGenerator.StreamDimension
 				throw new Exception("can't build stream, there isn't any generator!");
 			}
 
-			nodes = new List<Entity>();
+			BuildRoot(startNode, originalNodes, new StreamNode[originalNodes.Length], graph);
+		}
 
-			BuildStreamNode(startNode, originalNodes, graph);
+		private void BuildRoot(
+			int pos, 
+			Node[] originalNodes, 
+			StreamNode[] streamNodes, 
+			float[,] graph)
+		{
+			root = new StreamNode(originalNodes[pos], "");
+
+			for (int i = 0; i < originalNodes.Length; i++)
+			{
+				if (graph[pos, i] == 1f)
+				{
+					root.NextNodes.Add(BuildStreamNode(i, originalNodes, streamNodes, graph));
+				}
+				else if ((graph[pos, i] < 1f) && (graph[pos, i] > 0f))
+				{
+					root.NextNodes.Add(BuildTransfer(pos, originalNodes, streamNodes, graph));
+				}
+			}
 
 		}
 
-		/*
-		private void AnalisOfMatrix(float[][] graph)
+		private StreamNode BuildStreamNode(
+			int pos, 
+			Node[] originalNodes,
+			StreamNode[] streamNodes,
+			float[,] graph)
 		{
-			
+			streamNodes[pos] = new StreamNode(originalNodes[pos], string.Format("label_{0}_{1}", originalNodes[pos].Id, index));
 
-			int count = graph.Count;
-			for (int i = 0; i < count; i++)
+			for (int i = 0; i < originalNodes.Length; i++)
 			{
-				for (int j = 0; j < count; j++)
+				if (graph[pos, i] == 1f)
 				{
-					if(graph[i][j] < 1 && graph[i][j] > 0)
+					if(streamNodes[i] != null)
 					{
-						InsertTransfers(i);
-						break;
+						streamNodes[pos].NextNodes.Add(BuildAbsoluteTransfer(pos, originalNodes, streamNodes, graph));
+					}
+					streamNodes[pos].NextNodes.Add(BuildStreamNode(i, originalNodes, streamNodes, graph));
+				}
+				else if ((graph[pos, i] < 1f) && (graph[pos, i] > 0f))
+				{
+					streamNodes[pos].NextNodes.Add(BuildTransfer(pos, originalNodes, streamNodes, graph));
+				}
+			}
+
+			return streamNodes[pos];
+		}
+
+		private StreamNode BuildTransfer(
+			int pos, 
+			Node[] originalNodes,
+			StreamNode[] streamNodes,
+			float[,] graph)
+		{
+			List<float> probabilities = new List<float>();
+			List<StreamNode> nodes = new List<StreamNode>();
+			for (int i = 0; i < originalNodes.Length; i++)
+			{
+				if (graph[pos, i] > 0f)
+				{
+					probabilities.Add(graph[pos, i]);
+					if (streamNodes[i] != null)
+					{
+						streamNodes[i].IsNeedLabel = true;
+						nodes.Add(streamNodes[i]);
+					}
+					else
+					{
+						StreamNode tmp = BuildStreamNode(i, originalNodes, streamNodes, graph);
+						tmp.IsNeedLabel = true;
+						nodes.Add(tmp);
 					}
 				}
 			}
+
+
+			Transfer transfer = new Transfer(
+				string.Format("t_{0}", GlobalVariables.counterOfTransfers),
+				probabilities,
+				nodes);
+
+			StreamNode node = new StreamNode(transfer, string.Format("label_{0}_{1}", transfer.Id, index));
+			node.NextNodes.AddRange(nodes);
+			return node;
 		}
 
-		private int InsertTransfers(int currNode)
+		private StreamNode BuildAbsoluteTransfer(
+			int pos,
+			Node[] originalNodes,
+			StreamNode[] streamNodes,
+			float[,] graph)
 		{
-			List<KeyValuePair<int, double>> transitions = new List<KeyValuePair<int, double>>();
-			for (int i = 0; i < graph[currNode].Count; i++)
+			List<float> probabilities = new List<float>();
+			List<StreamNode> nodes = new List<StreamNode>();
+			for (int i = 0; i < originalNodes.Length; i++)
 			{
-				if (graph[currNode][i] > 0 && graph[currNode][i] < 1)
+				if (graph[pos, i] == 1f)
 				{
-					transitions.Add(new KeyValuePair<int, double>(i, graph[currNode][i]));
-					nodes[i].IsNeedLabel = true;
+					probabilities.Add(graph[pos, i]);
+					streamNodes[i].IsNeedLabel = true;
+					nodes.Add(streamNodes[i]);
+					break;
 				}
 			}
-			double remainingPersents = 1;
-			Transfer[] transfers = new Transfer[transitions.Count - 1];
-			for (int i = 0; i < transfers.Length; i++)
-			{
-				transfers[i] = new Transfer(string.Format("t{0}", GlobalVariables.counterOfTransfers++));
-				if (i > 0)
-					transfers[i].IsNeedLabel = true;
-			}
-			List<List<double>> insertlinks = new List<List<double>>();
-			for (int i = 0; i < transitions.Count - 1; i++)
-			{
-				double percents = (double)(transitions[i].Value * 1) / remainingPersents;
-				remainingPersents -= transitions[i].Value;
-				
-				transfers[i].Probability1 = percents;
-				transfers[i].Node1 = nodes[transitions[i].Key];
-				if(i == transitions.Count - 2)
-				{
-					transfers[i].Node2 = nodes[transitions[transitions.Count - 1].Key];
-				}
-				else
-				{
-					transfers[i].Node2 = transfers[i + 1];
-				}
-
-				List<double> tmp = new List<double>();
-
-				for (int ii = 0; ii < (graph.Count + transitions.Count - 1); ii++)
-				{
-					tmp.Add(0);
-				}
-				tmp[transitions[i].Key] = percents;
-				tmp[i == transitions.Count - 2 ?
-					transitions[transitions.Count - 1].Key :
-					transitions[i].Key + 1] = 1 - percents;
 
 
-				insertlinks.Add(tmp);
+			Transfer transfer = new Transfer(
+				string.Format("t_{0}", GlobalVariables.counterOfTransfers),
+				probabilities,
+				nodes);
 
-			}
-
-			for (int i = 0; i < graph.Count; i++)
-			{
-				graph[i].InsertRange(graph.Count, new double[transitions.Count - 1]);
-			}
-
-			for (int i = 0; i < graph[currNode].Count; i++)
-			{
-				graph[currNode][i] = 0;
-			}
-
-			graph[currNode][graph.Count] = 1;
-
-			nodes.InsertRange(nodes.Count, transfers);
-			graph.InsertRange(graph.Count, insertlinks);
-
-			return transfers.Length;
+			StreamNode node = new StreamNode(transfer, string.Format("label_{0}_{1}", transfer.Id, index));
+			return node;
 		}
-		*/
 	}
 }

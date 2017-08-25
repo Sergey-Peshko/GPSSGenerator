@@ -9,65 +9,43 @@ namespace GPSSGenerator.Nodes.Transfers
 {
 	class Transfer : Node
 	{
-		private float probability1;
-		private StreamNode node1;
-		private StreamNode node2;
+		private List<float> probabilities;
+		private List<StreamNode> nodes;
 
-		public float Probability1
+		
+
+		public Transfer(string id, List<float> probabilities, List<StreamNode> nodes) : base(id)
 		{
-			get
-			{
-				return probability1;
-			}
-
-			set
-			{
-				probability1 = value;
-			}
+			this.probabilities = probabilities;
+			this.nodes = nodes;
 		}
 
-		internal StreamNode Node1
-		{
-			get
-			{
-				return node1;
-			}
-
-			set
-			{
-				node1 = value;
-			}
-		}
-
-		internal StreamNode Node2
-		{
-			get
-			{
-				return node2;
-			}
-
-			set
-			{
-				node2 = value;
-			}
-		}
-
-		public Transfer()
-		{
-			this.id = "unknown Transfer node";
-		}
-
-		public Transfer(string id)
-		{
-			this.id = id;
-		}
-
-		public override List<string> buildDescription(StreamModel streamModel)
+		public override List<string> buildDescription(int indexOfStream)
 		{
 			List<string> description = new List<string>();
+			if(probabilities.Count == 1 && probabilities[0] == 1f)
+			{
+				description.Add(string.Format("TRANSFER ,{0}", nodes[0].Label));
+			}
+			else if(probabilities.Count == 2)
+			{
+				description.Add(string.Format("TRANSFER {0},{1},{2}", probabilities[0], nodes[1].Label, nodes[0].Label));
+			}
+			else
+			{
+				float remainingPersents = 1f;
+				int i = 0;
+				for (; i < (probabilities.Count - 2); i++)
+				{
+					float currPersent = probabilities[i] / remainingPersents;
+					description.Add(string.Format("TRANSFER {0},,{1}", currPersent, nodes[i].Label));
+					remainingPersents = remainingPersents - probabilities[i];
+				}
 
-			description.Add(string.Format("TRANSFER {0},{2},{1}", probability1, node1.Label, node2.Label));
-
+				float lastPersent = probabilities[i] / remainingPersents;
+				description.Add(string.Format("TRANSFER {0},{1},{2}", lastPersent, nodes[i+1].Label, nodes[i].Label));
+				remainingPersents = remainingPersents - probabilities[i];
+			}
 			return description;
 		}
 	}

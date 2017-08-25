@@ -11,6 +11,11 @@ namespace GPSSGenerator.Nodes.Generators
 	{
 		protected IntervalStatistic netLevelIntervalStatistic;
 
+		public Generator(string id, IntervalStatistic netLevelIntervalStatistic) : base(id)
+		{
+			this.netLevelIntervalStatistic = netLevelIntervalStatistic;
+		}
+
 		public IntervalStatistic NetLevelStatistic
 		{
 			get

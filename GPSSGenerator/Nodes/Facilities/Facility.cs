@@ -15,6 +15,13 @@ namespace GPSSGenerator.Nodes.Facilities
 		protected IntervalStatistic netLevelFull;
 		protected IntervalStatistic netLevelQueue;
 
+		public Facility(string id, IDistribution distribution) : base(id)
+		{
+			netLevelFull = new IntervalStatistic(id + "_stat", id);
+			netLevelQueue = new IntervalStatistic(id + "_queue_stat", id + "_queue");
+			this.distribution = distribution;
+		}
+
 		public IDistribution Distribution
 		{
 			get

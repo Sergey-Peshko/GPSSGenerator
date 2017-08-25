@@ -9,6 +9,6 @@ namespace GPSSGenerator.Nodes
 {
 	public interface IDescribed
 	{
-		List<string> buildDescription(StreamModel streamModel);
+		List<string> buildDescription(int indexOfStream);
 	}
 }
