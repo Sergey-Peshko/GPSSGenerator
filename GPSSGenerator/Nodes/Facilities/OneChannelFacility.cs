@@ -9,10 +9,10 @@ using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes.Facilities
 {
-	class OneChannelRelativeFacility : Facility
+	class OneChannelFacility : Facility
 	{
 
-		public OneChannelRelativeFacility(string id,
+		public OneChannelFacility(string id,
 			IDistribution distribution) : base(id, distribution)
 		{
 

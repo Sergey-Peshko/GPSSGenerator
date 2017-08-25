@@ -63,7 +63,7 @@
     <Compile Include="Nodes\Generators\ClosedGenerator.cs" />
     <Compile Include="Nodes\Facilities\Facility.cs" />
     <Compile Include="Nodes\Facilities\MultyChannelFacility.cs" />
-    <Compile Include="Nodes\Facilities\OneChannelRelativeFacility.cs" />
+    <Compile Include="Nodes\Facilities\OneChannelFacility.cs" />
     <Compile Include="Nodes\Generators\OpenGenerator.cs" />
     <Compile Include="Nodes\Statistics\IntervalStatistic.cs" />
     <Compile Include="Nodes\Terminates\Terminate.cs" />

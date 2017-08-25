@@ -16,65 +16,15 @@ namespace ConsoleInterface
 		{
 			Console.Write("input file name: ");
 			string path = Console.ReadLine();
-			GlobalModel gl = Read(data + path);
-			gl.MakeCode();
-		}
+			GlobalModel gl = ModelReader.Read(data + path);
 
-		static GlobalModel Read(string path)
-		{
-			GlobalModel globalModel = new GlobalModel();
+			List<string> code = gl.MakeCode();
 
-			StreamReader sr = new StreamReader(path);
-			int numberOfNodes = Convert.ToInt32(sr.ReadLine());
-
-			globalModel.Nodes = new List<Entity>(numberOfNodes);
-			string[][] nodesDesciption = new string[numberOfNodes][];
-
-			for (int i = 0; i < numberOfNodes; i++)
+			for(int i = 0; i < code.Count; i++)
 			{
-				string tmp = sr.ReadLine();
-				string[] tmpMass = tmp.Split(' ');
-				nodesDesciption[i] = (tmpMass);
-			}
-
-			globalModel.nodes = NodeFactory.CreateNodes(nodesDesciption);
-
-			int count = Convert.ToInt32(sr.ReadLine());
-			matrixs = new StreamModel[count];
-
-			for (int i = 0; i < count; i++)
-			{
-				matrixs[i] = new StreamModel(i);
-				matrixs[i].Read(ref sr, nodes);
+				Console.WriteLine(code[i]);
 			}
 		}
 
-		public void Read(ref StreamReader sr, List<Entity> sourseList)
-		{
-			int numberOfNodes = Convert.ToInt32(sr.ReadLine());
-			nodes = new List<Entity>();
-
-			string nodesInexes = sr.ReadLine();
-			string[] nodesInexesMass = nodesInexes.Split(' ');
-			for (int i = 0; i < numberOfNodes; i++)
-			{
-				nodes.Add(sourseList[Convert.ToInt32(nodesInexesMass[i])]);
-			}
-
-			graph = new List<List<double>>();
-			for (int i = 0; i < numberOfNodes; i++)
-			{
-				string tmp = sr.ReadLine();
-				string[] mass = tmp.Split(' ');
-				List<double> links = new List<double>();
-				for (int j = 0; j < numberOfNodes; j++)
-				{
-					links.Add(Convert.ToDouble(mass[j]));
-				}
-				graph.Add(links);
-			}
-
-			AnalisOfMatrix();
-		}
 	}
 }

@@ -47,12 +47,26 @@ namespace GPSSGenerator.StreamDimension
 
 		public List<string> buildStreamDescription()
 		{
-
+			return buildStreamDescriptionRec(root);
 		}
 
-		public List<string> buildStreamDescriptionRec()
+		private List<string> buildStreamDescriptionRec(StreamNode node)
 		{
+			List<string> description = node.Node.buildDescription(index);
 
+			description[0] = string.Format("{0}\t{1}", node.IsNeedLabel? node.Label : "\t", description[0]);
+
+			for(int i =1;i< description.Count; i++)
+			{
+				description[i] = "\t\t" + description[i];
+			}
+
+			for (int i = 0; i < node.NextNodes.Count; i++)
+			{
+				description.AddRange(buildStreamDescriptionRec(node.NextNodes[i]));
+			}
+			
+			return description;
 		}
 
 		public void Show()
@@ -76,15 +90,15 @@ namespace GPSSGenerator.StreamDimension
 				throw new Exception("graph is not square!");
 			}
 
-			if (originalNodes.Length != graph.Length)
+			if (originalNodes.Length != graph.GetLength(0))
 			{
 				throw new Exception("graph size and namber of original nodes is not identical!");
 			}
 
-			for (int i = 0; i < graph.Length; i++)
+			for (int i = 0; i < graph.GetLength(0); i++)
 			{
 				float counter = 0;
-				for (int j = 0; j < graph.Length; j++)
+				for (int j = 0; j < graph.GetLength(1); j++)
 				{
 					counter += graph[i, j];
 				}
@@ -128,6 +142,7 @@ namespace GPSSGenerator.StreamDimension
 				else if ((graph[pos, i] < 1f) && (graph[pos, i] > 0f))
 				{
 					root.NextNodes.Add(BuildTransfer(pos, originalNodes, streamNodes, graph));
+					break;
 				}
 			}
 
@@ -145,15 +160,19 @@ namespace GPSSGenerator.StreamDimension
 			{
 				if (graph[pos, i] == 1f)
 				{
-					if(streamNodes[i] != null)
+					if (streamNodes[i] != null)
 					{
 						streamNodes[pos].NextNodes.Add(BuildAbsoluteTransfer(pos, originalNodes, streamNodes, graph));
 					}
-					streamNodes[pos].NextNodes.Add(BuildStreamNode(i, originalNodes, streamNodes, graph));
+					else
+					{
+						streamNodes[pos].NextNodes.Add(BuildStreamNode(i, originalNodes, streamNodes, graph));
+					}
 				}
 				else if ((graph[pos, i] < 1f) && (graph[pos, i] > 0f))
 				{
 					streamNodes[pos].NextNodes.Add(BuildTransfer(pos, originalNodes, streamNodes, graph));
+					break;
 				}
 			}
 
@@ -167,7 +186,8 @@ namespace GPSSGenerator.StreamDimension
 			float[,] graph)
 		{
 			List<float> probabilities = new List<float>();
-			List<StreamNode> nodes = new List<StreamNode>();
+			List<StreamNode> nodesInTree = new List<StreamNode>();
+			List<StreamNode> nodesInTransfer = new List<StreamNode>();
 			for (int i = 0; i < originalNodes.Length; i++)
 			{
 				if (graph[pos, i] > 0f)
@@ -176,25 +196,26 @@ namespace GPSSGenerator.StreamDimension
 					if (streamNodes[i] != null)
 					{
 						streamNodes[i].IsNeedLabel = true;
-						nodes.Add(streamNodes[i]);
+						nodesInTransfer.Add(streamNodes[i]);
 					}
 					else
 					{
 						StreamNode tmp = BuildStreamNode(i, originalNodes, streamNodes, graph);
 						tmp.IsNeedLabel = true;
-						nodes.Add(tmp);
+						nodesInTree.Add(tmp);
+						nodesInTransfer.Add(tmp);
 					}
 				}
 			}
 
 
 			Transfer transfer = new Transfer(
-				string.Format("t_{0}", GlobalVariables.counterOfTransfers),
+				string.Format("t_{0}", GlobalVariables.counterOfTransfers++),
 				probabilities,
-				nodes);
+				nodesInTransfer);
 
 			StreamNode node = new StreamNode(transfer, string.Format("label_{0}_{1}", transfer.Id, index));
-			node.NextNodes.AddRange(nodes);
+			node.NextNodes.AddRange(nodesInTree);
 			return node;
 		}
 
@@ -219,7 +240,7 @@ namespace GPSSGenerator.StreamDimension
 
 
 			Transfer transfer = new Transfer(
-				string.Format("t_{0}", GlobalVariables.counterOfTransfers),
+				string.Format("t_{0}", GlobalVariables.counterOfTransfers++),
 				probabilities,
 				nodes);
 

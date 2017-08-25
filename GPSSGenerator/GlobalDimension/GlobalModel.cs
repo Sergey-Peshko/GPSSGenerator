@@ -11,9 +11,35 @@ namespace GPSSGenerator.GlobalDimension
 {
 	public class GlobalModel
 	{
-		private List<Entity> entities;
-		private List<StreamModel> streamModels;
-		private NetSettings settings;
+		private Entity[] nodes;
+		private StreamModel[] streamModels;
+		private NetSettings settings = new NetSettings();
+
+		public Entity[] Nodes
+		{
+			get
+			{
+				return nodes;
+			}
+
+			set
+			{
+				nodes = value;
+			}
+		}
+
+		public StreamModel[] StreamModels
+		{
+			get
+			{
+				return streamModels;
+			}
+
+			set
+			{
+				streamModels = value;
+			}
+		}
 
 		public NetSettings Settings
 		{
@@ -28,66 +54,83 @@ namespace GPSSGenerator.GlobalDimension
 			}
 		}
 
-		public List<StreamModel> StreamModels
-		{
-			get
-			{
-				return streamModels;
-			}
-
-		}
-
 		public GlobalModel()
 		{
-			nodes = new List<Entity>();
-			streamModels = new List<StreamModel>();
-		}
-		public GlobalModel(string way) { this.way = way; }
 
-		public void MakeCode()
-		{
-			string tmpGpss = MakeTmpGpssCode();
-			string markeredGpss = AddStreamMarkers(tmpGpss);
-			string declarations = MakeDeclarations();
-			string finalGpss = GlueTogether(declarations, markeredGpss);
-			//добавить START
-			//Console.WriteLine("finalGpss in file {0}", finalGpss);
 		}
 
-		private string MakeTmpGpssCode()
+		public GlobalModel(Entity[] nodes, StreamModel[] streamModels, NetSettings settings)
 		{
-			string rez_way = GlobalVariables.rez + "tmpGpss" + way;
-			StreamWriter sw = new StreamWriter(rez_way);
-			OneWhoCircumventsMatrix circumventer = new OneWhoCircumventsMatrix(sw);
-			for (int i = 0; i < streamModels.Count; i++)
+			this.nodes = nodes;
+			this.streamModels = streamModels;
+			this.settings = settings;
+		}
+
+		public List<string> MakeCode()
+		{
+			List<string> streams = MakeStreamsCode();
+			List<string> declarations = MakeDeclarations();
+			List<string> launcherCode = MakeLauncherCode();
+
+			List<string> full = new List<string>();
+
+			full.Add("\t ; start declarations -----------------------");
+			full.AddRange(declarations);
+			full.Add("\t ; end declarations -------------------------");
+			full.Add("");
+			full.Add("\t ; start streams code -----------------------");
+			full.AddRange(streams);
+			full.Add("\t ; end streams code -------------------------");
+			full.Add("");
+			full.Add("\t ; start launch code ------------------------");
+			full.AddRange(launcherCode);
+			full.Add("\t ; end launch code --------------------------");
+
+			return full;
+		}
+
+		private List<string> MakeStreamsCode()
+		{
+			List<string> description = new List<string>();
+			for (int i = 0; i < streamModels.Length; i++)
 			{
-				Console.WriteLine("START_STREAM#{0}", i);
-				sw.WriteLine("START_STREAM#{0}", i);
-				circumventer.CircumventsMatrix(streamModels[i]);
-				Console.WriteLine("END_STREAM#{0}", i);
-				sw.WriteLine("END_STREAM#{0}", i);
-				Console.WriteLine();
+				description.Add(string.Format("\t ; START_STREAM#{0}", i));
+				description.AddRange(streamModels[i].buildStreamDescription());
+				description.Add(string.Format("\t ; END_STREAM#{0}", i));
 			}
-			sw.Close();
-			return rez_way;
+			return description;
 		}
-		private string AddStreamMarkers(string wayTmpGpssCode)
-		{
-			string rez_way = GlobalVariables.rez + "markeredGpss" + way;
 
-			return rez_way;
+		private List<string> MakeLauncherCode()
+		{
+			List<string> launcherCode = new List<string>();
+
+			if (settings.IsTime)
+			{
+				launcherCode.Add(string.Format("GENERATE {0}", settings.AmountOfTime));
+				launcherCode.Add("TERMINATE 1");
+				launcherCode.Add("START 1");
+			}
+			else if(settings.IsTrainsactions)
+			{
+				launcherCode.Add(string.Format("START {0}", settings.NumberOfTransactions));
+			}
+
+			return launcherCode;
 		}
-		private string GlueTogether(string declarations, string markeredGpss)
+		private List<string> MakeDeclarations()
 		{
-			string rez_way = GlobalVariables.rez + way;
+			List<string> declaration = new List<string>();
 
-			return rez_way;
-		}
-		private string MakeDeclarations()
-		{
-			string rez_way = GlobalVariables.rez + "declarations" + way;
+			for(int i = 0; i < nodes.Length; i++)
+			{
+				if(nodes[i] is IDeclarative)
+				{
+					declaration.AddRange(((IDeclarative)nodes[i]).buildDeclaration());
+				}
+			}
 
-			return rez_way;
+			return declaration;
 		}
 
 	}
