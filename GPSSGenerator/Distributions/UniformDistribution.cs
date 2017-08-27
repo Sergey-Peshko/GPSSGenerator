@@ -20,9 +20,10 @@ namespace GPSSGenerator.Distributions
 			}
 		}
 
-		public UniformDistribution()
+		public UniformDistribution(int numberOfGenerator, float a, float b) : base(numberOfGenerator)
 		{
-
+			this.a = a;
+			this.b = b;
 		}
 
 		public float A
@@ -31,11 +32,6 @@ namespace GPSSGenerator.Distributions
 			{
 				return a;
 			}
-
-			set
-			{
-				a = value;
-			}
 		}
 
 		public float B
@@ -43,11 +39,6 @@ namespace GPSSGenerator.Distributions
 			get
 			{
 				return b;
-			}
-
-			set
-			{
-				b = value;
 			}
 		}
 

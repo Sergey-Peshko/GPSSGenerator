@@ -7,7 +7,7 @@ using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes
 {
-	public class StreamNode
+	class StreamNode
 	{
 		private Node node;
 

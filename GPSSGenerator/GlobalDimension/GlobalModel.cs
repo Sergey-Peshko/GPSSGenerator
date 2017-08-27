@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using GPSSGenerator.StreamDimension;
 using GPSSGenerator.Nodes;
+using GPSSGenerator.ModelReaders;
 
 namespace GPSSGenerator.GlobalDimension
 {
@@ -15,7 +16,7 @@ namespace GPSSGenerator.GlobalDimension
 		private StreamModel[] streamModels;
 		private NetSettings settings = new NetSettings();
 
-		public Entity[] Nodes
+		internal Entity[] Nodes
 		{
 			get
 			{
@@ -28,7 +29,7 @@ namespace GPSSGenerator.GlobalDimension
 			}
 		}
 
-		public StreamModel[] StreamModels
+		internal StreamModel[] StreamModels
 		{
 			get
 			{
@@ -41,29 +42,17 @@ namespace GPSSGenerator.GlobalDimension
 			}
 		}
 
-		public NetSettings Settings
+		internal NetSettings Settings
 		{
 			get
 			{
 				return settings;
 			}
-
-			set
-			{
-				settings = value;
-			}
 		}
 
-		public GlobalModel()
+		internal GlobalModel()
 		{
 
-		}
-
-		public GlobalModel(Entity[] nodes, StreamModel[] streamModels, NetSettings settings)
-		{
-			this.nodes = nodes;
-			this.streamModels = streamModels;
-			this.settings = settings;
 		}
 
 		public List<string> MakeCode()
@@ -107,13 +96,13 @@ namespace GPSSGenerator.GlobalDimension
 
 			if (settings.IsTime)
 			{
-				launcherCode.Add(string.Format("GENERATE {0}", settings.AmountOfTime));
+				launcherCode.Add(string.Format("GENERATE {0}", settings.NumberOfItems));
 				launcherCode.Add("TERMINATE 1");
 				launcherCode.Add("START 1");
 			}
 			else if(settings.IsTrainsactions)
 			{
-				launcherCode.Add(string.Format("START {0}", settings.NumberOfTransactions));
+				launcherCode.Add(string.Format("START {0}", settings.NumberOfItems));
 			}
 
 			return launcherCode;

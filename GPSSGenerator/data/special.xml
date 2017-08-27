@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Model>
-  <!--time-->
-  <!--transaction counter-->
-  <!-- -->
-  <Settings measure-by="Time">
-    <property name="AmountOfTime" value="3600"/>
-  </Settings>
+
+  <Settings measure-lifecycle-by="AmountOfTime" value="3600"/>
 
   <Distributions>
     <Distribution id="dis1" type="EXPONENTIAL">
-      <property name="ExpectedValue" value="4"/>
+      <property name="MathematicalExpectation" value="4"/>
       <property name="GeneratorNumber" value="2"/>
     </Distribution>
     <Distribution id="dis2" type="EXPONENTIAL">
-      <property name="ExpectedValue" value="3"/>
-      <property name="GeneratorNumber" value="3"/>
-    </Distribution>
-    <Distribution id="dis3" type="EXPONENTIAL">
-      <property name="ExpectedValue" value="6"/>
+      <property name="MathematicalExpectation" value="3"/>
       <property name="GeneratorNumber" value="4"/>
     </Distribution>
+    <Distribution id="dis3" type="EXPONENTIAL">
+      <property name="MathematicalExpectation" value="6"/>
+      <property name="GeneratorNumber" value="3"/>
+    </Distribution>
     <Distribution id="dis4" type="EXPONENTIAL">
-      <property name="ExpectedValue" value="8"/>
+      <property name="MathematicalExpectation" value="8"/>
       <property name="GeneratorNumber" value="1"/>
     </Distribution>
   </Distributions>
@@ -31,7 +27,7 @@
       <property name="NumberOfTransactions" value="10"/>
     </Entity>
     <Entity id="b1" type="MULTYCHANNEL_FACILITY">
-      <property name="Capacity" value="10"/>
+      <property name="Capacity" value="2"/>
       <property name="Distribution" ref="dis1"/>
     </Entity>
     <Entity id="b2" type="ONECHANNEL_FACILITY">
@@ -52,8 +48,8 @@
       <movement from="g1" to="b1">1</movement>
       <movement from="b1" to="b2">0.5</movement>
       <movement from="b1" to="b3">0.5</movement>
-      <movement from="b2" to="b3">1</movement>
-      <movement from="b3" to="b1">1</movement>
+      <movement from="b2" to="b1">1</movement>
+      <movement from="b3" to="b2">1</movement>
     </Stream>
     <Stream id="2">
       <movement from="g2" to="b1">1</movement>

@@ -31,11 +31,11 @@ namespace GPSSGenerator.Nodes.Generators
 			this.numberOfTransactions = numberOfTransactions;
 		}
 
-		public override List<string> buildDescription(int indexOfStream)
+		public override List<string> buildDescription(string idOfStream)
 		{
 			List<string> description = new List<string>();
 
-			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}_stat", id, indexOfStream), string.Format("net_{1}", id, indexOfStream));
+			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}_stat", id, idOfStream), string.Format("net_{1}", id, idOfStream));
 
 			description.Add(String.Format("GENERATE ,,,{0}", numberOfTransactions));
 			description.Add(netLevelIntervalStatistic.getStart());

@@ -4,6 +4,8 @@ using System.IO;
 using GPSSGenerator.GlobalDimension;
 using GPSSGenerator.Nodes;
 using GPSSGenerator.StreamDimension;
+using System.Xml;
+using GPSSGenerator.ModelReaders;
 
 namespace ConsoleInterface
 {
@@ -14,9 +16,12 @@ namespace ConsoleInterface
 
 		static void Main(string[] args)
 		{
-			Console.Write("input file name: ");
-			string path = Console.ReadLine();
-			GlobalModel gl = ModelReader.Read(data + path);
+			//Console.Write("input file name: ");
+			//string path = Console.ReadLine();
+
+			//GlobalModel gl = TxtModelReader.Read(data + path);
+
+			GlobalModel gl = XmlModelReader.Read(data + "special.xml");
 
 			List<string> code = gl.MakeCode();
 

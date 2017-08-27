@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Nodes
 {
-	public interface IDeclarative
+	interface IDeclarative
 	{
 		List<string> buildDeclaration();
 	}

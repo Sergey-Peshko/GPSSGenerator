@@ -29,11 +29,11 @@ namespace GPSSGenerator.Nodes.Terminates
 			this.netLevelIntervalStatistic = netLevelIntervalStatistic;
 		}
 
-		public override List<string> buildDescription(int indexOfStream)
+		public override List<string> buildDescription(string idOfStream)
 		{
 			List<string> description = new List<string>();
 
-			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}_stat", id, indexOfStream), string.Format("net_{1}", id, indexOfStream));
+			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}_stat", id, idOfStream), string.Format("net_{1}", id, idOfStream));
 
 			description.Add(streamLevelIntervalStatistic.getFinish());
 			description.Add(netLevelIntervalStatistic.getFinish());

@@ -7,7 +7,7 @@ using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes
 {
-	abstract public class Node : Entity, IDescribed
+	abstract class Node : Entity, IDescribed
 	{
 		public Node()
 		{
@@ -18,6 +18,6 @@ namespace GPSSGenerator.Nodes
 		{
 			this.id = id;
 		}
-		public abstract List<string> buildDescription(int indexOfStream);
+		public abstract List<string> buildDescription(string idOfStream);
 	}
 }

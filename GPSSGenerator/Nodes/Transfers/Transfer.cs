@@ -20,7 +20,7 @@ namespace GPSSGenerator.Nodes.Transfers
 			this.nodes = nodes;
 		}
 
-		public override List<string> buildDescription(int indexOfStream)
+		public override List<string> buildDescription(string idOfStream)
 		{
 			List<string> description = new List<string>();
 			if(probabilities.Count == 1 && probabilities[0] == 1f)

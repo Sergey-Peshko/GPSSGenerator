@@ -25,16 +25,11 @@ namespace GPSSGenerator.Distributions
 			{
 				return mathematicalExpectation;
 			}
-
-			set
-			{
-				mathematicalExpectation = value;
-			}
 		}
 
-		public ExponentialDistribution()
+		public ExponentialDistribution(int numberOfGenerator, float mathematicalExpectation) : base(numberOfGenerator)
 		{
-
+			this.mathematicalExpectation = mathematicalExpectation;
 		}
 	}
 }

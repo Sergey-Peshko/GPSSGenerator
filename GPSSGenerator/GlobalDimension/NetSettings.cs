@@ -6,38 +6,37 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.GlobalDimension
 {
-	public class NetSettings
+	class NetSettings
 	{
-		private int numberOfTransactions;
-		private int amountOfTime;
+		private int value;
 		private bool isTime;
 		private bool isTrainsactions;
 
-		public int NumberOfTransactions
+		public int NumberOfItems
 		{
 			get
 			{
-				return numberOfTransactions;
+				return value;
 			}
+		}
 
+		public int NumberOfTransactions
+		{
 			set
 			{
-				amountOfTime = default(int);
-				numberOfTransactions = value;
+				isTrainsactions = true;
+				isTime = false;
+				this.value = value;
 			}
 		}
 
 		public int AmountOfTime
 		{
-			get
-			{
-				return amountOfTime;
-			}
-
 			set
 			{
-				numberOfTransactions = default(int);
-				amountOfTime = value;
+				isTrainsactions = false;
+				isTime = true;
+				this.value = value;
 			}
 		}
 
@@ -47,12 +46,6 @@ namespace GPSSGenerator.GlobalDimension
 			{
 				return isTime;
 			}
-
-			set
-			{
-				isTrainsactions = !value;
-				isTime = value;
-			}
 		}
 
 		public bool IsTrainsactions
@@ -60,12 +53,6 @@ namespace GPSSGenerator.GlobalDimension
 			get
 			{
 				return isTrainsactions;
-			}
-
-			set
-			{
-				isTime = !value;
-				isTrainsactions = value;
 			}
 		}
 	}

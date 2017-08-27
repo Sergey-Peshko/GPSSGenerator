@@ -35,7 +35,7 @@ namespace GPSSGenerator.Nodes.Statistics
 			return String.Format("DEPART {0}", nameOfStatistic);
 		}
 
-		public override List<string> buildDescription(int indexOfStream)
+		public override List<string> buildDescription(string idOfStream)
 		{
 			List<string> description = new List<string>();
 

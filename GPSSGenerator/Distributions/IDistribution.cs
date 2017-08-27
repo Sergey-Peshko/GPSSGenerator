@@ -19,11 +19,11 @@ namespace GPSSGenerator.Distributions
 			{
 				return numberOfGenerator;
 			}
+		}
 
-			set
-			{
-				numberOfGenerator = value;
-			}
+		public IDistribution(int numberOfGenerator)
+		{
+			this.numberOfGenerator = numberOfGenerator;
 		}
 	}
 }

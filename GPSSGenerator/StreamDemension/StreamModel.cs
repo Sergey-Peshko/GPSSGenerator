@@ -12,16 +12,16 @@ using GPSSGenerator.GlobalDimension;
 
 namespace GPSSGenerator.StreamDimension
 {
-	public class StreamModel
+	class StreamModel
 	{
 		private StreamNode root;
-		private int index;
+		private string id;
 
-		public int Index
+		public string Id
 		{
 			get
 			{
-				return index;
+				return id;
 			}
 		}
 
@@ -38,9 +38,9 @@ namespace GPSSGenerator.StreamDimension
 			}
 		}
 
-		public StreamModel(int index, Node[] originalNodes, float[,] graph)
+		public StreamModel(string id, Node[] originalNodes, float[,] graph)
 		{
-			this.index = index;
+			this.id = id;
 
 			AnalizeAndBuildStreamNodes(originalNodes, graph);
 		}
@@ -52,7 +52,7 @@ namespace GPSSGenerator.StreamDimension
 
 		private List<string> buildStreamDescriptionRec(StreamNode node)
 		{
-			List<string> description = node.Node.buildDescription(index);
+			List<string> description = node.Node.buildDescription(id);
 
 			description[0] = string.Format("{0}\t{1}", node.IsNeedLabel? node.Label : "\t", description[0]);
 
@@ -67,20 +67,6 @@ namespace GPSSGenerator.StreamDimension
 			}
 			
 			return description;
-		}
-
-		public void Show()
-		{
-			ShowRec(root);
-		}
-
-		private void ShowRec(StreamNode node)
-		{
-			Console.WriteLine(node.Node.Id);
-			for(int i = 0; i < node.NextNodes.Count; i++)
-			{
-				ShowRec(node.NextNodes[i]);
-			}
 		}
 
 		private void AnalizeAndBuildStreamNodes(Node[] originalNodes, float[,] graph)
@@ -154,7 +140,7 @@ namespace GPSSGenerator.StreamDimension
 			StreamNode[] streamNodes,
 			float[,] graph)
 		{
-			streamNodes[pos] = new StreamNode(originalNodes[pos], string.Format("label_{0}_{1}", originalNodes[pos].Id, index));
+			streamNodes[pos] = new StreamNode(originalNodes[pos], string.Format("label_{0}_{1}", originalNodes[pos].Id, id));
 
 			for (int i = 0; i < originalNodes.Length; i++)
 			{
@@ -214,7 +200,7 @@ namespace GPSSGenerator.StreamDimension
 				probabilities,
 				nodesInTransfer);
 
-			StreamNode node = new StreamNode(transfer, string.Format("label_{0}_{1}", transfer.Id, index));
+			StreamNode node = new StreamNode(transfer, string.Format("label_{0}_{1}", transfer.Id, id));
 			node.NextNodes.AddRange(nodesInTree);
 			return node;
 		}
@@ -244,7 +230,7 @@ namespace GPSSGenerator.StreamDimension
 				probabilities,
 				nodes);
 
-			StreamNode node = new StreamNode(transfer, string.Format("label_{0}_{1}", transfer.Id, index));
+			StreamNode node = new StreamNode(transfer, string.Format("label_{0}_{1}", transfer.Id, id));
 			return node;
 		}
 	}

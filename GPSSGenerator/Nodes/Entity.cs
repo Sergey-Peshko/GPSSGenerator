@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Nodes
 {
-	public abstract class Entity
+	abstract class Entity
 	{
 		protected string id;
 

@@ -36,27 +36,27 @@ namespace GPSSGenerator.Nodes.Facilities
 			return declaration;
 		}
 
-		public override List<string> buildDescription(int indexOfStream)
+		public override List<string> buildDescription(string idOfStream)
 		{
 
-			IntervalStatistic streamLevelFull = new IntervalStatistic(string.Format("{0}_{1}_stat", id, indexOfStream),
-				string.Format("{0}_{1}", id, indexOfStream));
-			IntervalStatistic streamLevelQueue = new IntervalStatistic(string.Format("{0}_{1}_queue_stat", id, indexOfStream),
-				string.Format("{0}_{1}_queue", id, indexOfStream));
+			IntervalStatistic streamLevelFull = new IntervalStatistic(string.Format("{0}_{1}_stat", id, idOfStream),
+				string.Format("{0}_{1}", id, idOfStream));
+			IntervalStatistic streamLevelQueue = new IntervalStatistic(string.Format("{0}_{1}_queue_stat", id, idOfStream),
+				string.Format("{0}_{1}_queue", id, idOfStream));
 			
 			List<string> description = new List<string>();
 
-			description.AddRange(netLevelFull.buildDescription(indexOfStream));
-			description.AddRange(streamLevelFull.buildDescription(indexOfStream));
-			description.AddRange(netLevelQueue.buildDescription(indexOfStream));
-			description.AddRange(streamLevelQueue.buildDescription(indexOfStream));
+			description.AddRange(netLevelFull.buildDescription(idOfStream));
+			description.AddRange(streamLevelFull.buildDescription(idOfStream));
+			description.AddRange(netLevelQueue.buildDescription(idOfStream));
+			description.AddRange(streamLevelQueue.buildDescription(idOfStream));
 			description.Add(String.Format("ENTER {0}", id));
-			description.AddRange(streamLevelQueue.buildDescription(indexOfStream));
-			description.AddRange(netLevelQueue.buildDescription(indexOfStream));
+			description.AddRange(streamLevelQueue.buildDescription(idOfStream));
+			description.AddRange(netLevelQueue.buildDescription(idOfStream));
 			description.Add(String.Format("ADVANCE ({0})", distribution.Description));
 			description.Add(String.Format("LEAVE {0}", id));
-			description.AddRange(streamLevelFull.buildDescription(indexOfStream));
-			description.AddRange(netLevelFull.buildDescription(indexOfStream));
+			description.AddRange(streamLevelFull.buildDescription(idOfStream));
+			description.AddRange(netLevelFull.buildDescription(idOfStream));
 
 			return description;
 		}

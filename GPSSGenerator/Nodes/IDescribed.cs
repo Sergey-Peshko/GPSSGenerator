@@ -7,8 +7,8 @@ using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes
 {
-	public interface IDescribed
+	interface IDescribed
 	{
-		List<string> buildDescription(int indexOfStream);
+		List<string> buildDescription(string idOfStream);
 	}
 }
