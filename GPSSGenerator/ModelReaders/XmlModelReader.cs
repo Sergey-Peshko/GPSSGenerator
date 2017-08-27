@@ -41,10 +41,8 @@ namespace GPSSGenerator.ModelReaders
 			}
 
 			XmlNodeList xmlEntities = doc.DocumentElement.SelectSingleNode("Entities").SelectNodes("Entity");
-			XmlNodeList xmlDistributions = doc.DocumentElement.SelectSingleNode("Distributions").SelectNodes("Distribution");
 
-
-			model.Nodes = CreateEntities(xmlEntities, xmlDistributions, model.Settings);
+			model.Nodes = CreateEntities(xmlEntities, model.Settings);
 
 			XmlNodeList xmlStreams = doc.DocumentElement.SelectSingleNode("Streams").SelectNodes("Stream");
 
@@ -104,7 +102,7 @@ namespace GPSSGenerator.ModelReaders
 				);
 		}
 
-		static private Entity[] CreateEntities(XmlNodeList xmlEntities, XmlNodeList xmlDistributions, NetSettings settings)
+		static private Entity[] CreateEntities(XmlNodeList xmlEntities, NetSettings settings)
 		{
 			IntervalStatistic netLevel = new IntervalStatistic("net_stat", "net");
 
@@ -112,13 +110,13 @@ namespace GPSSGenerator.ModelReaders
 
 			for (int i = 0; i < xmlEntities.Count; i++)
 			{
-				entities[i] = CreateEntity(xmlEntities[i], netLevel, xmlDistributions, settings);
+				entities[i] = CreateEntity(xmlEntities[i], netLevel, settings);
 			}
 
 			return entities;
 		}
 
-		static private Entity CreateEntity(XmlNode xmlEntity, IntervalStatistic netLevel, XmlNodeList xmlDistributions, NetSettings settings)
+		static private Entity CreateEntity(XmlNode xmlEntity, IntervalStatistic netLevel, NetSettings settings)
 		{
 			if (xmlEntity.Attributes["type"]?.Value == "ZGENERATOR")
 			{
@@ -126,22 +124,18 @@ namespace GPSSGenerator.ModelReaders
 				return new ClosedGenerator(
 					xmlEntity.Attributes["id"]?.Value,
 					netLevel,
-					Convert.ToInt32(findPropertyByAtribyteName(xmlEntity, "NumberOfTransactions").Attributes["value"]?.Value));
+					Convert.ToInt32(getPropertyValueByName(xmlEntity, "NumberOfTransactions")));
 			}
 			else if (xmlEntity.Attributes["type"]?.Value == "GENERATOR")
 			{
 				return new OpenGenerator(
 					xmlEntity.Attributes["id"]?.Value,
 					netLevel,
-					CreateDistribution(
-						findByIdInAttributes(
-							xmlDistributions, 
-							findPropertyByAtribyteName(xmlEntity, "Distribution").Attributes["ref"]?.Value))
-							);
+					CreateDistribution(xmlEntity.SelectSingleNode("Distribution")));
 			}
 			else if(xmlEntity.Attributes["type"]?.Value == "RECEIVER")
 			{
-				int count = Convert.ToInt32(findPropertyByAtribyteName(xmlEntity, "NumberOfTransactionsToBeDeleted").Attributes["value"]?.Value);
+				int count = Convert.ToInt32(getPropertyValueByName(xmlEntity, "NumberOfTransactionsToBeDeleted"));
 							
 				if(settings.IsTime && count != 0)
 				{
@@ -156,29 +150,22 @@ namespace GPSSGenerator.ModelReaders
 			{
 				return new OneChannelFacility(
 					xmlEntity.Attributes["id"]?.Value,
-					CreateDistribution(
-						findByIdInAttributes(
-							xmlDistributions,
-							findPropertyByAtribyteName(xmlEntity, "Distribution").Attributes["ref"]?.Value))
-					);
+					CreateDistribution(xmlEntity.SelectSingleNode("Distribution")));
 
 			}
 			else if (xmlEntity.Attributes["type"]?.Value == "MULTYCHANNEL_FACILITY")
 			{
 				return new MultyChannelFacility(
 					xmlEntity.Attributes["id"]?.Value,
-					CreateDistribution(
-						findByIdInAttributes(
-							xmlDistributions,
-							findPropertyByAtribyteName(xmlEntity, "Distribution").Attributes["ref"]?.Value)),
-					Convert.ToInt32(findPropertyByAtribyteName(xmlEntity, "Capacity").Attributes["value"]?.Value)
+					CreateDistribution(xmlEntity.SelectSingleNode("Distribution")),
+					Convert.ToInt32(getPropertyValueByName(xmlEntity, "Capacity"))
 					);
 			}
 			else if (xmlEntity.Attributes["type"]?.Value == "INTERNAL_STATISTIC")
 			{
 				return new IntervalStatistic(
 					xmlEntity.Attributes["id"]?.Value,
-					findPropertyByAtribyteName(xmlEntity, "NameOfStatistic").Attributes["value"]?.Value
+					getPropertyValueByName(xmlEntity, "NameOfStatistic")
 					);
 			}
 
@@ -191,16 +178,16 @@ namespace GPSSGenerator.ModelReaders
 			if (xmlDistribution.Attributes["type"]?.Value == "EXPONENTIAL")
 			{
 				ExponentialDistribution ed = new ExponentialDistribution(
-					Convert.ToInt32(findPropertyByAtribyteName(xmlDistribution, "GeneratorNumber").Attributes["value"]?.Value),
-					(float)Convert.ToDouble(findPropertyByAtribyteName(xmlDistribution, "MathematicalExpectation").Attributes["value"]?.Value));
+					Convert.ToInt32(getPropertyValueByName(xmlDistribution, "GeneratorNumber")),
+					(float)Convert.ToDouble(getPropertyValueByName(xmlDistribution, "MathematicalExpectation")));
 				return ed;
 			}
 			if (xmlDistribution.Attributes["type"]?.Value == "UNIFORM")
 			{
 				UniformDistribution d = new UniformDistribution(
-					Convert.ToInt32(findPropertyByAtribyteName(xmlDistribution, "GeneratorNumber").Attributes["value"]?.Value),
-					(float)Convert.ToDouble(findPropertyByAtribyteName(xmlDistribution, "A").Attributes["value"]?.Value),
-					(float)Convert.ToDouble(findPropertyByAtribyteName(xmlDistribution, "B").Attributes["value"]?.Value));
+					Convert.ToInt32(getPropertyValueByName(xmlDistribution, "GeneratorNumber")),
+					(float)Convert.ToDouble(getPropertyValueByName(xmlDistribution, "A")),
+					(float)Convert.ToDouble(getPropertyValueByName(xmlDistribution, "B")));
 				return d;
 			}
 			else
@@ -222,17 +209,9 @@ namespace GPSSGenerator.ModelReaders
 			return null;
 		}
 
-		static private XmlNode findPropertyByAtribyteName(XmlNode xmlEntity, string name)
+		static private string getPropertyValueByName(XmlNode xmlEntity, string name)
 		{
-			XmlNodeList list = xmlEntity.SelectNodes("property");
-			for (int i = 0; i < list.Count; i++)
-			{
-				if(list[i].Attributes["name"]?.Value == name)
-				{
-					return list[i];
-				}
-			}
-			return null;
+			return xmlEntity.SelectSingleNode(name).Attributes["value"]?.Value;
 		}
 	}
 }
