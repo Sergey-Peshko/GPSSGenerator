@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model>
+  <!--time-->
+  <!--transaction counter-->
+  <!-- -->
+  <Settings measure-by="Time">
+    <property name="AmountOfTime" value="3600"/>
+  </Settings>
+
+  <Distributions>
+    <Distribution id="dis1" type="EXPONENTIAL">
+      <property name="ExpectedValue" value="4"/>
+      <property name="GeneratorNumber" value="2"/>
+    </Distribution>
+    <Distribution id="dis2" type="EXPONENTIAL">
+      <property name="ExpectedValue" value="3"/>
+      <property name="GeneratorNumber" value="3"/>
+    </Distribution>
+    <Distribution id="dis3" type="EXPONENTIAL">
+      <property name="ExpectedValue" value="6"/>
+      <property name="GeneratorNumber" value="4"/>
+    </Distribution>
+    <Distribution id="dis4" type="EXPONENTIAL">
+      <property name="ExpectedValue" value="8"/>
+      <property name="GeneratorNumber" value="1"/>
+    </Distribution>
+  </Distributions>
+  
+  <Entities>
+    <Entity id="g1" type="ZGENERATOR">
+      <property name="NumberOfTransactions" value="10"/>
+    </Entity>
+    <Entity id="b1" type="MULTYCHANNEL_FACILITY">
+      <property name="Capacity" value="10"/>
+      <property name="Distribution" ref="dis1"/>
+    </Entity>
+    <Entity id="b2" type="ONECHANNEL_FACILITY">
+      <property name="Distribution" ref="dis2"/>
+    </Entity>
+    <Entity id="b3" type="ONECHANNEL_FACILITY">
+      <property name="Distribution" ref="dis3"/>
+    </Entity>
+    <Entity id="g2" type="GENERATOR">
+      <property name="Distribution" ref="dis4"/>
+    </Entity>
+    <Entity id="r1" type="RECEIVER">
+      <property name="NumberOfTransactionsToBeDeleted" value="0"/>
+    </Entity>
+  </Entities>
+  <Streams>
+    <Stream id="1">
+      <movement from="g1" to="b1">1</movement>
+      <movement from="b1" to="b2">0.5</movement>
+      <movement from="b1" to="b3">0.5</movement>
+      <movement from="b2" to="b3">1</movement>
+      <movement from="b3" to="b1">1</movement>
+    </Stream>
+    <Stream id="2">
+      <movement from="g2" to="b1">1</movement>
+      <movement from="b1" to="r1">1</movement>
+    </Stream>
+  </Streams>
+</Model>
