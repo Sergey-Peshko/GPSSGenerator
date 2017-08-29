@@ -15,7 +15,7 @@ using GPSSGenerator.Nodes.Generators;
 using GPSSGenerator.Nodes.Statistics;
 using GPSSGenerator.Nodes.Terminates;
 using GPSSGenerator.Nodes.Transfers;
-using GPSSGenerator.Nodes;
+using GPSSGenerator.Statistics;
 
 namespace GPSSGenerator.ModelReaders
 {

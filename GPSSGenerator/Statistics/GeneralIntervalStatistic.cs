@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPSSGenerator.Nodes.Statistics
+namespace GPSSGenerator.Statistics
 {
 	class GeneralIntervalStatistic : Statistic
 	{

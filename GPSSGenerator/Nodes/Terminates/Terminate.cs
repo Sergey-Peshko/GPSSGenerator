@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GPSSGenerator.Nodes.Statistics;
+using GPSSGenerator.Statistics;
 using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes.Terminates

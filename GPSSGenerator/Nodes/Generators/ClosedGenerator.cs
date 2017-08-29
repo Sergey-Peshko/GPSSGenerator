@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GPSSGenerator.StreamDimension;
+using GPSSGenerator.Statistics;
 
 namespace GPSSGenerator.Nodes.Generators
 {

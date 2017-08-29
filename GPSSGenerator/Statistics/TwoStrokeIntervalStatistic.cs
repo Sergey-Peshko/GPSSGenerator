@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GPSSGenerator.StreamDimension;
 
-namespace GPSSGenerator.Nodes.Statistics
+namespace GPSSGenerator.Statistics
 {
 	class TwoStrokeIntervalStatistic : GeneralIntervalStatistic
 	{

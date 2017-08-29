@@ -7,7 +7,7 @@ using GPSSGenerator.GlobalDimension;
 using GPSSGenerator.StreamDimension;
 using GPSSGenerator.Nodes.Facilities;
 using GPSSGenerator.Nodes.Generators;
-using GPSSGenerator.Nodes.Statistics;
+using GPSSGenerator.Statistics;
 using GPSSGenerator.Nodes.Terminates;
 using GPSSGenerator.Nodes.Transfers;
 using GPSSGenerator.Nodes;
