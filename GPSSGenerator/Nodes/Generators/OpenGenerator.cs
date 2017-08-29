@@ -21,7 +21,7 @@ namespace GPSSGenerator.Nodes.Generators
 			}
 		}
 
-		public OpenGenerator(string id, IntervalStatistic netLevelIntervalStatistic, IDistribution distribution) : base(id, netLevelIntervalStatistic)
+		public OpenGenerator(string id, TwoStrokeIntervalStatistic netLevelIntervalStatistic, IDistribution distribution) : base(id, netLevelIntervalStatistic)
 		{
 			this.distribution = distribution;
 		}
@@ -30,11 +30,8 @@ namespace GPSSGenerator.Nodes.Generators
 		{
 			List<string> description = new List<string>();
 
-			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}_stat", id, idOfStream), string.Format("net_{1}", id, idOfStream));
-
 			description.Add(String.Format("GENERATE ({0})", distribution.Description));
 			description.Add(netLevelIntervalStatistic.getStart());
-			description.Add(streamLevelIntervalStatistic.getStart());
 
 			return description;
 		}

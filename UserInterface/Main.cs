@@ -13,12 +13,8 @@ namespace UserInterface
 {
 	public partial class MainFrame : Form
 	{
-
-		private GlobalModel globalModel; 
 		public MainFrame()
 		{
-			globalModel = new GlobalModel();
-
 			InitializeComponent();
 		}
 
@@ -31,17 +27,6 @@ namespace UserInterface
 		{
 			AddNode addNode = new AddNode();
 			addNode.Show();
-		}
-
-		private void buttonEdit_Click(object sender, EventArgs e)
-		{
-			groupBoxCommonParam.Enabled = true;
-		}
-
-		private void buttonApply_Click(object sender, EventArgs e)
-		{
-			NetSettings netSettings = new NetSettings();
-			netSettings.NumberOfTransactions = (int)numericNumberOfTransactions.Value;
 		}
 
 		private void buttonAddStream_Click(object sender, EventArgs e)

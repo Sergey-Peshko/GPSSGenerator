@@ -11,7 +11,7 @@ namespace GPSSGenerator.Nodes.Terminates
 	class Terminate : Node
 	{
 		private int count;
-		private IntervalStatistic netLevelIntervalStatistic;
+		private TwoStrokeIntervalStatistic netLevelIntervalStatistic;
 
 		public int Count
 		{
@@ -22,8 +22,8 @@ namespace GPSSGenerator.Nodes.Terminates
 		}
 
 		public Terminate(string id, 
-			int count, 
-			IntervalStatistic netLevelIntervalStatistic) : base(id)
+			int count,
+			TwoStrokeIntervalStatistic netLevelIntervalStatistic) : base(id)
 		{
 			this.count = count;
 			this.netLevelIntervalStatistic = netLevelIntervalStatistic;
@@ -33,9 +33,6 @@ namespace GPSSGenerator.Nodes.Terminates
 		{
 			List<string> description = new List<string>();
 
-			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{1}_stat", id, idOfStream), string.Format("net_{1}", id, idOfStream));
-
-			description.Add(streamLevelIntervalStatistic.getFinish());
 			description.Add(netLevelIntervalStatistic.getFinish());
 			description.Add(String.Format("TERMINATE {0}", count));
 

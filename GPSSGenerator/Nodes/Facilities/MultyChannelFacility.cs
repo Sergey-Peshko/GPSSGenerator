@@ -39,24 +39,22 @@ namespace GPSSGenerator.Nodes.Facilities
 		public override List<string> buildDescription(string idOfStream)
 		{
 
-			IntervalStatistic streamLevelFull = new IntervalStatistic(string.Format("{0}_{1}_stat", id, idOfStream),
-				string.Format("{0}_{1}", id, idOfStream));
-			IntervalStatistic streamLevelQueue = new IntervalStatistic(string.Format("{0}_{1}_queue_stat", id, idOfStream),
-				string.Format("{0}_{1}_queue", id, idOfStream));
+			TwoStrokeIntervalStatistic streamLevelFull = new TwoStrokeIntervalStatistic(string.Format("{0}_{1}", id, idOfStream));
+			TwoStrokeIntervalStatistic streamLevelQueue = new TwoStrokeIntervalStatistic(string.Format("{0}_{1}_queue", id, idOfStream));
 			
 			List<string> description = new List<string>();
 
-			description.AddRange(netLevelFull.buildDescription(idOfStream));
-			description.AddRange(streamLevelFull.buildDescription(idOfStream));
-			description.AddRange(netLevelQueue.buildDescription(idOfStream));
-			description.AddRange(streamLevelQueue.buildDescription(idOfStream));
+			description.AddRange(netLevelFull.buildDescription());
+			description.AddRange(streamLevelFull.buildDescription());
+			description.AddRange(netLevelQueue.buildDescription());
+			description.AddRange(streamLevelQueue.buildDescription());
 			description.Add(String.Format("ENTER {0}", id));
-			description.AddRange(streamLevelQueue.buildDescription(idOfStream));
-			description.AddRange(netLevelQueue.buildDescription(idOfStream));
+			description.AddRange(streamLevelQueue.buildDescription());
+			description.AddRange(netLevelQueue.buildDescription());
 			description.Add(String.Format("ADVANCE ({0})", distribution.Description));
 			description.Add(String.Format("LEAVE {0}", id));
-			description.AddRange(streamLevelFull.buildDescription(idOfStream));
-			description.AddRange(netLevelFull.buildDescription(idOfStream));
+			description.AddRange(streamLevelFull.buildDescription());
+			description.AddRange(netLevelFull.buildDescription());
 
 			return description;
 		}

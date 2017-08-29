@@ -9,19 +9,11 @@ namespace GPSSGenerator.Nodes.Generators
 {
 	abstract class Generator : Node
 	{
-		protected IntervalStatistic netLevelIntervalStatistic;
+		protected TwoStrokeIntervalStatistic netLevelIntervalStatistic;
 
-		public Generator(string id, IntervalStatistic netLevelIntervalStatistic) : base(id)
+		public Generator(string id, TwoStrokeIntervalStatistic netLevelIntervalStatistic) : base(id)
 		{
 			this.netLevelIntervalStatistic = netLevelIntervalStatistic;
-		}
-
-		public IntervalStatistic NetLevelStatistic
-		{
-			get
-			{
-				return netLevelIntervalStatistic;
-			}
 		}
 	}
 }

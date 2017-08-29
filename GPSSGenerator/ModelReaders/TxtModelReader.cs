@@ -21,6 +21,8 @@ namespace GPSSGenerator.ModelReaders
 {
 	public static class TxtModelReader
 	{
+		static TwoStrokeIntervalStatistic netLevel = new TwoStrokeIntervalStatistic("net");
+
 		static public GlobalModel Read(string path)
 		{
 			GlobalModel model = new GlobalModel();
@@ -88,7 +90,7 @@ namespace GPSSGenerator.ModelReaders
 
 		static private Entity[] CreateNodes(string[][] nodes)
 		{
-			IntervalStatistic netLevel = new IntervalStatistic("net_stat", "net");
+			TwoStrokeIntervalStatistic netLevel = new TwoStrokeIntervalStatistic("net");
 
 			Entity[] rezult = new Entity[nodes.Length];
 			for (int i = 0; i < nodes.Length; i++)
@@ -98,9 +100,9 @@ namespace GPSSGenerator.ModelReaders
 			return rezult;
 		}
 
-		static private Entity CreateNode(string[] param, IntervalStatistic netLevel)
+		static private Entity CreateNode(string[] param, TwoStrokeIntervalStatistic netLevel)
 		{
-			if (param[0] == "RECEIVER")
+			if (param[0] == GlobalVariables.RECEIVER)
 			{
 				Terminate entity = new Terminate(param[1],
 					Convert.ToInt32(param[2]),
@@ -108,18 +110,18 @@ namespace GPSSGenerator.ModelReaders
 
 				return entity;
 			}
-			else if (param[0] == "GENERATOR")
+			else if (param[0] == GlobalVariables.GENERATOR)
 			{
 				string[] distributionParam = new string[param.Length - 2];
 				Array.Copy(param, 2, distributionParam, 0, distributionParam.Length);
 				IDistribution distribution = CreateDistribution(distributionParam);
 				return new OpenGenerator(param[1], netLevel, distribution); ;
 			}
-			else if (param[0] == "ZGENERATOR")
+			else if (param[0] == GlobalVariables.ZGENERATOR)
 			{
 				return new ClosedGenerator(param[1], netLevel, Convert.ToInt32(param[2]));
 			}
-			else if (param[0] == "ONECHANNEL_FACILITY")
+			else if (param[0] == GlobalVariables.ONECHANNEL_FACILITY)
 			{
 				string[] distributionParam = new string[param.Length - 2];
 				Array.Copy(param, 2, distributionParam, 0, distributionParam.Length);
@@ -127,7 +129,7 @@ namespace GPSSGenerator.ModelReaders
 
 				return new OneChannelFacility(param[1], distribution);
 			}
-			else if (param[0] == "MULTYCHANNEL_FACILITY")
+			else if (param[0] == GlobalVariables.MULTYCHANNEL_FACILITY)
 			{
 				string[] distributionParam = new string[param.Length - 3];
 				Array.Copy(param, 3, distributionParam, 0, distributionParam.Length);
@@ -135,25 +137,21 @@ namespace GPSSGenerator.ModelReaders
 
 				return new MultyChannelFacility(param[1], distribution, Convert.ToInt32(param[2]));
 			}
-			else if (param[0] == "INTERNAL_STATISTIC")
-			{
-				return new IntervalStatistic(param[1], param[2]);
-			}
-
+			
 			else
 				throw new Exception("can't create Node");
 		}
 
 		static private IDistribution CreateDistribution(string[] param)
 		{
-			if (param[0] == "EXPONENTIAL")
+			if (param[0] == GlobalVariables.EXPONENTIAL)
 			{
 				ExponentialDistribution ed = new ExponentialDistribution(
 					Convert.ToInt32(param[1]),
 					(float)Convert.ToDouble(param[2]));
 				return ed;
 			}
-			if (param[0] == "UNIFORM")
+			if (param[0] == GlobalVariables.UNIFORM)
 			{
 				UniformDistribution d = new UniformDistribution(
 					Convert.ToInt32(param[1]),

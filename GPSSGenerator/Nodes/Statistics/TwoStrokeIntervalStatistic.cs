@@ -7,22 +7,13 @@ using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes.Statistics
 {
-	class IntervalStatistic : Node
+	class TwoStrokeIntervalStatistic : GeneralIntervalStatistic
 	{
-		private string nameOfStatistic;
 		private bool state = true;
 
-		public string NameOfStatistic
+		public TwoStrokeIntervalStatistic(string nameOfStatistic) : base(nameOfStatistic)
 		{
-			get
-			{
-				return nameOfStatistic;
-			}
-		}
 
-		public IntervalStatistic(string id, string nameOfStatistic) : base(id)
-		{
-			this.nameOfStatistic = nameOfStatistic;
 		}
 
 		public string getStart()
@@ -35,7 +26,7 @@ namespace GPSSGenerator.Nodes.Statistics
 			return String.Format("DEPART {0}", nameOfStatistic);
 		}
 
-		public override List<string> buildDescription(string idOfStream)
+		public List<string> buildDescription()
 		{
 			List<string> description = new List<string>();
 

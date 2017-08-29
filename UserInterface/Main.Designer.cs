@@ -35,10 +35,10 @@
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.groupBoxCommonParam = new System.Windows.Forms.GroupBox();
-			this.buttonEdit = new System.Windows.Forms.Button();
-			this.buttonApply = new System.Windows.Forms.Button();
-			this.numericNumberOfTransactions = new System.Windows.Forms.NumericUpDown();
+			this.groupBoxSettings = new System.Windows.Forms.GroupBox();
+			this.isTime = new System.Windows.Forms.RadioButton();
+			this.isTransactions = new System.Windows.Forms.RadioButton();
+			this.numericValue = new System.Windows.Forms.NumericUpDown();
 			this.groupBoxStreams = new System.Windows.Forms.GroupBox();
 			this.buttonEditStream = new System.Windows.Forms.Button();
 			this.buttonDeleteStream = new System.Windows.Forms.Button();
@@ -51,16 +51,12 @@
 			this.buttonAddNode = new System.Windows.Forms.Button();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.buttonGenerate = new System.Windows.Forms.Button();
-			this.numericTime = new System.Windows.Forms.NumericUpDown();
-			this.radioButton1 = new System.Windows.Forms.RadioButton();
-			this.radioButton2 = new System.Windows.Forms.RadioButton();
 			this.menuStrip1.SuspendLayout();
-			this.groupBoxCommonParam.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericNumberOfTransactions)).BeginInit();
+			this.groupBoxSettings.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericValue)).BeginInit();
 			this.groupBoxStreams.SuspendLayout();
 			this.groupBoxNodes.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericTime)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -114,48 +110,56 @@
 			this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			// 
-			// groupBoxCommonParam
+			// groupBoxSettings
 			// 
-			this.groupBoxCommonParam.Controls.Add(this.radioButton2);
-			this.groupBoxCommonParam.Controls.Add(this.radioButton1);
-			this.groupBoxCommonParam.Controls.Add(this.numericTime);
-			this.groupBoxCommonParam.Controls.Add(this.buttonEdit);
-			this.groupBoxCommonParam.Controls.Add(this.buttonApply);
-			this.groupBoxCommonParam.Controls.Add(this.numericNumberOfTransactions);
-			this.groupBoxCommonParam.Location = new System.Drawing.Point(12, 47);
-			this.groupBoxCommonParam.Name = "groupBoxCommonParam";
-			this.groupBoxCommonParam.Size = new System.Drawing.Size(277, 113);
-			this.groupBoxCommonParam.TabIndex = 1;
-			this.groupBoxCommonParam.TabStop = false;
-			this.groupBoxCommonParam.Text = "Общие Параметры";
+			this.groupBoxSettings.Controls.Add(this.isTime);
+			this.groupBoxSettings.Controls.Add(this.isTransactions);
+			this.groupBoxSettings.Controls.Add(this.numericValue);
+			this.groupBoxSettings.Location = new System.Drawing.Point(12, 47);
+			this.groupBoxSettings.Name = "groupBoxSettings";
+			this.groupBoxSettings.Size = new System.Drawing.Size(277, 83);
+			this.groupBoxSettings.TabIndex = 1;
+			this.groupBoxSettings.TabStop = false;
+			this.groupBoxSettings.Text = "Измерять жизненный цикл модели по:";
 			// 
-			// buttonEdit
+			// isTime
 			// 
-			this.buttonEdit.Location = new System.Drawing.Point(6, 77);
-			this.buttonEdit.Name = "buttonEdit";
-			this.buttonEdit.Size = new System.Drawing.Size(93, 23);
-			this.buttonEdit.TabIndex = 7;
-			this.buttonEdit.Text = "редактировать";
-			this.buttonEdit.UseVisualStyleBackColor = true;
-			this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+			this.isTime.AutoSize = true;
+			this.isTime.Location = new System.Drawing.Point(6, 19);
+			this.isTime.Name = "isTime";
+			this.isTime.Size = new System.Drawing.Size(73, 17);
+			this.isTime.TabIndex = 11;
+			this.isTime.Text = "Времени:";
+			this.isTime.UseVisualStyleBackColor = true;
 			// 
-			// buttonApply
+			// isTransactions
 			// 
-			this.buttonApply.Location = new System.Drawing.Point(196, 77);
-			this.buttonApply.Name = "buttonApply";
-			this.buttonApply.Size = new System.Drawing.Size(75, 23);
-			this.buttonApply.TabIndex = 6;
-			this.buttonApply.Text = "применить";
-			this.buttonApply.UseVisualStyleBackColor = true;
-			this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
+			this.isTransactions.AutoSize = true;
+			this.isTransactions.Checked = true;
+			this.isTransactions.Location = new System.Drawing.Point(107, 19);
+			this.isTransactions.Name = "isTransactions";
+			this.isTransactions.Size = new System.Drawing.Size(125, 17);
+			this.isTransactions.TabIndex = 10;
+			this.isTransactions.TabStop = true;
+			this.isTransactions.Text = "Кол-ву транзактов: ";
+			this.isTransactions.UseVisualStyleBackColor = true;
 			// 
-			// numericNumberOfTransactions
+			// numericValue
 			// 
-			this.numericNumberOfTransactions.Location = new System.Drawing.Point(150, 25);
-			this.numericNumberOfTransactions.Name = "numericNumberOfTransactions";
-			this.numericNumberOfTransactions.Size = new System.Drawing.Size(121, 20);
-			this.numericNumberOfTransactions.TabIndex = 4;
-			this.numericNumberOfTransactions.Visible = false;
+			this.numericValue.Location = new System.Drawing.Point(6, 48);
+			this.numericValue.Maximum = new decimal(new int[] {
+            1241513984,
+            370409800,
+            542101,
+            0});
+			this.numericValue.Name = "numericValue";
+			this.numericValue.Size = new System.Drawing.Size(121, 20);
+			this.numericValue.TabIndex = 4;
+			this.numericValue.Value = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
 			// 
 			// groupBoxStreams
 			// 
@@ -274,36 +278,6 @@
 			this.buttonGenerate.Text = "Сгенерировать код";
 			this.buttonGenerate.UseVisualStyleBackColor = true;
 			// 
-			// numericTime
-			// 
-			this.numericTime.Location = new System.Drawing.Point(150, 51);
-			this.numericTime.Name = "numericTime";
-			this.numericTime.Size = new System.Drawing.Size(121, 20);
-			this.numericTime.TabIndex = 8;
-			this.numericTime.Visible = false;
-			// 
-			// radioButton1
-			// 
-			this.radioButton1.AutoSize = true;
-			this.radioButton1.Location = new System.Drawing.Point(6, 25);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(126, 17);
-			this.radioButton1.TabIndex = 10;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.Text = "Кол-во транзактов: ";
-			this.radioButton1.UseVisualStyleBackColor = true;
-			// 
-			// radioButton2
-			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.Location = new System.Drawing.Point(6, 51);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(101, 17);
-			this.radioButton2.TabIndex = 11;
-			this.radioButton2.TabStop = true;
-			this.radioButton2.Text = "Время работы:";
-			this.radioButton2.UseVisualStyleBackColor = true;
-			// 
 			// MainFrame
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,7 +286,7 @@
 			this.Controls.Add(this.buttonGenerate);
 			this.Controls.Add(this.groupBoxNodes);
 			this.Controls.Add(this.groupBoxStreams);
-			this.Controls.Add(this.groupBoxCommonParam);
+			this.Controls.Add(this.groupBoxSettings);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainFrame";
@@ -320,13 +294,12 @@
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
-			this.groupBoxCommonParam.ResumeLayout(false);
-			this.groupBoxCommonParam.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericNumberOfTransactions)).EndInit();
+			this.groupBoxSettings.ResumeLayout(false);
+			this.groupBoxSettings.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericValue)).EndInit();
 			this.groupBoxStreams.ResumeLayout(false);
 			this.groupBoxNodes.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericTime)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -341,8 +314,8 @@
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-		private System.Windows.Forms.GroupBox groupBoxCommonParam;
-		private System.Windows.Forms.NumericUpDown numericNumberOfTransactions;
+		private System.Windows.Forms.GroupBox groupBoxSettings;
+		private System.Windows.Forms.NumericUpDown numericValue;
 		private System.Windows.Forms.GroupBox groupBoxStreams;
 		private System.Windows.Forms.GroupBox groupBoxNodes;
 		private System.Windows.Forms.Button buttonEditNode;
@@ -351,15 +324,12 @@
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.Button buttonShowFullDescription;
 		private System.Windows.Forms.Button buttonGenerate;
-		private System.Windows.Forms.Button buttonEdit;
-		private System.Windows.Forms.Button buttonApply;
 		private System.Windows.Forms.Button buttonEditStream;
 		private System.Windows.Forms.Button buttonDeleteStream;
 		private System.Windows.Forms.Button buttonAddStream;
 		private System.Windows.Forms.ListBox listBox1;
-		private System.Windows.Forms.NumericUpDown numericTime;
-		private System.Windows.Forms.RadioButton radioButton2;
-		private System.Windows.Forms.RadioButton radioButton1;
+		private System.Windows.Forms.RadioButton isTime;
+		private System.Windows.Forms.RadioButton isTransactions;
 	}
 }
 

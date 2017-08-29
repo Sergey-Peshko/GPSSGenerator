@@ -6,27 +6,32 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.GlobalDimension
 {
-	class GlobalVariables
+	public class GlobalVariables
 	{
-		public static int counterOfTransfers = 0;
+		internal static int counterOfTransfers = 0;
+
+		public static string ZGENERATOR = "ZGENERATOR";
+		public static string GENERATOR = "GENERATOR";
+		public static string RECEIVER = "RECEIVER";
+		public static string ONECHANNEL_FACILITY = "ONECHANNEL_FACILITY";
+		public static string MULTYCHANNEL_FACILITY = "MULTYCHANNEL_FACILITY";
+		public static string INTERVAL_STATISTIC = "INTERVAL_STATISTIC";
+
 		public static string[] typesOfNode = {
-			"CLOSED_GENERATOR",
-			"GENERATOR",
-			"FACILITY_ONECHANNEL_RELATIVE",
-			"FACILITY_MULTYCHANNEL",
-			"TERMINATE",
-			"START_STATISTIC",
-			"END_STATISTIC"
+			ZGENERATOR,
+			GENERATOR,
+			RECEIVER,
+			ONECHANNEL_FACILITY,
+			MULTYCHANNEL_FACILITY,
+			INTERVAL_STATISTIC
 		};
+
+		public static string EXPONENTIAL = "EXPONENTIAL";
+		public static string UNIFORM = "UNIFORM";
+
 		public static string[] typesOfDistribution = {
-			"EXPONENTIAL",
-			"UNIFORM",
-		};
-		public static string[] typesOfNet =
-		{
-			"Closed",
-			"Open",
-			"Mixied"
+			EXPONENTIAL,
+			UNIFORM,
 		};
 	}
 }

@@ -12,13 +12,13 @@ namespace GPSSGenerator.Nodes.Facilities
 	{
 		protected IDistribution distribution;
 
-		protected IntervalStatistic netLevelFull;
-		protected IntervalStatistic netLevelQueue;
+		protected TwoStrokeIntervalStatistic netLevelFull;
+		protected TwoStrokeIntervalStatistic netLevelQueue;
 
 		public Facility(string id, IDistribution distribution) : base(id)
 		{
-			netLevelFull = new IntervalStatistic(id + "_stat", id);
-			netLevelQueue = new IntervalStatistic(id + "_queue_stat", id + "_queue");
+			netLevelFull = new TwoStrokeIntervalStatistic(id);
+			netLevelQueue = new TwoStrokeIntervalStatistic(id + "_queue");
 			this.distribution = distribution;
 		}
 
@@ -30,7 +30,7 @@ namespace GPSSGenerator.Nodes.Facilities
 			}
 		}
 
-		public IntervalStatistic NetLevelFull
+		public TwoStrokeIntervalStatistic NetLevelFull
 		{
 			get
 			{
@@ -38,7 +38,7 @@ namespace GPSSGenerator.Nodes.Facilities
 			}
 		}
 
-		public IntervalStatistic NetLevelQueue
+		public TwoStrokeIntervalStatistic NetLevelQueue
 		{
 			get
 			{

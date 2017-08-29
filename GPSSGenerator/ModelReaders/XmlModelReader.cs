@@ -104,7 +104,7 @@ namespace GPSSGenerator.ModelReaders
 
 		static private Entity[] CreateEntities(XmlNodeList xmlEntities, NetSettings settings)
 		{
-			IntervalStatistic netLevel = new IntervalStatistic("net_stat", "net");
+			TwoStrokeIntervalStatistic netLevel = new TwoStrokeIntervalStatistic("net");
 
 			Entity[] entities = new Entity[xmlEntities.Count];
 
@@ -116,9 +116,9 @@ namespace GPSSGenerator.ModelReaders
 			return entities;
 		}
 
-		static private Entity CreateEntity(XmlNode xmlEntity, IntervalStatistic netLevel, NetSettings settings)
+		static private Entity CreateEntity(XmlNode xmlEntity, TwoStrokeIntervalStatistic netLevel, NetSettings settings)
 		{
-			if (xmlEntity.Attributes["type"]?.Value == "ZGENERATOR")
+			if (xmlEntity.Attributes["type"]?.Value == GlobalVariables.ZGENERATOR)
 			{
 
 				return new ClosedGenerator(
@@ -126,14 +126,14 @@ namespace GPSSGenerator.ModelReaders
 					netLevel,
 					Convert.ToInt32(getPropertyValueByName(xmlEntity, "NumberOfTransactions")));
 			}
-			else if (xmlEntity.Attributes["type"]?.Value == "GENERATOR")
+			else if (xmlEntity.Attributes["type"]?.Value == GlobalVariables.GENERATOR)
 			{
 				return new OpenGenerator(
 					xmlEntity.Attributes["id"]?.Value,
 					netLevel,
 					CreateDistribution(xmlEntity.SelectSingleNode("Distribution")));
 			}
-			else if(xmlEntity.Attributes["type"]?.Value == "RECEIVER")
+			else if(xmlEntity.Attributes["type"]?.Value == GlobalVariables.RECEIVER)
 			{
 				int count = Convert.ToInt32(getPropertyValueByName(xmlEntity, "NumberOfTransactionsToBeDeleted"));
 							
@@ -146,26 +146,19 @@ namespace GPSSGenerator.ModelReaders
 					count,
 					netLevel);
 			}
-			else if (xmlEntity.Attributes["type"]?.Value == "ONECHANNEL_FACILITY")
+			else if (xmlEntity.Attributes["type"]?.Value == GlobalVariables.ONECHANNEL_FACILITY)
 			{
 				return new OneChannelFacility(
 					xmlEntity.Attributes["id"]?.Value,
 					CreateDistribution(xmlEntity.SelectSingleNode("Distribution")));
 
 			}
-			else if (xmlEntity.Attributes["type"]?.Value == "MULTYCHANNEL_FACILITY")
+			else if (xmlEntity.Attributes["type"]?.Value == GlobalVariables.MULTYCHANNEL_FACILITY)
 			{
 				return new MultyChannelFacility(
 					xmlEntity.Attributes["id"]?.Value,
 					CreateDistribution(xmlEntity.SelectSingleNode("Distribution")),
 					Convert.ToInt32(getPropertyValueByName(xmlEntity, "Capacity"))
-					);
-			}
-			else if (xmlEntity.Attributes["type"]?.Value == "INTERNAL_STATISTIC")
-			{
-				return new IntervalStatistic(
-					xmlEntity.Attributes["id"]?.Value,
-					getPropertyValueByName(xmlEntity, "NameOfStatistic")
 					);
 			}
 
@@ -175,14 +168,14 @@ namespace GPSSGenerator.ModelReaders
 
 		static private IDistribution CreateDistribution(XmlNode xmlDistribution)
 		{
-			if (xmlDistribution.Attributes["type"]?.Value == "EXPONENTIAL")
+			if (xmlDistribution.Attributes["type"]?.Value == GlobalVariables.EXPONENTIAL)
 			{
 				ExponentialDistribution ed = new ExponentialDistribution(
 					Convert.ToInt32(getPropertyValueByName(xmlDistribution, "GeneratorNumber")),
 					(float)Convert.ToDouble(getPropertyValueByName(xmlDistribution, "MathematicalExpectation")));
 				return ed;
 			}
-			if (xmlDistribution.Attributes["type"]?.Value == "UNIFORM")
+			if (xmlDistribution.Attributes["type"]?.Value == GlobalVariables.UNIFORM)
 			{
 				UniformDistribution d = new UniformDistribution(
 					Convert.ToInt32(getPropertyValueByName(xmlDistribution, "GeneratorNumber")),
