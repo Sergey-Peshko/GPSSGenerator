@@ -7,12 +7,14 @@ using GPSSGenerator.GlobalDimension;
 using GPSSGenerator.StreamDimension;
 using GPSSGenerator.Nodes.Facilities;
 using GPSSGenerator.Nodes.Generators;
-using GPSSGenerator.Statistics;
+using GPSSGenerator.Statistics.IntervalStatistic;
 using GPSSGenerator.Nodes.Terminates;
 using GPSSGenerator.Nodes.Transfers;
 using GPSSGenerator.Nodes;
+using GPSSGenerator.Nodes.Statistics;
 using GPSSGenerator.Distributions;
 using System.Xml;
+using GPSSGenerator.Statistics;
 
 namespace GPSSGenerator.ModelReaders
 {
@@ -44,24 +46,64 @@ namespace GPSSGenerator.ModelReaders
 
 			model.Nodes = CreateEntities(xmlEntities, model.Settings);
 
+			XmlNodeList xmlStats = doc.DocumentElement.SelectSingleNode("Statistics").SelectNodes("Statistic");
+
+			model.Statistics = CreateStatistics(xmlStats);
+
 			XmlNodeList xmlStreams = doc.DocumentElement.SelectSingleNode("Streams").SelectNodes("Stream");
 
-			model.StreamModels = CreateStreamModels(xmlStreams, model.Nodes);
+			model.StreamModels = CreateStreamModels(xmlStreams, model.Nodes, model.Statistics);
 
 			return model;
 		}
 
-		static private StreamModel[] CreateStreamModels(XmlNodeList xmlStreams, Entity[] allOriginalEntities)
+		static private Statistic[] CreateStatistics(XmlNodeList xmlStats)
+		{
+			Statistic[] statistics = new Statistic[xmlStats.Count];
+
+			for(int i = 0; i < xmlStats.Count; i++)
+			{
+				if(xmlStats[i].Attributes["type"]?.Value == GlobalVariables.INTERVAL_STATISTIC)
+				{
+					GeneralIntervalStatistic stat = new GeneralIntervalStatistic(xmlStats[i].Attributes["name"]?.Value);
+
+					XmlNode tableParam = xmlStats[i].SelectSingleNode("TableParam");
+
+					if (tableParam != null)
+					{
+						stat.TableParam = new TableParam();
+
+						stat.TableParam.UpperBoundOfLowerFrequencyInterval = 
+							Convert.ToInt32(tableParam.Attributes["UpperBoundOfLowerFrequencyInterval"]?.Value);
+						stat.TableParam.IntervalWidth =
+							Convert.ToInt32(tableParam.Attributes["IntervalWidth"]?.Value);
+						stat.TableParam.NumberOfIntervals =
+							Convert.ToInt32(tableParam.Attributes["NumberOfIntervals"]?.Value);
+
+					}
+
+					statistics[i] = stat;
+				}
+				else
+				{
+					throw new Exception("cant create statistic, unkonown type of statistic");
+				}
+			}
+
+			return statistics;
+		}
+		static private StreamModel[] CreateStreamModels(XmlNodeList xmlStreams, Entity[] allOriginalEntities, Statistic[] allOriginalStatistics)
 		{
 			StreamModel[] streamModels = new StreamModel[xmlStreams.Count];
-			for(int i=0;i< xmlStreams.Count; i++)
+
+			for (int i=0;i< xmlStreams.Count; i++)
 			{
-				streamModels[i] = CreateStreamModel(xmlStreams[i], allOriginalEntities);
+				streamModels[i] = CreateStreamModel(xmlStreams[i], allOriginalEntities, allOriginalStatistics);
 			}
 			return streamModels;
 		}
 
-		static private StreamModel CreateStreamModel(XmlNode xmlStream, Entity[] allOriginalEntities)
+		static private StreamModel CreateStreamModel(XmlNode xmlStream, Entity[] allOriginalEntities, Statistic[] allOriginalStatistics)
 		{
 			List<Node> streamNodes = new List<Node>();
 
@@ -80,6 +122,43 @@ namespace GPSSGenerator.ModelReaders
 				{
 					streamNodes.Add((Node)Array.Find(allOriginalEntities, delegate (Entity e) { return e.Id == to; }));
 				}
+
+				XmlNodeList statistics = movements[i].SelectNodes("statistic");
+				if (statistics.Count != 0)
+				{
+					for (int j = 0; j < statistics.Count; j++)
+					{
+						string refName = statistics[j].Attributes["ref"]?.Value;
+
+						Statistic stat = Array.Find(allOriginalStatistics, delegate (Statistic s) { return s.NameOfStatistic == refName; });
+
+						if (stat is GeneralIntervalStatistic)
+						{
+							if (statistics[j].Attributes["status"]?.Value == "start")
+							{
+								streamNodes.Add(new FixedStateIntervalStatistic(
+									String.Format(statistics[j].Attributes["id"]?.Value, stat.NameOfStatistic),
+									(GeneralIntervalStatistic)stat,
+									true));
+							}
+							else if (statistics[j].Attributes["status"]?.Value == "finish")
+							{
+								streamNodes.Add(new FixedStateIntervalStatistic(
+									String.Format(statistics[j].Attributes["id"]?.Value, stat.NameOfStatistic),
+									(GeneralIntervalStatistic)stat,
+									false));
+							}
+							else
+							{
+								throw new Exception("error in stream stat description");
+							}
+						}
+						else
+						{
+							throw new Exception("error in stream stat description");
+						}
+					}
+				}
 			}
 
 			float[,] graph = new float[streamNodes.Count, streamNodes.Count];
@@ -89,10 +168,36 @@ namespace GPSSGenerator.ModelReaders
 				string from = movements[i].Attributes["from"]?.Value;
 				string to = movements[i].Attributes["to"]?.Value;
 
-				int index1 = streamNodes.FindIndex(delegate (Node e) { return e.Id == from; });
-				int index2 = streamNodes.FindIndex(delegate (Node e) { return e.Id == to; });
+				XmlNodeList statistics = movements[i].SelectNodes("statistic");
+				if (statistics.Count != 0)
+				{
+					int fromIndex = streamNodes.FindIndex(delegate (Node e) { return e.Id == from; });
+					int firstStat = streamNodes.FindIndex(delegate (Node e) { return e.Id == statistics[0].Attributes["id"]?.Value; });
 
-				graph[index1, index2] = (float)Convert.ToDouble(movements[i].InnerText);
+					graph[fromIndex, firstStat] = (float)Convert.ToDouble(movements[i].Attributes["value"]?.Value);
+
+					int j = 0;
+					for (; j < (statistics.Count - 1); j++) 
+					{
+						int index1 = streamNodes.FindIndex(delegate (Node e) { return e.Id == statistics[j].Attributes["id"]?.Value; });
+						int index2 = streamNodes.FindIndex(delegate (Node e) { return e.Id == statistics[j+1].Attributes["id"]?.Value; });
+
+						graph[index1, index2] = 1f;
+					}
+
+					int lastStat = streamNodes.FindIndex(delegate (Node e) { return e.Id == statistics[j].Attributes["id"]?.Value;  });
+					int toIndex = streamNodes.FindIndex(delegate (Node e) { return e.Id == to; });
+
+					graph[lastStat, toIndex] = 1f;
+
+				}
+				else
+				{
+					int index1 = streamNodes.FindIndex(delegate (Node e) { return e.Id == from; });
+					int index2 = streamNodes.FindIndex(delegate (Node e) { return e.Id == to; });
+
+					graph[index1, index2] = (float)Convert.ToDouble(movements[i].Attributes["value"]?.Value);
+				}
 			}
 
 			return new StreamModel(

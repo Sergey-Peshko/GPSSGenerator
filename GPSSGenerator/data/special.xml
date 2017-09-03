@@ -36,18 +36,28 @@
       <NumberOfTransactionsToBeDeleted value="0"/>
     </Entity>
   </Entities>
+
+  <Statistics>
+    <Statistic name="lol" type="INTERVAL_STATISTIC">
+      <TableParam UpperBoundOfLowerFrequencyInterval="5" 
+                  IntervalWidth="5" 
+                  NumberOfIntervals="10"/>
+    </Statistic>
+  </Statistics>
   
   <Streams>
     <Stream id="1">
-      <movement from="g1" to="b1">1</movement>
-      <movement from="b1" to="b2">0.5</movement>
-      <movement from="b1" to="b3">0.5</movement>
-      <movement from="b2" to="b1">1</movement>
-      <movement from="b3" to="b2">1</movement>
+      <movements>
+        <movement from="g1" to="b1" value="1"/>
+        <movement from="b1" to="b2" value="0.5"/>
+        <movement from="b1" to="b3" value="0.5"/>
+        <movement from="b2" to="b1" value="1"/>
+        <movement from="b3" to="b2" value="1"/>
+      </movements>
     </Stream>
     <Stream id="2">
-      <movement from="g2" to="b1">1</movement>
-      <movement from="b1" to="r1">1</movement>
+      <movement from="g2" to="b1" value="1"></movement>
+      <movement from="b1" to="r1" value="1"></movement>
     </Stream>
   </Streams>
   

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GPSSGenerator.Statistics;
+using GPSSGenerator.Statistics.IntervalStatistic;
 using GPSSGenerator.StreamDimension;
 
 namespace GPSSGenerator.Nodes.Terminates
@@ -33,6 +33,9 @@ namespace GPSSGenerator.Nodes.Terminates
 		{
 			List<string> description = new List<string>();
 
+			TwoStrokeIntervalStatistic streamLevelIntervalStatistic = new TwoStrokeIntervalStatistic(string.Format("net_{0}", idOfStream));
+
+			description.Add(streamLevelIntervalStatistic.getFinish());
 			description.Add(netLevelIntervalStatistic.getFinish());
 			description.Add(String.Format("TERMINATE {0}", count));
 

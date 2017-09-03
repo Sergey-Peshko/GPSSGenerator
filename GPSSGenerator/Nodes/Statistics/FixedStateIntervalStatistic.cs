@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GPSSGenerator.Statistics;
+using GPSSGenerator.Statistics.IntervalStatistic;
 
 namespace GPSSGenerator.Nodes.Statistics
 {
-	class FixedStateIntervalStatistic : Node
+	class FixedStateIntervalStatistic : Node 
 	{
 		GeneralIntervalStatistic intervalStatistic;
 

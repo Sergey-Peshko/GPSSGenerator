@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GPSSGenerator.Distributions;
 using GPSSGenerator.Statistics;
 using GPSSGenerator.StreamDimension;
+using GPSSGenerator.Statistics.IntervalStatistic;
 
 namespace GPSSGenerator.Nodes.Generators
 {
@@ -30,8 +31,11 @@ namespace GPSSGenerator.Nodes.Generators
 		{
 			List<string> description = new List<string>();
 
+			TwoStrokeIntervalStatistic streamLevelIntervalStatistic = new TwoStrokeIntervalStatistic(string.Format("net_{0}", idOfStream));
+
 			description.Add(String.Format("GENERATE ({0})", distribution.Description));
 			description.Add(netLevelIntervalStatistic.getStart());
+			description.Add(streamLevelIntervalStatistic.getStart());
 
 			return description;
 		}

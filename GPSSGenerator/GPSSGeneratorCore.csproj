@@ -62,7 +62,8 @@
     <Compile Include="Nodes\Entity.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\Statistics\FixedStateIntervalStatistic.cs" />
-    <Compile Include="Statistics\GeneralIntervalStatistic.cs" />
+    <Compile Include="Statistics\IntervalStatistic\GeneralIntervalStatistic.cs" />
+    <Compile Include="Statistics\TableParam.cs" />
     <Compile Include="Statistics\Statistic.cs" />
     <Compile Include="Nodes\StreamNode.cs" />
     <Compile Include="Nodes\Generators\ClosedGenerator.cs" />
@@ -70,7 +71,7 @@
     <Compile Include="Nodes\Facilities\MultyChannelFacility.cs" />
     <Compile Include="Nodes\Facilities\OneChannelFacility.cs" />
     <Compile Include="Nodes\Generators\OpenGenerator.cs" />
-    <Compile Include="Statistics\TwoStrokeIntervalStatistic.cs" />
+    <Compile Include="Statistics\IntervalStatistic\TwoStrokeIntervalStatistic.cs" />
     <Compile Include="Nodes\Terminates\Terminate.cs" />
     <Compile Include="Nodes\Transfers\Transfer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

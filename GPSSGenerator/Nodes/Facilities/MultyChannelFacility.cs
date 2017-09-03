@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GPSSGenerator.Distributions;
-using GPSSGenerator.Statistics;
+using GPSSGenerator.Statistics.IntervalStatistic;
 using GPSSGenerator.Nodes;
 using GPSSGenerator.StreamDimension;
 

@@ -7,6 +7,7 @@ using System.IO;
 using GPSSGenerator.StreamDimension;
 using GPSSGenerator.Nodes;
 using GPSSGenerator.ModelReaders;
+using GPSSGenerator.Statistics;
 
 namespace GPSSGenerator.GlobalDimension
 {
@@ -15,6 +16,7 @@ namespace GPSSGenerator.GlobalDimension
 		private Entity[] nodes;
 		private StreamModel[] streamModels;
 		private NetSettings settings = new NetSettings();
+		private Statistic[] statistics;
 
 		internal Entity[] Nodes
 		{
@@ -47,6 +49,19 @@ namespace GPSSGenerator.GlobalDimension
 			get
 			{
 				return settings;
+			}
+		}
+
+		internal Statistic[] Statistics
+		{
+			get
+			{
+				return statistics;
+			}
+
+			set
+			{
+				statistics = value;
 			}
 		}
 
