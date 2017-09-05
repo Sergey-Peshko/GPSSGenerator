@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GPSSGenerator.Statistics.IntervalStatistic;
+using GPSSGenerator.Statistics;
 
 namespace GPSSGenerator.Nodes.Generators
 {
@@ -26,7 +26,7 @@ namespace GPSSGenerator.Nodes.Generators
 			}
 		}
 
-		public ClosedGenerator(string id, TwoStrokeIntervalStatistic netLevelIntervalStatistic, int numberOfTransactions) : base(id, netLevelIntervalStatistic)
+		public ClosedGenerator(string id, IntervalStatistic netLevelIntervalStatistic, int numberOfTransactions) : base(id, netLevelIntervalStatistic)
 		{
 			this.numberOfTransactions = numberOfTransactions;
 		}
@@ -35,7 +35,7 @@ namespace GPSSGenerator.Nodes.Generators
 		{
 			List<string> description = new List<string>();
 
-			TwoStrokeIntervalStatistic streamLevelIntervalStatistic = new TwoStrokeIntervalStatistic(string.Format("net_{0}", idOfStream));
+			IntervalStatistic streamLevelIntervalStatistic = new IntervalStatistic(string.Format("net_{0}", idOfStream));
 
 			description.Add(String.Format("GENERATE ,,,{0}", numberOfTransactions));
 			description.Add(netLevelIntervalStatistic.getStart());

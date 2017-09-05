@@ -43,6 +43,11 @@
                   IntervalWidth="5" 
                   NumberOfIntervals="10"/>
     </Statistic>
+    <Statistic name="kek" type="ONEPOINT_STATISTIC">
+      <TableParam UpperBoundOfLowerFrequencyInterval="5"
+                  IntervalWidth="5"
+                  NumberOfIntervals="10"/>
+    </Statistic>
   </Statistics>
   
   <Streams>
@@ -51,13 +56,23 @@
         <movement from="g1" to="b1" value="1"/>
         <movement from="b1" to="b2" value="0.5"/>
         <movement from="b1" to="b3" value="0.5"/>
-        <movement from="b2" to="b1" value="1"/>
+        <movement from="b2" to="b1" value="1">
+          <statistic id="kek_point" ref="kek"/>
+        </movement>
         <movement from="b3" to="b2" value="1"/>
       </movements>
+      <statistics>
+        <statistic id="after_b1_lol" before="b1" ref="lol"/>
+        <statistic id="after_b3_lol" after="b3" ref="lol"/>
+      </statistics>
     </Stream>
     <Stream id="2">
-      <movement from="g2" to="b1" value="1"></movement>
-      <movement from="b1" to="r1" value="1"></movement>
+      <movements>
+        <movement from="g2" to="b1" value="1"></movement>
+        <movement from="b1" to="r1" value="1"></movement>
+      </movements>
+      <statistics>
+      </statistics>
     </Stream>
   </Streams>
   

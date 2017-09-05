@@ -7,7 +7,6 @@ using GPSSGenerator.GlobalDimension;
 using GPSSGenerator.StreamDimension;
 using GPSSGenerator.Nodes.Facilities;
 using GPSSGenerator.Nodes.Generators;
-using GPSSGenerator.Statistics.IntervalStatistic;
 using GPSSGenerator.Nodes.Terminates;
 using GPSSGenerator.Nodes.Transfers;
 using GPSSGenerator.Nodes;
@@ -15,6 +14,7 @@ using GPSSGenerator.Nodes.Statistics;
 using GPSSGenerator.Distributions;
 using System.Xml;
 using GPSSGenerator.Statistics;
+using GPSSGenerator.DTO;
 
 namespace GPSSGenerator.ModelReaders
 {
@@ -65,7 +65,7 @@ namespace GPSSGenerator.ModelReaders
 			{
 				if(xmlStats[i].Attributes["type"]?.Value == GlobalVariables.INTERVAL_STATISTIC)
 				{
-					GeneralIntervalStatistic stat = new GeneralIntervalStatistic(xmlStats[i].Attributes["name"]?.Value);
+					IntervalStatistic stat = new IntervalStatistic(xmlStats[i].Attributes["name"]?.Value);
 
 					XmlNode tableParam = xmlStats[i].SelectSingleNode("TableParam");
 
@@ -74,6 +74,27 @@ namespace GPSSGenerator.ModelReaders
 						stat.TableParam = new TableParam();
 
 						stat.TableParam.UpperBoundOfLowerFrequencyInterval = 
+							Convert.ToInt32(tableParam.Attributes["UpperBoundOfLowerFrequencyInterval"]?.Value);
+						stat.TableParam.IntervalWidth =
+							Convert.ToInt32(tableParam.Attributes["IntervalWidth"]?.Value);
+						stat.TableParam.NumberOfIntervals =
+							Convert.ToInt32(tableParam.Attributes["NumberOfIntervals"]?.Value);
+
+					}
+
+					statistics[i] = stat;
+				}
+				else if(xmlStats[i].Attributes["type"]?.Value == GlobalVariables.ONEPOINT_STATISTIC)
+				{
+					OnePointStatistic stat = new OnePointStatistic(xmlStats[i].Attributes["name"]?.Value);
+
+					XmlNode tableParam = xmlStats[i].SelectSingleNode("TableParam");
+
+					if (tableParam != null)
+					{
+						stat.TableParam = new TableParam();
+
+						stat.TableParam.UpperBoundOfLowerFrequencyInterval =
 							Convert.ToInt32(tableParam.Attributes["UpperBoundOfLowerFrequencyInterval"]?.Value);
 						stat.TableParam.IntervalWidth =
 							Convert.ToInt32(tableParam.Attributes["IntervalWidth"]?.Value);
@@ -107,7 +128,7 @@ namespace GPSSGenerator.ModelReaders
 		{
 			List<Node> streamNodes = new List<Node>();
 
-			XmlNodeList movements = xmlStream.SelectNodes("movement");
+			XmlNodeList movements = xmlStream.SelectSingleNode("movements").SelectNodes("movement");
 
 			for (int i = 0; i < movements.Count; i++) 
 			{
@@ -132,31 +153,10 @@ namespace GPSSGenerator.ModelReaders
 
 						Statistic stat = Array.Find(allOriginalStatistics, delegate (Statistic s) { return s.NameOfStatistic == refName; });
 
-						if (stat is GeneralIntervalStatistic)
-						{
-							if (statistics[j].Attributes["status"]?.Value == "start")
-							{
-								streamNodes.Add(new FixedStateIntervalStatistic(
-									String.Format(statistics[j].Attributes["id"]?.Value, stat.NameOfStatistic),
-									(GeneralIntervalStatistic)stat,
-									true));
-							}
-							else if (statistics[j].Attributes["status"]?.Value == "finish")
-							{
-								streamNodes.Add(new FixedStateIntervalStatistic(
-									String.Format(statistics[j].Attributes["id"]?.Value, stat.NameOfStatistic),
-									(GeneralIntervalStatistic)stat,
-									false));
-							}
-							else
-							{
-								throw new Exception("error in stream stat description");
-							}
-						}
-						else
-						{
-							throw new Exception("error in stream stat description");
-						}
+						streamNodes.Add(CreateStreamStatisticNodeWrapper(
+							String.Format(statistics[j].Attributes["id"]?.Value, stat.NameOfStatistic),
+							stat
+							));
 					}
 				}
 			}
@@ -200,16 +200,18 @@ namespace GPSSGenerator.ModelReaders
 				}
 			}
 
+			ContainerForBeforAfterStatistic[] beforAfterStatistics = CreateBeforAfterStatisticArray(streamNodes, allOriginalStatistics.ToList(), xmlStream.SelectSingleNode("statistics"));
+
 			return new StreamModel(
 				xmlStream.Attributes["id"]?.Value,
 				streamNodes.ToArray(),
-				graph
-				);
+				graph,
+				beforAfterStatistics);
 		}
 
 		static private Entity[] CreateEntities(XmlNodeList xmlEntities, NetSettings settings)
 		{
-			TwoStrokeIntervalStatistic netLevel = new TwoStrokeIntervalStatistic("net");
+			IntervalStatistic netLevel = new IntervalStatistic("net");
 
 			Entity[] entities = new Entity[xmlEntities.Count];
 
@@ -221,7 +223,7 @@ namespace GPSSGenerator.ModelReaders
 			return entities;
 		}
 
-		static private Entity CreateEntity(XmlNode xmlEntity, TwoStrokeIntervalStatistic netLevel, NetSettings settings)
+		static private Entity CreateEntity(XmlNode xmlEntity, IntervalStatistic netLevel, NetSettings settings)
 		{
 			if (xmlEntity.Attributes["type"]?.Value == GlobalVariables.ZGENERATOR)
 			{
@@ -311,5 +313,108 @@ namespace GPSSGenerator.ModelReaders
 		{
 			return xmlEntity.SelectSingleNode(name).Attributes["value"]?.Value;
 		}
+
+		static private ContainerForBeforAfterStatistic[] CreateBeforAfterStatisticArray(List<Node>streamNodes, List<Statistic> allOriginalStatistics, XmlNode xmlStatistics)
+		{
+			List<ContainerForBeforAfterStatistic> list = new List<ContainerForBeforAfterStatistic>();
+
+			XmlNodeList xmlStatisticList = xmlStatistics.SelectNodes("statistic");
+
+			for (int i = 0; i < xmlStatisticList.Count; i++) 
+			{
+				if(!list.Exists(
+					delegate (ContainerForBeforAfterStatistic obj) 
+					{
+						return (obj.Node.Id == xmlStatisticList[i].Attributes["after"]?.Value) || (obj.Node.Id == xmlStatisticList[i].Attributes["before"]?.Value);
+					}))
+				{
+					ContainerForBeforAfterStatistic wrapper = new ContainerForBeforAfterStatistic();
+
+					if (xmlStatisticList[i].Attributes["after"]?.Value != null)
+					{
+						wrapper.Node = streamNodes.Find(delegate (Node node) { return node.Id == xmlStatisticList[i].Attributes["after"]?.Value; });
+						wrapper.After.Add(
+							CreateStreamStatisticNodeWrapper(
+								xmlStatisticList[i].Attributes["id"]?.Value,
+								allOriginalStatistics.Find(
+									delegate (Statistic obj)
+									{
+										return obj.NameOfStatistic == xmlStatisticList[i].Attributes["ref"]?.Value;
+									})
+								));
+					}
+
+					if (xmlStatisticList[i].Attributes["before"]?.Value != null)
+					{
+						wrapper.Node = streamNodes.Find(delegate (Node node) { return node.Id == xmlStatisticList[i].Attributes["before"]?.Value; });
+						wrapper.Before.Add(
+							CreateStreamStatisticNodeWrapper(
+								xmlStatisticList[i].Attributes["id"]?.Value,
+								allOriginalStatistics.Find(
+									delegate (Statistic obj)
+									{
+										return obj.NameOfStatistic == xmlStatisticList[i].Attributes["ref"]?.Value;
+									})));
+					}
+
+					list.Add(wrapper);
+				}
+				else
+				{
+					ContainerForBeforAfterStatistic wrapper; 
+
+					if (xmlStatisticList[i].Attributes["after"]?.Value != "")
+					{
+						wrapper = list.Find(delegate (ContainerForBeforAfterStatistic obj) { return obj.Node.Id == xmlStatisticList[i].Attributes["after"]?.Value; });
+						wrapper.After.Add(
+							CreateStreamStatisticNodeWrapper(
+								xmlStatisticList[i].Attributes["id"]?.Value,
+								allOriginalStatistics.Find(
+									delegate (Statistic obj) 
+									{
+										return obj.NameOfStatistic == xmlStatisticList[i].Attributes["ref"]?.Value;
+									})));
+					}
+
+					if (xmlStatisticList[i].Attributes["before"]?.Value != "")
+					{
+						wrapper = list.Find(delegate (ContainerForBeforAfterStatistic obj) { return obj.Node.Id == xmlStatisticList[i].Attributes["after"]?.Value; });
+						wrapper.Before.Add(
+							CreateStreamStatisticNodeWrapper(
+								xmlStatisticList[i].Attributes["id"]?.Value,
+								allOriginalStatistics.Find(
+									delegate (Statistic obj)
+									{
+										return obj.NameOfStatistic == xmlStatisticList[i].Attributes["ref"]?.Value;
+									})));
+					}
+				}
+			}
+
+			return list.ToArray();
+		}
+
+		static private Node CreateStreamStatisticNodeWrapper(string id, Statistic stat)
+		{
+			if (stat is IntervalStatistic)
+			{
+
+				return (new IntervalStatisticNode(
+					id,
+					(IntervalStatistic)stat));
+
+			}
+			else if (stat is OnePointStatistic)
+			{
+				return (new OnePointStatisticNode(
+					id,
+					(OnePointStatistic)stat));
+			}
+			else
+			{
+				throw new Exception("error in stream stat description");
+			}
+		}
+
 	}
 }

@@ -29,6 +29,8 @@ namespace ConsoleInterface
 			{
 				Console.WriteLine(code[i]);
 			}
+
+			File.WriteAllLines(rez + "rez.txt", code.ToArray());
 		}
 
 	}

@@ -9,6 +9,7 @@ using GPSSGenerator.Nodes;
 using GPSSGenerator.Nodes.Transfers;
 using GPSSGenerator.Nodes.Generators;
 using GPSSGenerator.GlobalDimension;
+using GPSSGenerator.DTO;
 
 namespace GPSSGenerator.StreamDimension
 {
@@ -38,11 +39,11 @@ namespace GPSSGenerator.StreamDimension
 			}
 		}
 
-		public StreamModel(string id, Node[] originalNodes, float[,] graph)
+		public StreamModel(string id, Node[] originalNodes, float[,] graph, ContainerForBeforAfterStatistic[] beforAfterStatistics)
 		{
 			this.id = id;
 
-			AnalizeAndBuildStreamNodes(originalNodes, graph);
+			AnalizeAndBuildStreamNodes(originalNodes, graph, beforAfterStatistics);
 		}
 
 		public List<string> buildStreamDescription()
@@ -52,7 +53,7 @@ namespace GPSSGenerator.StreamDimension
 
 		private List<string> buildStreamDescriptionRec(StreamNode node)
 		{
-			List<string> description = node.Node.buildDescription(id);
+			List<string> description = node.buildDescription(id);
 
 			description[0] = string.Format("{0}\t{1}", node.IsNeedLabel? node.Label : "\t", description[0]);
 
@@ -69,7 +70,7 @@ namespace GPSSGenerator.StreamDimension
 			return description;
 		}
 
-		private void AnalizeAndBuildStreamNodes(Node[] originalNodes, float[,] graph)
+		private void AnalizeAndBuildStreamNodes(Node[] originalNodes, float[,] graph, ContainerForBeforAfterStatistic[] beforAfterStatistics)
 		{
 			if (graph.GetLength(0) != graph.GetLength(1))
 			{
@@ -108,7 +109,11 @@ namespace GPSSGenerator.StreamDimension
 				throw new Exception("can't build stream, there isn't any generator!");
 			}
 
-			BuildRoot(startNode, originalNodes, new StreamNode[originalNodes.Length], graph);
+			StreamNode[] streamNodes = new StreamNode[originalNodes.Length];
+
+			BuildRoot(startNode, originalNodes, streamNodes, graph);
+
+			InjectStatisticsInStreamNodes(streamNodes, beforAfterStatistics);
 		}
 
 		private void BuildRoot(
@@ -118,6 +123,8 @@ namespace GPSSGenerator.StreamDimension
 			float[,] graph)
 		{
 			root = new StreamNode(originalNodes[pos], "");
+
+			streamNodes[pos] = root;
 
 			for (int i = 0; i < originalNodes.Length; i++)
 			{
@@ -233,5 +240,21 @@ namespace GPSSGenerator.StreamDimension
 			StreamNode node = new StreamNode(transfer, string.Format("label_{0}_{1}", transfer.Id, id));
 			return node;
 		}
+
+		private void InjectStatisticsInStreamNodes(StreamNode[] streamNodes, ContainerForBeforAfterStatistic[] beforAfterStatistics)
+		{
+			for (int i = 0; i < streamNodes.Length; i++) 
+			{
+				for (int j = 0; j < beforAfterStatistics.Length; j++) 
+				{
+					if(streamNodes[i].Node.Id == beforAfterStatistics[j].Node.Id)
+					{
+						streamNodes[i].AfterStatistic = beforAfterStatistics[j].After;
+						streamNodes[i].BeforeStatistic = beforAfterStatistics[j].Before;
+					}
+				}
+			}
+		}
+		
 	}
 }

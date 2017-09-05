@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GPSSGenerator.Distributions;
-using GPSSGenerator.Statistics.IntervalStatistic;
+using GPSSGenerator.Statistics;
 using GPSSGenerator.Nodes;
 using GPSSGenerator.StreamDimension;
 
@@ -39,8 +39,8 @@ namespace GPSSGenerator.Nodes.Facilities
 		public override List<string> buildDescription(string idOfStream)
 		{
 
-			TwoStrokeIntervalStatistic streamLevelFull = new TwoStrokeIntervalStatistic(string.Format("{0}_{1}", id, idOfStream));
-			TwoStrokeIntervalStatistic streamLevelQueue = new TwoStrokeIntervalStatistic(string.Format("{0}_{1}_queue", id, idOfStream));
+			IntervalStatistic streamLevelFull = new IntervalStatistic(string.Format("{0}_{1}", id, idOfStream));
+			IntervalStatistic streamLevelQueue = new IntervalStatistic(string.Format("{0}_{1}_queue", id, idOfStream));
 			
 			List<string> description = new List<string>();
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GPSSGenerator.Distributions;
-using GPSSGenerator.Statistics.IntervalStatistic;
+using GPSSGenerator.Statistics;
 
 namespace GPSSGenerator.Nodes.Facilities
 {
@@ -12,13 +12,13 @@ namespace GPSSGenerator.Nodes.Facilities
 	{
 		protected IDistribution distribution;
 
-		protected TwoStrokeIntervalStatistic netLevelFull;
-		protected TwoStrokeIntervalStatistic netLevelQueue;
+		protected IntervalStatistic netLevelFull;
+		protected IntervalStatistic netLevelQueue;
 
 		public Facility(string id, IDistribution distribution) : base(id)
 		{
-			netLevelFull = new TwoStrokeIntervalStatistic(id);
-			netLevelQueue = new TwoStrokeIntervalStatistic(id + "_queue");
+			netLevelFull = new IntervalStatistic(id);
+			netLevelQueue = new IntervalStatistic(id + "_queue");
 			this.distribution = distribution;
 		}
 
@@ -30,7 +30,7 @@ namespace GPSSGenerator.Nodes.Facilities
 			}
 		}
 
-		public TwoStrokeIntervalStatistic NetLevelFull
+		public IntervalStatistic NetLevelFull
 		{
 			get
 			{
@@ -38,7 +38,7 @@ namespace GPSSGenerator.Nodes.Facilities
 			}
 		}
 
-		public TwoStrokeIntervalStatistic NetLevelQueue
+		public IntervalStatistic NetLevelQueue
 		{
 			get
 			{

@@ -134,6 +134,14 @@ namespace GPSSGenerator.GlobalDimension
 				}
 			}
 
+			for (int i = 0; i < statistics.Length; i++)
+			{
+				if (statistics[i] is IDeclarative)
+				{
+					declaration.AddRange(((IDeclarative)statistics[i]).buildDeclaration());
+				}
+			}
+
 			return declaration;
 		}
 
