@@ -19,18 +19,17 @@ namespace ConsoleInterface
 			//Console.Write("input file name: ");
 			//string path = Console.ReadLine();
 
-			//GlobalModel gl = TxtModelReader.Read(data + path);
-
 			GlobalModel gl = XmlModelReader.Read(data + "special.xml");
 
 			List<string> code = gl.MakeCode();
 
-			for(int i = 0; i < code.Count; i++)
+			for (int i = 0; i < code.Count; i++)
 			{
 				Console.WriteLine(code[i]);
 			}
 
 			File.WriteAllLines(rez + "rez.txt", code.ToArray());
+
 		}
 
 	}

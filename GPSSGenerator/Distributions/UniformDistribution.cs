@@ -8,8 +8,8 @@ namespace GPSSGenerator.Distributions
 {
 	class UniformDistribution : IDistribution
 	{
-		private float a;
-		private float b;
+		private float a; // нижняя граница
+		private float b; // верхняя граница
 
 		public override string Description
 		{

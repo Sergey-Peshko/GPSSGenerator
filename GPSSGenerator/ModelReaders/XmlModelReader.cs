@@ -286,8 +286,8 @@ namespace GPSSGenerator.ModelReaders
 			{
 				UniformDistribution d = new UniformDistribution(
 					Convert.ToInt32(getPropertyValueByName(xmlDistribution, "GeneratorNumber")),
-					(float)Convert.ToDouble(getPropertyValueByName(xmlDistribution, "A")),
-					(float)Convert.ToDouble(getPropertyValueByName(xmlDistribution, "B")));
+					(float)Convert.ToDouble(getPropertyValueByName(xmlDistribution, "LowerBound")),
+					(float)Convert.ToDouble(getPropertyValueByName(xmlDistribution, "UpperBound")));
 				return d;
 			}
 			else

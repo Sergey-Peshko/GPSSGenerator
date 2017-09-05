@@ -45,18 +45,17 @@
 			this.buttonAddStream = new System.Windows.Forms.Button();
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.groupBoxNodes = new System.Windows.Forms.GroupBox();
-			this.buttonShowFullDescription = new System.Windows.Forms.Button();
 			this.buttonEditNode = new System.Windows.Forms.Button();
 			this.buttonDeleteNode = new System.Windows.Forms.Button();
 			this.buttonAddNode = new System.Windows.Forms.Button();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.entitiesDataGridView = new System.Windows.Forms.DataGridView();
 			this.buttonGenerate = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.groupBoxSettings.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericValue)).BeginInit();
 			this.groupBoxStreams.SuspendLayout();
 			this.groupBoxNodes.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.entitiesDataGridView)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -65,7 +64,7 @@
             this.fileToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(667, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(680, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -117,7 +116,7 @@
 			this.groupBoxSettings.Controls.Add(this.numericValue);
 			this.groupBoxSettings.Location = new System.Drawing.Point(12, 47);
 			this.groupBoxSettings.Name = "groupBoxSettings";
-			this.groupBoxSettings.Size = new System.Drawing.Size(277, 83);
+			this.groupBoxSettings.Size = new System.Drawing.Size(243, 83);
 			this.groupBoxSettings.TabIndex = 1;
 			this.groupBoxSettings.TabStop = false;
 			this.groupBoxSettings.Text = "Измерять жизненный цикл модели по:";
@@ -169,14 +168,14 @@
 			this.groupBoxStreams.Controls.Add(this.listBox1);
 			this.groupBoxStreams.Location = new System.Drawing.Point(12, 162);
 			this.groupBoxStreams.Name = "groupBoxStreams";
-			this.groupBoxStreams.Size = new System.Drawing.Size(277, 121);
+			this.groupBoxStreams.Size = new System.Drawing.Size(243, 121);
 			this.groupBoxStreams.TabIndex = 2;
 			this.groupBoxStreams.TabStop = false;
 			this.groupBoxStreams.Text = "Описание Потоков";
 			// 
 			// buttonEditStream
 			// 
-			this.buttonEditStream.Location = new System.Drawing.Point(175, 55);
+			this.buttonEditStream.Location = new System.Drawing.Point(130, 49);
 			this.buttonEditStream.Name = "buttonEditStream";
 			this.buttonEditStream.Size = new System.Drawing.Size(102, 23);
 			this.buttonEditStream.TabIndex = 6;
@@ -185,7 +184,7 @@
 			// 
 			// buttonDeleteStream
 			// 
-			this.buttonDeleteStream.Location = new System.Drawing.Point(175, 84);
+			this.buttonDeleteStream.Location = new System.Drawing.Point(130, 78);
 			this.buttonDeleteStream.Name = "buttonDeleteStream";
 			this.buttonDeleteStream.Size = new System.Drawing.Size(102, 23);
 			this.buttonDeleteStream.TabIndex = 5;
@@ -194,7 +193,7 @@
 			// 
 			// buttonAddStream
 			// 
-			this.buttonAddStream.Location = new System.Drawing.Point(175, 26);
+			this.buttonAddStream.Location = new System.Drawing.Point(130, 20);
 			this.buttonAddStream.Name = "buttonAddStream";
 			this.buttonAddStream.Size = new System.Drawing.Size(102, 23);
 			this.buttonAddStream.TabIndex = 4;
@@ -207,35 +206,25 @@
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.Location = new System.Drawing.Point(6, 19);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(163, 95);
+			this.listBox1.Size = new System.Drawing.Size(121, 95);
 			this.listBox1.TabIndex = 0;
 			// 
 			// groupBoxNodes
 			// 
-			this.groupBoxNodes.Controls.Add(this.buttonShowFullDescription);
 			this.groupBoxNodes.Controls.Add(this.buttonEditNode);
 			this.groupBoxNodes.Controls.Add(this.buttonDeleteNode);
 			this.groupBoxNodes.Controls.Add(this.buttonAddNode);
-			this.groupBoxNodes.Controls.Add(this.dataGridView1);
-			this.groupBoxNodes.Location = new System.Drawing.Point(295, 47);
+			this.groupBoxNodes.Controls.Add(this.entitiesDataGridView);
+			this.groupBoxNodes.Location = new System.Drawing.Point(261, 47);
 			this.groupBoxNodes.Name = "groupBoxNodes";
-			this.groupBoxNodes.Size = new System.Drawing.Size(358, 236);
+			this.groupBoxNodes.Size = new System.Drawing.Size(409, 236);
 			this.groupBoxNodes.TabIndex = 3;
 			this.groupBoxNodes.TabStop = false;
 			this.groupBoxNodes.Text = "Описание Узлов Системы";
 			// 
-			// buttonShowFullDescription
-			// 
-			this.buttonShowFullDescription.Location = new System.Drawing.Point(252, 181);
-			this.buttonShowFullDescription.Name = "buttonShowFullDescription";
-			this.buttonShowFullDescription.Size = new System.Drawing.Size(101, 49);
-			this.buttonShowFullDescription.TabIndex = 4;
-			this.buttonShowFullDescription.Text = "Показать Полное Описание";
-			this.buttonShowFullDescription.UseVisualStyleBackColor = true;
-			// 
 			// buttonEditNode
 			// 
-			this.buttonEditNode.Location = new System.Drawing.Point(252, 48);
+			this.buttonEditNode.Location = new System.Drawing.Point(302, 47);
 			this.buttonEditNode.Name = "buttonEditNode";
 			this.buttonEditNode.Size = new System.Drawing.Size(102, 23);
 			this.buttonEditNode.TabIndex = 3;
@@ -244,16 +233,17 @@
 			// 
 			// buttonDeleteNode
 			// 
-			this.buttonDeleteNode.Location = new System.Drawing.Point(252, 77);
+			this.buttonDeleteNode.Location = new System.Drawing.Point(302, 76);
 			this.buttonDeleteNode.Name = "buttonDeleteNode";
 			this.buttonDeleteNode.Size = new System.Drawing.Size(102, 23);
 			this.buttonDeleteNode.TabIndex = 2;
 			this.buttonDeleteNode.Text = "Удалить";
 			this.buttonDeleteNode.UseVisualStyleBackColor = true;
+			this.buttonDeleteNode.Click += new System.EventHandler(this.buttonDeleteNode_Click);
 			// 
 			// buttonAddNode
 			// 
-			this.buttonAddNode.Location = new System.Drawing.Point(252, 19);
+			this.buttonAddNode.Location = new System.Drawing.Point(302, 18);
 			this.buttonAddNode.Name = "buttonAddNode";
 			this.buttonAddNode.Size = new System.Drawing.Size(102, 23);
 			this.buttonAddNode.TabIndex = 1;
@@ -261,28 +251,32 @@
 			this.buttonAddNode.UseVisualStyleBackColor = true;
 			this.buttonAddNode.Click += new System.EventHandler(this.addButton_Click);
 			// 
-			// dataGridView1
+			// entitiesDataGridView
 			// 
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Location = new System.Drawing.Point(6, 19);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(240, 211);
-			this.dataGridView1.TabIndex = 0;
+			this.entitiesDataGridView.AllowUserToAddRows = false;
+			this.entitiesDataGridView.AllowUserToDeleteRows = false;
+			this.entitiesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.entitiesDataGridView.Location = new System.Drawing.Point(6, 19);
+			this.entitiesDataGridView.Name = "entitiesDataGridView";
+			this.entitiesDataGridView.ReadOnly = true;
+			this.entitiesDataGridView.Size = new System.Drawing.Size(290, 211);
+			this.entitiesDataGridView.TabIndex = 0;
 			// 
 			// buttonGenerate
 			// 
-			this.buttonGenerate.Location = new System.Drawing.Point(258, 289);
+			this.buttonGenerate.Location = new System.Drawing.Point(277, 295);
 			this.buttonGenerate.Name = "buttonGenerate";
 			this.buttonGenerate.Size = new System.Drawing.Size(131, 23);
 			this.buttonGenerate.TabIndex = 4;
 			this.buttonGenerate.Text = "Сгенерировать код";
 			this.buttonGenerate.UseVisualStyleBackColor = true;
+			this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
 			// 
 			// MainFrame
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(667, 330);
+			this.ClientSize = new System.Drawing.Size(680, 330);
 			this.Controls.Add(this.buttonGenerate);
 			this.Controls.Add(this.groupBoxNodes);
 			this.Controls.Add(this.groupBoxStreams);
@@ -299,7 +293,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericValue)).EndInit();
 			this.groupBoxStreams.ResumeLayout(false);
 			this.groupBoxNodes.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.entitiesDataGridView)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -321,8 +315,7 @@
 		private System.Windows.Forms.Button buttonEditNode;
 		private System.Windows.Forms.Button buttonDeleteNode;
 		private System.Windows.Forms.Button buttonAddNode;
-		private System.Windows.Forms.DataGridView dataGridView1;
-		private System.Windows.Forms.Button buttonShowFullDescription;
+		private System.Windows.Forms.DataGridView entitiesDataGridView;
 		private System.Windows.Forms.Button buttonGenerate;
 		private System.Windows.Forms.Button buttonEditStream;
 		private System.Windows.Forms.Button buttonDeleteStream;
