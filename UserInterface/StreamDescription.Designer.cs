@@ -1,4 +1,4 @@
-﻿namespace UserInterface
+﻿namespace WinFromInterface
 {
 	partial class StreamDescription
 	{

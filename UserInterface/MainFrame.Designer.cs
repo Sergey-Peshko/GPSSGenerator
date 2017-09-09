@@ -1,4 +1,4 @@
-﻿namespace UserInterface
+﻿namespace WinFromInterface
 {
 	partial class MainFrame
 	{
@@ -44,18 +44,35 @@
 			this.buttonDeleteStream = new System.Windows.Forms.Button();
 			this.buttonAddStream = new System.Windows.Forms.Button();
 			this.listBox1 = new System.Windows.Forms.ListBox();
-			this.groupBoxNodes = new System.Windows.Forms.GroupBox();
+			this.groupBoxEntities = new System.Windows.Forms.GroupBox();
 			this.buttonEditNode = new System.Windows.Forms.Button();
 			this.buttonDeleteNode = new System.Windows.Forms.Button();
 			this.buttonAddNode = new System.Windows.Forms.Button();
 			this.entitiesDataGridView = new System.Windows.Forms.DataGridView();
 			this.buttonGenerate = new System.Windows.Forms.Button();
+			this.mainTabControl = new System.Windows.Forms.TabControl();
+			this.generalTabPage = new System.Windows.Forms.TabPage();
+			this.entitiesTabPage = new System.Windows.Forms.TabPage();
+			this.statisticsTabPage = new System.Windows.Forms.TabPage();
+			this.StreamsTabPage = new System.Windows.Forms.TabPage();
+			this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
+			this.statisticsDataGridView = new System.Windows.Forms.DataGridView();
+			this.addButton = new System.Windows.Forms.Button();
+			this.editButton = new System.Windows.Forms.Button();
+			this.removeButton = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.groupBoxSettings.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericValue)).BeginInit();
 			this.groupBoxStreams.SuspendLayout();
-			this.groupBoxNodes.SuspendLayout();
+			this.groupBoxEntities.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.entitiesDataGridView)).BeginInit();
+			this.mainTabControl.SuspendLayout();
+			this.generalTabPage.SuspendLayout();
+			this.entitiesTabPage.SuspendLayout();
+			this.statisticsTabPage.SuspendLayout();
+			this.StreamsTabPage.SuspendLayout();
+			this.statisticsGroupBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.statisticsDataGridView)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -64,7 +81,7 @@
             this.fileToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(680, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(484, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -114,21 +131,21 @@
 			this.groupBoxSettings.Controls.Add(this.isTime);
 			this.groupBoxSettings.Controls.Add(this.isTransactions);
 			this.groupBoxSettings.Controls.Add(this.numericValue);
-			this.groupBoxSettings.Location = new System.Drawing.Point(12, 47);
+			this.groupBoxSettings.Location = new System.Drawing.Point(6, 6);
 			this.groupBoxSettings.Name = "groupBoxSettings";
-			this.groupBoxSettings.Size = new System.Drawing.Size(243, 83);
+			this.groupBoxSettings.Size = new System.Drawing.Size(436, 277);
 			this.groupBoxSettings.TabIndex = 1;
 			this.groupBoxSettings.TabStop = false;
-			this.groupBoxSettings.Text = "Измерять жизненный цикл модели по:";
+			this.groupBoxSettings.Text = "Measure life cycle by";
 			// 
 			// isTime
 			// 
 			this.isTime.AutoSize = true;
 			this.isTime.Location = new System.Drawing.Point(6, 19);
 			this.isTime.Name = "isTime";
-			this.isTime.Size = new System.Drawing.Size(73, 17);
+			this.isTime.Size = new System.Drawing.Size(80, 17);
 			this.isTime.TabIndex = 11;
-			this.isTime.Text = "Времени:";
+			this.isTime.Text = "Time (sec.):";
 			this.isTime.UseVisualStyleBackColor = true;
 			// 
 			// isTransactions
@@ -137,15 +154,15 @@
 			this.isTransactions.Checked = true;
 			this.isTransactions.Location = new System.Drawing.Point(107, 19);
 			this.isTransactions.Name = "isTransactions";
-			this.isTransactions.Size = new System.Drawing.Size(125, 17);
+			this.isTransactions.Size = new System.Drawing.Size(122, 17);
 			this.isTransactions.TabIndex = 10;
 			this.isTransactions.TabStop = true;
-			this.isTransactions.Text = "Кол-ву транзактов: ";
+			this.isTransactions.Text = "Num. of transactions";
 			this.isTransactions.UseVisualStyleBackColor = true;
 			// 
 			// numericValue
 			// 
-			this.numericValue.Location = new System.Drawing.Point(6, 48);
+			this.numericValue.Location = new System.Drawing.Point(30, 53);
 			this.numericValue.Maximum = new decimal(new int[] {
             1241513984,
             370409800,
@@ -166,38 +183,38 @@
 			this.groupBoxStreams.Controls.Add(this.buttonDeleteStream);
 			this.groupBoxStreams.Controls.Add(this.buttonAddStream);
 			this.groupBoxStreams.Controls.Add(this.listBox1);
-			this.groupBoxStreams.Location = new System.Drawing.Point(12, 162);
+			this.groupBoxStreams.Location = new System.Drawing.Point(6, 6);
 			this.groupBoxStreams.Name = "groupBoxStreams";
-			this.groupBoxStreams.Size = new System.Drawing.Size(243, 121);
+			this.groupBoxStreams.Size = new System.Drawing.Size(436, 277);
 			this.groupBoxStreams.TabIndex = 2;
 			this.groupBoxStreams.TabStop = false;
-			this.groupBoxStreams.Text = "Описание Потоков";
+			this.groupBoxStreams.Text = "Streams descriptions";
 			// 
 			// buttonEditStream
 			// 
-			this.buttonEditStream.Location = new System.Drawing.Point(130, 49);
+			this.buttonEditStream.Location = new System.Drawing.Point(328, 48);
 			this.buttonEditStream.Name = "buttonEditStream";
 			this.buttonEditStream.Size = new System.Drawing.Size(102, 23);
 			this.buttonEditStream.TabIndex = 6;
-			this.buttonEditStream.Text = "Редактировать";
+			this.buttonEditStream.Text = "edit";
 			this.buttonEditStream.UseVisualStyleBackColor = true;
 			// 
 			// buttonDeleteStream
 			// 
-			this.buttonDeleteStream.Location = new System.Drawing.Point(130, 78);
+			this.buttonDeleteStream.Location = new System.Drawing.Point(328, 77);
 			this.buttonDeleteStream.Name = "buttonDeleteStream";
 			this.buttonDeleteStream.Size = new System.Drawing.Size(102, 23);
 			this.buttonDeleteStream.TabIndex = 5;
-			this.buttonDeleteStream.Text = "Удалить";
+			this.buttonDeleteStream.Text = "remove";
 			this.buttonDeleteStream.UseVisualStyleBackColor = true;
 			// 
 			// buttonAddStream
 			// 
-			this.buttonAddStream.Location = new System.Drawing.Point(130, 20);
+			this.buttonAddStream.Location = new System.Drawing.Point(328, 19);
 			this.buttonAddStream.Name = "buttonAddStream";
 			this.buttonAddStream.Size = new System.Drawing.Size(102, 23);
 			this.buttonAddStream.TabIndex = 4;
-			this.buttonAddStream.Text = "Добавить";
+			this.buttonAddStream.Text = "add";
 			this.buttonAddStream.UseVisualStyleBackColor = true;
 			this.buttonAddStream.Click += new System.EventHandler(this.buttonAddStream_Click);
 			// 
@@ -206,50 +223,51 @@
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.Location = new System.Drawing.Point(6, 19);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(121, 95);
+			this.listBox1.Size = new System.Drawing.Size(316, 251);
 			this.listBox1.TabIndex = 0;
 			// 
-			// groupBoxNodes
+			// groupBoxEntities
 			// 
-			this.groupBoxNodes.Controls.Add(this.buttonEditNode);
-			this.groupBoxNodes.Controls.Add(this.buttonDeleteNode);
-			this.groupBoxNodes.Controls.Add(this.buttonAddNode);
-			this.groupBoxNodes.Controls.Add(this.entitiesDataGridView);
-			this.groupBoxNodes.Location = new System.Drawing.Point(261, 47);
-			this.groupBoxNodes.Name = "groupBoxNodes";
-			this.groupBoxNodes.Size = new System.Drawing.Size(409, 236);
-			this.groupBoxNodes.TabIndex = 3;
-			this.groupBoxNodes.TabStop = false;
-			this.groupBoxNodes.Text = "Описание Узлов Системы";
+			this.groupBoxEntities.Controls.Add(this.buttonEditNode);
+			this.groupBoxEntities.Controls.Add(this.buttonDeleteNode);
+			this.groupBoxEntities.Controls.Add(this.buttonAddNode);
+			this.groupBoxEntities.Controls.Add(this.entitiesDataGridView);
+			this.groupBoxEntities.Location = new System.Drawing.Point(3, 6);
+			this.groupBoxEntities.Name = "groupBoxEntities";
+			this.groupBoxEntities.Size = new System.Drawing.Size(439, 277);
+			this.groupBoxEntities.TabIndex = 3;
+			this.groupBoxEntities.TabStop = false;
+			this.groupBoxEntities.Text = "Entities descriptions";
 			// 
 			// buttonEditNode
 			// 
-			this.buttonEditNode.Location = new System.Drawing.Point(302, 47);
+			this.buttonEditNode.Location = new System.Drawing.Point(328, 48);
 			this.buttonEditNode.Name = "buttonEditNode";
 			this.buttonEditNode.Size = new System.Drawing.Size(102, 23);
 			this.buttonEditNode.TabIndex = 3;
-			this.buttonEditNode.Text = "Редактировать";
+			this.buttonEditNode.Text = "edit";
 			this.buttonEditNode.UseVisualStyleBackColor = true;
+			this.buttonEditNode.Click += new System.EventHandler(this.editEntityButton_Click);
 			// 
 			// buttonDeleteNode
 			// 
-			this.buttonDeleteNode.Location = new System.Drawing.Point(302, 76);
+			this.buttonDeleteNode.Location = new System.Drawing.Point(328, 77);
 			this.buttonDeleteNode.Name = "buttonDeleteNode";
 			this.buttonDeleteNode.Size = new System.Drawing.Size(102, 23);
 			this.buttonDeleteNode.TabIndex = 2;
-			this.buttonDeleteNode.Text = "Удалить";
+			this.buttonDeleteNode.Text = "remove";
 			this.buttonDeleteNode.UseVisualStyleBackColor = true;
-			this.buttonDeleteNode.Click += new System.EventHandler(this.buttonDeleteNode_Click);
+			this.buttonDeleteNode.Click += new System.EventHandler(this.removeEntityButton_Click);
 			// 
 			// buttonAddNode
 			// 
-			this.buttonAddNode.Location = new System.Drawing.Point(302, 18);
+			this.buttonAddNode.Location = new System.Drawing.Point(328, 19);
 			this.buttonAddNode.Name = "buttonAddNode";
 			this.buttonAddNode.Size = new System.Drawing.Size(102, 23);
 			this.buttonAddNode.TabIndex = 1;
-			this.buttonAddNode.Text = "Добавить";
+			this.buttonAddNode.Text = "add";
 			this.buttonAddNode.UseVisualStyleBackColor = true;
-			this.buttonAddNode.Click += new System.EventHandler(this.addButton_Click);
+			this.buttonAddNode.Click += new System.EventHandler(this.addEntityButton_Click);
 			// 
 			// entitiesDataGridView
 			// 
@@ -259,29 +277,137 @@
 			this.entitiesDataGridView.Location = new System.Drawing.Point(6, 19);
 			this.entitiesDataGridView.Name = "entitiesDataGridView";
 			this.entitiesDataGridView.ReadOnly = true;
-			this.entitiesDataGridView.Size = new System.Drawing.Size(290, 211);
+			this.entitiesDataGridView.Size = new System.Drawing.Size(316, 252);
 			this.entitiesDataGridView.TabIndex = 0;
 			// 
 			// buttonGenerate
 			// 
-			this.buttonGenerate.Location = new System.Drawing.Point(277, 295);
+			this.buttonGenerate.Location = new System.Drawing.Point(168, 348);
 			this.buttonGenerate.Name = "buttonGenerate";
 			this.buttonGenerate.Size = new System.Drawing.Size(131, 23);
 			this.buttonGenerate.TabIndex = 4;
-			this.buttonGenerate.Text = "Сгенерировать код";
+			this.buttonGenerate.Text = "Generate Code";
 			this.buttonGenerate.UseVisualStyleBackColor = true;
 			this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
+			// 
+			// mainTabControl
+			// 
+			this.mainTabControl.Controls.Add(this.generalTabPage);
+			this.mainTabControl.Controls.Add(this.entitiesTabPage);
+			this.mainTabControl.Controls.Add(this.statisticsTabPage);
+			this.mainTabControl.Controls.Add(this.StreamsTabPage);
+			this.mainTabControl.Location = new System.Drawing.Point(12, 27);
+			this.mainTabControl.Name = "mainTabControl";
+			this.mainTabControl.SelectedIndex = 0;
+			this.mainTabControl.Size = new System.Drawing.Size(456, 315);
+			this.mainTabControl.TabIndex = 5;
+			// 
+			// generalTabPage
+			// 
+			this.generalTabPage.Controls.Add(this.groupBoxSettings);
+			this.generalTabPage.Location = new System.Drawing.Point(4, 22);
+			this.generalTabPage.Name = "generalTabPage";
+			this.generalTabPage.Padding = new System.Windows.Forms.Padding(3);
+			this.generalTabPage.Size = new System.Drawing.Size(448, 289);
+			this.generalTabPage.TabIndex = 0;
+			this.generalTabPage.Text = "General";
+			this.generalTabPage.UseVisualStyleBackColor = true;
+			// 
+			// entitiesTabPage
+			// 
+			this.entitiesTabPage.Controls.Add(this.groupBoxEntities);
+			this.entitiesTabPage.Location = new System.Drawing.Point(4, 22);
+			this.entitiesTabPage.Name = "entitiesTabPage";
+			this.entitiesTabPage.Padding = new System.Windows.Forms.Padding(3);
+			this.entitiesTabPage.Size = new System.Drawing.Size(448, 289);
+			this.entitiesTabPage.TabIndex = 1;
+			this.entitiesTabPage.Text = "Entities";
+			this.entitiesTabPage.UseVisualStyleBackColor = true;
+			// 
+			// statisticsTabPage
+			// 
+			this.statisticsTabPage.Controls.Add(this.statisticsGroupBox);
+			this.statisticsTabPage.Location = new System.Drawing.Point(4, 22);
+			this.statisticsTabPage.Name = "statisticsTabPage";
+			this.statisticsTabPage.Padding = new System.Windows.Forms.Padding(3);
+			this.statisticsTabPage.Size = new System.Drawing.Size(448, 289);
+			this.statisticsTabPage.TabIndex = 2;
+			this.statisticsTabPage.Text = "Statistics";
+			this.statisticsTabPage.UseVisualStyleBackColor = true;
+			// 
+			// StreamsTabPage
+			// 
+			this.StreamsTabPage.Controls.Add(this.groupBoxStreams);
+			this.StreamsTabPage.Location = new System.Drawing.Point(4, 22);
+			this.StreamsTabPage.Name = "StreamsTabPage";
+			this.StreamsTabPage.Padding = new System.Windows.Forms.Padding(3);
+			this.StreamsTabPage.Size = new System.Drawing.Size(448, 289);
+			this.StreamsTabPage.TabIndex = 3;
+			this.StreamsTabPage.Text = "Streams";
+			this.StreamsTabPage.UseVisualStyleBackColor = true;
+			// 
+			// statisticsGroupBox
+			// 
+			this.statisticsGroupBox.Controls.Add(this.removeButton);
+			this.statisticsGroupBox.Controls.Add(this.editButton);
+			this.statisticsGroupBox.Controls.Add(this.addButton);
+			this.statisticsGroupBox.Controls.Add(this.statisticsDataGridView);
+			this.statisticsGroupBox.Location = new System.Drawing.Point(6, 6);
+			this.statisticsGroupBox.Name = "statisticsGroupBox";
+			this.statisticsGroupBox.Size = new System.Drawing.Size(436, 280);
+			this.statisticsGroupBox.TabIndex = 0;
+			this.statisticsGroupBox.TabStop = false;
+			this.statisticsGroupBox.Text = "Statistics descriptions";
+			// 
+			// statisticsDataGridView
+			// 
+			this.statisticsDataGridView.AllowUserToAddRows = false;
+			this.statisticsDataGridView.AllowUserToDeleteRows = false;
+			this.statisticsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.statisticsDataGridView.Location = new System.Drawing.Point(6, 19);
+			this.statisticsDataGridView.Name = "statisticsDataGridView";
+			this.statisticsDataGridView.ReadOnly = true;
+			this.statisticsDataGridView.Size = new System.Drawing.Size(319, 255);
+			this.statisticsDataGridView.TabIndex = 0;
+			// 
+			// addButton
+			// 
+			this.addButton.Location = new System.Drawing.Point(331, 19);
+			this.addButton.Name = "addButton";
+			this.addButton.Size = new System.Drawing.Size(99, 23);
+			this.addButton.TabIndex = 1;
+			this.addButton.Text = "add";
+			this.addButton.UseVisualStyleBackColor = true;
+			this.addButton.Click += new System.EventHandler(this.addStatisticButton_Click);
+			// 
+			// editButton
+			// 
+			this.editButton.Location = new System.Drawing.Point(331, 48);
+			this.editButton.Name = "editButton";
+			this.editButton.Size = new System.Drawing.Size(99, 23);
+			this.editButton.TabIndex = 2;
+			this.editButton.Text = "edit";
+			this.editButton.UseVisualStyleBackColor = true;
+			this.editButton.Click += new System.EventHandler(this.editStatisticButton_Click);
+			// 
+			// removeButton
+			// 
+			this.removeButton.Location = new System.Drawing.Point(331, 77);
+			this.removeButton.Name = "removeButton";
+			this.removeButton.Size = new System.Drawing.Size(99, 23);
+			this.removeButton.TabIndex = 3;
+			this.removeButton.Text = "remove";
+			this.removeButton.UseVisualStyleBackColor = true;
+			this.removeButton.Click += new System.EventHandler(this.removeStatisticButton_Click);
 			// 
 			// MainFrame
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(680, 330);
+			this.ClientSize = new System.Drawing.Size(484, 383);
 			this.Controls.Add(this.buttonGenerate);
-			this.Controls.Add(this.groupBoxNodes);
-			this.Controls.Add(this.groupBoxStreams);
-			this.Controls.Add(this.groupBoxSettings);
 			this.Controls.Add(this.menuStrip1);
+			this.Controls.Add(this.mainTabControl);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainFrame";
 			this.Text = "GPSSHelper";
@@ -292,8 +418,15 @@
 			this.groupBoxSettings.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericValue)).EndInit();
 			this.groupBoxStreams.ResumeLayout(false);
-			this.groupBoxNodes.ResumeLayout(false);
+			this.groupBoxEntities.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.entitiesDataGridView)).EndInit();
+			this.mainTabControl.ResumeLayout(false);
+			this.generalTabPage.ResumeLayout(false);
+			this.entitiesTabPage.ResumeLayout(false);
+			this.statisticsTabPage.ResumeLayout(false);
+			this.StreamsTabPage.ResumeLayout(false);
+			this.statisticsGroupBox.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.statisticsDataGridView)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -311,7 +444,7 @@
 		private System.Windows.Forms.GroupBox groupBoxSettings;
 		private System.Windows.Forms.NumericUpDown numericValue;
 		private System.Windows.Forms.GroupBox groupBoxStreams;
-		private System.Windows.Forms.GroupBox groupBoxNodes;
+		private System.Windows.Forms.GroupBox groupBoxEntities;
 		private System.Windows.Forms.Button buttonEditNode;
 		private System.Windows.Forms.Button buttonDeleteNode;
 		private System.Windows.Forms.Button buttonAddNode;
@@ -323,6 +456,16 @@
 		private System.Windows.Forms.ListBox listBox1;
 		private System.Windows.Forms.RadioButton isTime;
 		private System.Windows.Forms.RadioButton isTransactions;
+		private System.Windows.Forms.TabControl mainTabControl;
+		private System.Windows.Forms.TabPage generalTabPage;
+		private System.Windows.Forms.TabPage entitiesTabPage;
+		private System.Windows.Forms.TabPage statisticsTabPage;
+		private System.Windows.Forms.TabPage StreamsTabPage;
+		private System.Windows.Forms.GroupBox statisticsGroupBox;
+		private System.Windows.Forms.Button removeButton;
+		private System.Windows.Forms.Button editButton;
+		private System.Windows.Forms.Button addButton;
+		private System.Windows.Forms.DataGridView statisticsDataGridView;
 	}
 }
 

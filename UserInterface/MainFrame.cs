@@ -10,8 +10,9 @@ using System.Windows.Forms;
 using GPSSGenerator.GlobalDimension;
 using System.Xml;
 using System.Threading;
+using WinFromInterface;
 
-namespace UserInterface
+namespace WinFromInterface
 {
 	public partial class MainFrame : Form
 	{
@@ -34,14 +35,27 @@ namespace UserInterface
 			XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
 			doc.AppendChild(docNode);
 
+			XmlNode model = doc.CreateElement("Model");
+
 			settings = doc.CreateElement("Settings");
 			entities = doc.CreateElement("Entities");
 			statistics = doc.CreateElement("Statistics");
 			streams = doc.CreateElement("Streams");
 
+			model.AppendChild(settings);
+			model.AppendChild(entities);
+			model.AppendChild(statistics);
+			model.AppendChild(streams);
+
+			doc.AppendChild(model);
+
 			entitiesDataGridView.ColumnCount = 2;
-			entitiesDataGridView.Columns[0].Name = "Name of Entities";
+			entitiesDataGridView.Columns[0].Name = "Name of Entity";
 			entitiesDataGridView.Columns[1].Name = "Type";
+
+			statisticsDataGridView.ColumnCount = 2;
+			statisticsDataGridView.Columns[0].Name = "Name of Statistic";
+			statisticsDataGridView.Columns[1].Name = "Type";
 		}
 
 		public void UpdateEntitiesDataGradeView()
@@ -64,12 +78,6 @@ namespace UserInterface
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			
-		}
-
-		private void addButton_Click(object sender, EventArgs e)
-		{
-			AddNode addNode = new AddNode(this);
-			addNode.Show();
 		}
 
 		private void buttonAddStream_Click(object sender, EventArgs e)
@@ -161,22 +169,56 @@ namespace UserInterface
 
 			settings.Attributes.Append(typeAttribyte);
 			settings.Attributes.Append(valueAttribute);
-
-			doc.AppendChild(settings);
 		}
 
 		private void buttonDeleteNode_Click(object sender, EventArgs e)
 		{
-			XmlNodeList list = entities.SelectNodes("Entity");
 
-			for(int i = 0; i < list.Count; i++)
+		}
+
+		private void addStatisticButton_Click(object sender, EventArgs e)
+		{
+			AddStatistic addStatistic = new AddStatistic(this);
+			addStatistic.Show();
+		}
+
+		private void editStatisticButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void removeStatisticButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void addEntityButton_Click(object sender, EventArgs e)
+		{
+			AddEntity addNode = new AddEntity(this);
+			addNode.Show();
+		}
+
+		private void editEntityButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void removeEntityButton_Click(object sender, EventArgs e)
+		{
+		
+			string id = (string)entitiesDataGridView.CurrentRow.Cells[0].Value;
+
+			XmlNodeList entitiesList = entities.SelectNodes("Entity");
+
+			for (int i = 0; i < entitiesList.Count; i++) 
 			{
-				if(list[i].Attributes["id"]?.Value == (string)entitiesDataGridView.CurrentRow.Cells[0].Value)
+				if(entitiesList[i].Attributes["id"]?.Value == id)
 				{
-					entities.RemoveChild(list[i]);
+					entities.RemoveChild(entitiesList[i]);
+					break;
 				}
 			}
-
+			MessageBox.Show(string.Format("Entity {0} was removed", id));
 			UpdateEntitiesDataGradeView();
 		}
 	}

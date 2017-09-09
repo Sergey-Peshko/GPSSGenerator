@@ -1,2 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Settings measure-lifecycle-by="NumberOfTransactions" value="10000" />
+<Model>
+  <Settings measure-lifecycle-by="NumberOfTransactions" value="10000" />
+  <Entities>
+    <Entity id="g1" type="ZGENERATOR">
+      <NumberOfTransactions value="0" />
+    </Entity>
+  </Entities>
+  <Statistics />
+  <Streams />
+</Model>

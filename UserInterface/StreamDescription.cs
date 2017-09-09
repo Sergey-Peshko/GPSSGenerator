@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UserInterface
+namespace WinFromInterface
 {
 	public partial class StreamDescription : Form
 	{

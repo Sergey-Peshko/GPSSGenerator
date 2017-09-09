@@ -1,0 +1,189 @@
+﻿namespace WinFromInterface
+{
+	partial class AddStatistic
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
+
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+
+		#region Windows Form Designer generated code
+
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.comboBoxTypeOfStatistic = new System.Windows.Forms.ComboBox();
+			this.parametersGroupBox = new System.Windows.Forms.GroupBox();
+			this.tableParamTabPage = new System.Windows.Forms.TabPage();
+			this.tabControl = new System.Windows.Forms.TabControl();
+			this.tableParamGroupBox = new System.Windows.Forms.GroupBox();
+			this.tableParamDataGridView = new System.Windows.Forms.DataGridView();
+			this.addButton = new System.Windows.Forms.Button();
+			this.cancelButton = new System.Windows.Forms.Button();
+			this.tableParamTabPage.SuspendLayout();
+			this.tabControl.SuspendLayout();
+			this.tableParamGroupBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tableParamDataGridView)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(12, 16);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(90, 13);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "Name of Statistic:";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(16, 47);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(86, 13);
+			this.label2.TabIndex = 1;
+			this.label2.Text = "Type of Statistic:";
+			// 
+			// textBox1
+			// 
+			this.textBox1.Location = new System.Drawing.Point(109, 13);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(157, 20);
+			this.textBox1.TabIndex = 2;
+			// 
+			// comboBoxTypeOfStatistic
+			// 
+			this.comboBoxTypeOfStatistic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxTypeOfStatistic.FormattingEnabled = true;
+			this.comboBoxTypeOfStatistic.Location = new System.Drawing.Point(109, 44);
+			this.comboBoxTypeOfStatistic.Name = "comboBoxTypeOfStatistic";
+			this.comboBoxTypeOfStatistic.Size = new System.Drawing.Size(157, 21);
+			this.comboBoxTypeOfStatistic.TabIndex = 3;
+			// 
+			// parametersGroupBox
+			// 
+			this.parametersGroupBox.Location = new System.Drawing.Point(12, 71);
+			this.parametersGroupBox.Name = "parametersGroupBox";
+			this.parametersGroupBox.Size = new System.Drawing.Size(510, 197);
+			this.parametersGroupBox.TabIndex = 5;
+			this.parametersGroupBox.TabStop = false;
+			this.parametersGroupBox.Text = "Parameters according to statistic type";
+			// 
+			// tableParamTabPage
+			// 
+			this.tableParamTabPage.Controls.Add(this.tableParamGroupBox);
+			this.tableParamTabPage.Location = new System.Drawing.Point(4, 22);
+			this.tableParamTabPage.Name = "tableParamTabPage";
+			this.tableParamTabPage.Padding = new System.Windows.Forms.Padding(3);
+			this.tableParamTabPage.Size = new System.Drawing.Size(489, 146);
+			this.tableParamTabPage.TabIndex = 0;
+			this.tableParamTabPage.Text = "Table Parameters";
+			this.tableParamTabPage.UseVisualStyleBackColor = true;
+			// 
+			// tabControl
+			// 
+			this.tabControl.Controls.Add(this.tableParamTabPage);
+			this.tabControl.Location = new System.Drawing.Point(19, 90);
+			this.tabControl.Name = "tabControl";
+			this.tabControl.SelectedIndex = 0;
+			this.tabControl.Size = new System.Drawing.Size(497, 172);
+			this.tabControl.TabIndex = 4;
+			// 
+			// tableParamGroupBox
+			// 
+			this.tableParamGroupBox.Controls.Add(this.tableParamDataGridView);
+			this.tableParamGroupBox.Location = new System.Drawing.Point(6, 6);
+			this.tableParamGroupBox.Name = "tableParamGroupBox";
+			this.tableParamGroupBox.Size = new System.Drawing.Size(477, 134);
+			this.tableParamGroupBox.TabIndex = 0;
+			this.tableParamGroupBox.TabStop = false;
+			this.tableParamGroupBox.Text = "Table parameters";
+			// 
+			// tableParamDataGridView
+			// 
+			this.tableParamDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.tableParamDataGridView.Location = new System.Drawing.Point(6, 19);
+			this.tableParamDataGridView.Name = "tableParamDataGridView";
+			this.tableParamDataGridView.Size = new System.Drawing.Size(471, 109);
+			this.tableParamDataGridView.TabIndex = 0;
+			// 
+			// addButton
+			// 
+			this.addButton.Location = new System.Drawing.Point(446, 274);
+			this.addButton.Name = "addButton";
+			this.addButton.Size = new System.Drawing.Size(75, 23);
+			this.addButton.TabIndex = 6;
+			this.addButton.Text = "Add";
+			this.addButton.UseVisualStyleBackColor = true;
+			this.addButton.Click += new System.EventHandler(this.addButton_Click);
+			// 
+			// cancelButton
+			// 
+			this.cancelButton.Location = new System.Drawing.Point(365, 274);
+			this.cancelButton.Name = "cancelButton";
+			this.cancelButton.Size = new System.Drawing.Size(75, 23);
+			this.cancelButton.TabIndex = 7;
+			this.cancelButton.Text = "Cancel";
+			this.cancelButton.UseVisualStyleBackColor = true;
+			this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+			// 
+			// AddStatistic
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(534, 309);
+			this.Controls.Add(this.cancelButton);
+			this.Controls.Add(this.addButton);
+			this.Controls.Add(this.tabControl);
+			this.Controls.Add(this.comboBoxTypeOfStatistic);
+			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.parametersGroupBox);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Name = "AddStatistic";
+			this.Text = "Add statistic";
+			this.Load += new System.EventHandler(this.AddStatistic_Load);
+			this.tableParamTabPage.ResumeLayout(false);
+			this.tabControl.ResumeLayout(false);
+			this.tableParamGroupBox.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.tableParamDataGridView)).EndInit();
+			this.ResumeLayout(false);
+			this.PerformLayout();
+
+		}
+
+		#endregion
+
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.ComboBox comboBoxTypeOfStatistic;
+		private System.Windows.Forms.GroupBox parametersGroupBox;
+		private System.Windows.Forms.TabPage tableParamTabPage;
+		private System.Windows.Forms.TabControl tabControl;
+		private System.Windows.Forms.GroupBox tableParamGroupBox;
+		private System.Windows.Forms.DataGridView tableParamDataGridView;
+		private System.Windows.Forms.Button addButton;
+		private System.Windows.Forms.Button cancelButton;
+	}
+}

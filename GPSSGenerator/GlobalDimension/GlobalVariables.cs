@@ -41,5 +41,10 @@ namespace GPSSGenerator.GlobalDimension
 
 		public static string INTERVAL_STATISTIC = "INTERVAL_STATISTIC";
 		public static string ONEPOINT_STATISTIC = "ONEPOINT_STATISTIC";
+
+		public static string[] typesOfStatistics = {
+			INTERVAL_STATISTIC,
+			ONEPOINT_STATISTIC,
+		};
 	}
 }
