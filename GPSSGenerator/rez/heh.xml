@@ -1,11 +1,72 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Model>
-  <Settings measure-lifecycle-by="NumberOfTransactions" value="10000" />
+  <Settings measure-lifecycle-by="AmountOfTime" value="3600" />
   <Entities>
     <Entity id="g1" type="ZGENERATOR">
-      <NumberOfTransactions value="0" />
+      <NumberOfTransactions value="10" />
+    </Entity>
+    <Entity id="b1" type="MULTYCHANNEL_FACILITY">
+      <Capacity value="2" />
+      <Distribution type="EXPONENTIAL">
+        <MathematicalExpectation value="4" />
+        <GeneratorNumber value="2" />
+      </Distribution>
+    </Entity>
+    <Entity id="b2" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <MathematicalExpectation value="3" />
+        <GeneratorNumber value="4" />
+      </Distribution>
+    </Entity>
+    <Entity id="b3" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <MathematicalExpectation value="6" />
+        <GeneratorNumber value="3" />
+      </Distribution>
+    </Entity>
+    <Entity id="g2" type="GENERATOR">
+      <Distribution type="EXPONENTIAL">
+        <MathematicalExpectation value="8" />
+        <GeneratorNumber value="1" />
+      </Distribution>
+    </Entity>
+    <Entity id="r1" type="RECEIVER">
+      <NumberOfTransactionsToBeDeleted value="0" />
     </Entity>
   </Entities>
-  <Statistics />
-  <Streams />
+  <Statistics>
+    <Statistic name="lol" type="INTERVAL_STATISTIC">
+      <TableParam UpperBoundOfLowerFrequencyInterval="5" IntervalWidth="5" NumberOfIntervals="10" />
+    </Statistic>
+    <Statistic name="kek" type="ONEPOINT_STATISTIC">
+      <TableParam UpperBoundOfLowerFrequencyInterval="5" IntervalWidth="5" NumberOfIntervals="10" />
+    </Statistic>
+  </Statistics>
+  <Streams>
+    <Stream id="1">
+      <movements>
+        <movement from="g1" to="b1" value="1" />
+        <movement from="b1" to="b2" value="0.5" />
+        <movement from="b1" to="b3" value="0.5" />
+        <movement from="b2" to="b1" value="1">
+          <statistic id="kek_point" ref="kek" />
+        </movement>
+        <movement from="b3" to="b2" value="1" />
+      </movements>
+      <statistics>
+        <statistic id="after_b1_lol" before="b1" ref="lol" />
+        <statistic id="after_b3_lol" after="b3" ref="lol" />
+      </statistics>
+    </Stream>
+    <Stream id="2">
+      <movements>
+        <movement from="g2" to="b1" value="1">
+        </movement>
+        <movement from="b1" to="r1" value="1">
+        </movement>
+      </movements>
+      <statistics>
+      </statistics>
+    </Stream>
+  </Streams>
 </Model>

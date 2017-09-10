@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace WinFromInterface
 {
-	public partial class StreamDescription : Form
+	public partial class CodeForm : Form
 	{
-		public StreamDescription()
+		public CodeForm(List<string> code)
 		{
 			InitializeComponent();
+
+			for (int i = 0; i < code.Count; i++)
+			{
+				codeTextBox.AppendText(code[i] + '\n');
+			}
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			this.Close();
 		}
 	}
 }

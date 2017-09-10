@@ -18,5 +18,7 @@ namespace WinFromInterface
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainFrame());
 		}
+
 	}
+	public enum Mode { Add, Edit }
 }

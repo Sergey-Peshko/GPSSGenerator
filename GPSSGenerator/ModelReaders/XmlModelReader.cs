@@ -20,20 +20,17 @@ namespace GPSSGenerator.ModelReaders
 {
 	public class XmlModelReader
 	{
-		static public GlobalModel Read(string path)
+		static public GlobalModel Read(XmlDocument doc)
 		{
 			GlobalModel model = new GlobalModel();
 
-			XmlDocument doc = new XmlDocument();
-			doc.Load(path);
-
 			XmlNode settings = doc.DocumentElement.SelectSingleNode("Settings");
-			
+
 			if (settings.Attributes["measure-lifecycle-by"]?.InnerText == "AmountOfTime")
 			{
 				model.Settings.AmountOfTime = Convert.ToInt32(settings.Attributes["value"]?.Value);
 			}
-			else if(settings.Attributes["measure-lifecycle-by"]?.InnerText == "NumberOfTransactions")
+			else if (settings.Attributes["measure-lifecycle-by"]?.InnerText == "NumberOfTransactions")
 			{
 				model.Settings.NumberOfTransactions = Convert.ToInt32(settings.Attributes["value"]?.Value);
 			}
@@ -55,6 +52,13 @@ namespace GPSSGenerator.ModelReaders
 			model.StreamModels = CreateStreamModels(xmlStreams, model.Nodes, model.Statistics);
 
 			return model;
+		}
+		static public GlobalModel Read(string path)
+		{
+			XmlDocument doc = new XmlDocument();
+			doc.Load(path);
+
+			return Read(doc);
 		}
 
 		static private Statistic[] CreateStatistics(XmlNodeList xmlStats)

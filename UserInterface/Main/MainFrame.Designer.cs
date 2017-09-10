@@ -43,7 +43,7 @@
 			this.buttonEditStream = new System.Windows.Forms.Button();
 			this.buttonDeleteStream = new System.Windows.Forms.Button();
 			this.buttonAddStream = new System.Windows.Forms.Button();
-			this.listBox1 = new System.Windows.Forms.ListBox();
+			this.streamListBox = new System.Windows.Forms.ListBox();
 			this.groupBoxEntities = new System.Windows.Forms.GroupBox();
 			this.buttonEditNode = new System.Windows.Forms.Button();
 			this.buttonDeleteNode = new System.Windows.Forms.Button();
@@ -54,12 +54,18 @@
 			this.generalTabPage = new System.Windows.Forms.TabPage();
 			this.entitiesTabPage = new System.Windows.Forms.TabPage();
 			this.statisticsTabPage = new System.Windows.Forms.TabPage();
-			this.StreamsTabPage = new System.Windows.Forms.TabPage();
 			this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
-			this.statisticsDataGridView = new System.Windows.Forms.DataGridView();
-			this.addButton = new System.Windows.Forms.Button();
-			this.editButton = new System.Windows.Forms.Button();
 			this.removeButton = new System.Windows.Forms.Button();
+			this.editButton = new System.Windows.Forms.Button();
+			this.addButton = new System.Windows.Forms.Button();
+			this.statisticsDataGridView = new System.Windows.Forms.DataGridView();
+			this.StreamsTabPage = new System.Windows.Forms.TabPage();
+			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+			this.nameOfStatisticColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.statisticTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.nameOfEntityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.entityTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.menuStrip1.SuspendLayout();
 			this.groupBoxSettings.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericValue)).BeginInit();
@@ -70,9 +76,9 @@
 			this.generalTabPage.SuspendLayout();
 			this.entitiesTabPage.SuspendLayout();
 			this.statisticsTabPage.SuspendLayout();
-			this.StreamsTabPage.SuspendLayout();
 			this.statisticsGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.statisticsDataGridView)).BeginInit();
+			this.StreamsTabPage.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -100,20 +106,23 @@
 			// newToolStripMenuItem
 			// 
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.newToolStripMenuItem.Text = "New";
+			this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
 			// 
 			// openToolStripMenuItem
 			// 
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
 			this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.openToolStripMenuItem.Text = "Open";
+			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
 			// 
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.saveToolStripMenuItem.Text = "Save";
+			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -123,8 +132,9 @@
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
 			// groupBoxSettings
 			// 
@@ -182,17 +192,17 @@
 			this.groupBoxStreams.Controls.Add(this.buttonEditStream);
 			this.groupBoxStreams.Controls.Add(this.buttonDeleteStream);
 			this.groupBoxStreams.Controls.Add(this.buttonAddStream);
-			this.groupBoxStreams.Controls.Add(this.listBox1);
+			this.groupBoxStreams.Controls.Add(this.streamListBox);
 			this.groupBoxStreams.Location = new System.Drawing.Point(6, 6);
 			this.groupBoxStreams.Name = "groupBoxStreams";
-			this.groupBoxStreams.Size = new System.Drawing.Size(436, 277);
+			this.groupBoxStreams.Size = new System.Drawing.Size(290, 277);
 			this.groupBoxStreams.TabIndex = 2;
 			this.groupBoxStreams.TabStop = false;
 			this.groupBoxStreams.Text = "Streams descriptions";
 			// 
 			// buttonEditStream
 			// 
-			this.buttonEditStream.Location = new System.Drawing.Point(328, 48);
+			this.buttonEditStream.Location = new System.Drawing.Point(175, 48);
 			this.buttonEditStream.Name = "buttonEditStream";
 			this.buttonEditStream.Size = new System.Drawing.Size(102, 23);
 			this.buttonEditStream.TabIndex = 6;
@@ -201,7 +211,7 @@
 			// 
 			// buttonDeleteStream
 			// 
-			this.buttonDeleteStream.Location = new System.Drawing.Point(328, 77);
+			this.buttonDeleteStream.Location = new System.Drawing.Point(175, 77);
 			this.buttonDeleteStream.Name = "buttonDeleteStream";
 			this.buttonDeleteStream.Size = new System.Drawing.Size(102, 23);
 			this.buttonDeleteStream.TabIndex = 5;
@@ -210,7 +220,7 @@
 			// 
 			// buttonAddStream
 			// 
-			this.buttonAddStream.Location = new System.Drawing.Point(328, 19);
+			this.buttonAddStream.Location = new System.Drawing.Point(175, 19);
 			this.buttonAddStream.Name = "buttonAddStream";
 			this.buttonAddStream.Size = new System.Drawing.Size(102, 23);
 			this.buttonAddStream.TabIndex = 4;
@@ -218,13 +228,13 @@
 			this.buttonAddStream.UseVisualStyleBackColor = true;
 			this.buttonAddStream.Click += new System.EventHandler(this.buttonAddStream_Click);
 			// 
-			// listBox1
+			// streamListBox
 			// 
-			this.listBox1.FormattingEnabled = true;
-			this.listBox1.Location = new System.Drawing.Point(6, 19);
-			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(316, 251);
-			this.listBox1.TabIndex = 0;
+			this.streamListBox.FormattingEnabled = true;
+			this.streamListBox.Location = new System.Drawing.Point(6, 19);
+			this.streamListBox.Name = "streamListBox";
+			this.streamListBox.Size = new System.Drawing.Size(161, 251);
+			this.streamListBox.TabIndex = 0;
 			// 
 			// groupBoxEntities
 			// 
@@ -274,6 +284,9 @@
 			this.entitiesDataGridView.AllowUserToAddRows = false;
 			this.entitiesDataGridView.AllowUserToDeleteRows = false;
 			this.entitiesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.entitiesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameOfEntityColumn,
+            this.entityTypeColumn});
 			this.entitiesDataGridView.Location = new System.Drawing.Point(6, 19);
 			this.entitiesDataGridView.Name = "entitiesDataGridView";
 			this.entitiesDataGridView.ReadOnly = true;
@@ -335,17 +348,6 @@
 			this.statisticsTabPage.Text = "Statistics";
 			this.statisticsTabPage.UseVisualStyleBackColor = true;
 			// 
-			// StreamsTabPage
-			// 
-			this.StreamsTabPage.Controls.Add(this.groupBoxStreams);
-			this.StreamsTabPage.Location = new System.Drawing.Point(4, 22);
-			this.StreamsTabPage.Name = "StreamsTabPage";
-			this.StreamsTabPage.Padding = new System.Windows.Forms.Padding(3);
-			this.StreamsTabPage.Size = new System.Drawing.Size(448, 289);
-			this.StreamsTabPage.TabIndex = 3;
-			this.StreamsTabPage.Text = "Streams";
-			this.StreamsTabPage.UseVisualStyleBackColor = true;
-			// 
 			// statisticsGroupBox
 			// 
 			this.statisticsGroupBox.Controls.Add(this.removeButton);
@@ -359,26 +361,15 @@
 			this.statisticsGroupBox.TabStop = false;
 			this.statisticsGroupBox.Text = "Statistics descriptions";
 			// 
-			// statisticsDataGridView
+			// removeButton
 			// 
-			this.statisticsDataGridView.AllowUserToAddRows = false;
-			this.statisticsDataGridView.AllowUserToDeleteRows = false;
-			this.statisticsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.statisticsDataGridView.Location = new System.Drawing.Point(6, 19);
-			this.statisticsDataGridView.Name = "statisticsDataGridView";
-			this.statisticsDataGridView.ReadOnly = true;
-			this.statisticsDataGridView.Size = new System.Drawing.Size(319, 255);
-			this.statisticsDataGridView.TabIndex = 0;
-			// 
-			// addButton
-			// 
-			this.addButton.Location = new System.Drawing.Point(331, 19);
-			this.addButton.Name = "addButton";
-			this.addButton.Size = new System.Drawing.Size(99, 23);
-			this.addButton.TabIndex = 1;
-			this.addButton.Text = "add";
-			this.addButton.UseVisualStyleBackColor = true;
-			this.addButton.Click += new System.EventHandler(this.addStatisticButton_Click);
+			this.removeButton.Location = new System.Drawing.Point(331, 77);
+			this.removeButton.Name = "removeButton";
+			this.removeButton.Size = new System.Drawing.Size(99, 23);
+			this.removeButton.TabIndex = 3;
+			this.removeButton.Text = "remove";
+			this.removeButton.UseVisualStyleBackColor = true;
+			this.removeButton.Click += new System.EventHandler(this.removeStatisticButton_Click);
 			// 
 			// editButton
 			// 
@@ -390,15 +381,83 @@
 			this.editButton.UseVisualStyleBackColor = true;
 			this.editButton.Click += new System.EventHandler(this.editStatisticButton_Click);
 			// 
-			// removeButton
+			// addButton
 			// 
-			this.removeButton.Location = new System.Drawing.Point(331, 77);
-			this.removeButton.Name = "removeButton";
-			this.removeButton.Size = new System.Drawing.Size(99, 23);
-			this.removeButton.TabIndex = 3;
-			this.removeButton.Text = "remove";
-			this.removeButton.UseVisualStyleBackColor = true;
-			this.removeButton.Click += new System.EventHandler(this.removeStatisticButton_Click);
+			this.addButton.Location = new System.Drawing.Point(331, 19);
+			this.addButton.Name = "addButton";
+			this.addButton.Size = new System.Drawing.Size(99, 23);
+			this.addButton.TabIndex = 1;
+			this.addButton.Text = "add";
+			this.addButton.UseVisualStyleBackColor = true;
+			this.addButton.Click += new System.EventHandler(this.addStatisticButton_Click);
+			// 
+			// statisticsDataGridView
+			// 
+			this.statisticsDataGridView.AllowUserToAddRows = false;
+			this.statisticsDataGridView.AllowUserToDeleteRows = false;
+			this.statisticsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.statisticsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameOfStatisticColumn,
+            this.statisticTypeColumn});
+			this.statisticsDataGridView.Location = new System.Drawing.Point(6, 19);
+			this.statisticsDataGridView.Name = "statisticsDataGridView";
+			this.statisticsDataGridView.ReadOnly = true;
+			this.statisticsDataGridView.Size = new System.Drawing.Size(319, 255);
+			this.statisticsDataGridView.TabIndex = 0;
+			// 
+			// StreamsTabPage
+			// 
+			this.StreamsTabPage.Controls.Add(this.groupBoxStreams);
+			this.StreamsTabPage.Location = new System.Drawing.Point(4, 22);
+			this.StreamsTabPage.Name = "StreamsTabPage";
+			this.StreamsTabPage.Padding = new System.Windows.Forms.Padding(3);
+			this.StreamsTabPage.Size = new System.Drawing.Size(448, 289);
+			this.StreamsTabPage.TabIndex = 3;
+			this.StreamsTabPage.Text = "Streams";
+			this.StreamsTabPage.UseVisualStyleBackColor = true;
+			// 
+			// openFileDialog
+			// 
+			this.openFileDialog.DefaultExt = "xml";
+			this.openFileDialog.FileName = "openFileDialog";
+			this.openFileDialog.Filter = "XML files|*.xml";
+			// 
+			// nameOfStatisticColumn
+			// 
+			this.nameOfStatisticColumn.Frozen = true;
+			this.nameOfStatisticColumn.HeaderText = "Name of Statistic";
+			this.nameOfStatisticColumn.Name = "nameOfStatisticColumn";
+			this.nameOfStatisticColumn.ReadOnly = true;
+			// 
+			// statisticTypeColumn
+			// 
+			this.statisticTypeColumn.FillWeight = 170F;
+			this.statisticTypeColumn.Frozen = true;
+			this.statisticTypeColumn.HeaderText = "Type";
+			this.statisticTypeColumn.Name = "statisticTypeColumn";
+			this.statisticTypeColumn.ReadOnly = true;
+			this.statisticTypeColumn.Width = 170;
+			// 
+			// nameOfEntityColumn
+			// 
+			this.nameOfEntityColumn.Frozen = true;
+			this.nameOfEntityColumn.HeaderText = "Name of Entity";
+			this.nameOfEntityColumn.Name = "nameOfEntityColumn";
+			this.nameOfEntityColumn.ReadOnly = true;
+			// 
+			// entityTypeColumn
+			// 
+			this.entityTypeColumn.FillWeight = 170F;
+			this.entityTypeColumn.Frozen = true;
+			this.entityTypeColumn.HeaderText = "Type";
+			this.entityTypeColumn.Name = "entityTypeColumn";
+			this.entityTypeColumn.ReadOnly = true;
+			this.entityTypeColumn.Width = 170;
+			// 
+			// saveFileDialog
+			// 
+			this.saveFileDialog.DefaultExt = "xml";
+			this.saveFileDialog.Filter = "XML files|*.xml";
 			// 
 			// MainFrame
 			// 
@@ -411,7 +470,6 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainFrame";
 			this.Text = "GPSSHelper";
-			this.Load += new System.EventHandler(this.Form1_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.groupBoxSettings.ResumeLayout(false);
@@ -424,9 +482,9 @@
 			this.generalTabPage.ResumeLayout(false);
 			this.entitiesTabPage.ResumeLayout(false);
 			this.statisticsTabPage.ResumeLayout(false);
-			this.StreamsTabPage.ResumeLayout(false);
 			this.statisticsGroupBox.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.statisticsDataGridView)).EndInit();
+			this.StreamsTabPage.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -453,7 +511,7 @@
 		private System.Windows.Forms.Button buttonEditStream;
 		private System.Windows.Forms.Button buttonDeleteStream;
 		private System.Windows.Forms.Button buttonAddStream;
-		private System.Windows.Forms.ListBox listBox1;
+		private System.Windows.Forms.ListBox streamListBox;
 		private System.Windows.Forms.RadioButton isTime;
 		private System.Windows.Forms.RadioButton isTransactions;
 		private System.Windows.Forms.TabControl mainTabControl;
@@ -466,6 +524,12 @@
 		private System.Windows.Forms.Button editButton;
 		private System.Windows.Forms.Button addButton;
 		private System.Windows.Forms.DataGridView statisticsDataGridView;
+		private System.Windows.Forms.OpenFileDialog openFileDialog;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameOfEntityColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn entityTypeColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameOfStatisticColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn statisticTypeColumn;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog;
 	}
 }
 
