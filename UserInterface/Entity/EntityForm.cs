@@ -238,10 +238,6 @@ namespace WinFromInterface
 		{
 			try
 			{
-				if (mode == Mode.Edit)
-				{
-					mainFrame.Entities.RemoveChild(node);
-				}
 
 				if (nameTextBox.Text == "")
 				{
@@ -249,26 +245,30 @@ namespace WinFromInterface
 					return;
 				}
 
-				XmlNodeList xmlEntities = mainFrame.Entities.SelectNodes("Entity");
-
-				for (int i = 0; i < xmlEntities.Count; i++)
+				if (mode == Mode.Add)
 				{
-					if (xmlEntities[i].Attributes["id"]?.Value == nameTextBox.Text)
+
+					XmlNodeList xmlEntities = mainFrame.Entities.SelectNodes("Entity");
+
+					for (int i = 0; i < xmlEntities.Count; i++)
 					{
-						MessageBox.Show("name of entity should be unique");
-						return;
+						if (xmlEntities[i].Attributes["id"]?.Value == nameTextBox.Text)
+						{
+							MessageBox.Show("name of entity should be unique");
+							return;
+						}
 					}
 				}
 
-				node = mainFrame.Doc.CreateElement("Entity");
+				XmlNode newNode = mainFrame.Doc.CreateElement("Entity");
 
 				XmlAttribute nodeId = mainFrame.Doc.CreateAttribute("id");
 				nodeId.Value = nameTextBox.Text;
 				XmlAttribute nodeType = mainFrame.Doc.CreateAttribute("type");
 				nodeType.Value = (string)comboBoxTypeOfEntity.SelectedItem;
 
-				node.Attributes.Append(nodeId);
-				node.Attributes.Append(nodeType);
+				newNode.Attributes.Append(nodeId);
+				newNode.Attributes.Append(nodeType);
 
 				if ((string)comboBoxTypeOfEntity.SelectedItem == GlobalVariables.ZGENERATOR)
 				{
@@ -279,11 +279,11 @@ namespace WinFromInterface
 
 					nodeNumberOfTransactions.Attributes.Append(value);
 
-					node.AppendChild(nodeNumberOfTransactions);
+					newNode.AppendChild(nodeNumberOfTransactions);
 				}
 				else if ((string)comboBoxTypeOfEntity.SelectedItem == GlobalVariables.GENERATOR)
 				{
-					node.AppendChild(GetDistributionNode());
+					newNode.AppendChild(GetDistributionNode());
 				}
 				else if ((string)comboBoxTypeOfEntity.SelectedItem == GlobalVariables.RECEIVER)
 				{
@@ -293,12 +293,12 @@ namespace WinFromInterface
 					value.Value = numberOfTransactionsToBeDeletedNumericUpDown.Value.ToString();
 					number.Attributes.Append(value);
 
-					node.AppendChild(number);
+					newNode.AppendChild(number);
 
 				}
 				else if ((string)comboBoxTypeOfEntity.SelectedItem == GlobalVariables.ONECHANNEL_FACILITY)
 				{
-					node.AppendChild(GetDistributionNode());
+					newNode.AppendChild(GetDistributionNode());
 				}
 				else if ((string)comboBoxTypeOfEntity.SelectedItem == GlobalVariables.MULTYCHANNEL_FACILITY)
 				{
@@ -308,15 +308,21 @@ namespace WinFromInterface
 					value.Value = capacityNumericUpDown.Value.ToString();
 					nodeCapasity.Attributes.Append(value);
 
-					node.AppendChild(nodeCapasity);
-					node.AppendChild(GetDistributionNode());
+					newNode.AppendChild(nodeCapasity);
+					newNode.AppendChild(GetDistributionNode());
 				}
 				else
 				{
 					throw new Exception("can't understand type of node");
 				}
-
-				mainFrame.Entities.AppendChild(node);
+				if (mode == Mode.Add)
+				{
+					mainFrame.Entities.AppendChild(newNode);
+				}
+				else
+				{
+					mainFrame.Entities.ReplaceChild(newNode, node);
+				}
 
 				mainFrame.UpdateEntitiesDataGradeView();
 

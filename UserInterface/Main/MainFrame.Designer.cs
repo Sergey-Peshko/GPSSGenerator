@@ -49,6 +49,8 @@
 			this.buttonDeleteNode = new System.Windows.Forms.Button();
 			this.buttonAddNode = new System.Windows.Forms.Button();
 			this.entitiesDataGridView = new System.Windows.Forms.DataGridView();
+			this.nameOfEntityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.entityTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.buttonGenerate = new System.Windows.Forms.Button();
 			this.mainTabControl = new System.Windows.Forms.TabControl();
 			this.generalTabPage = new System.Windows.Forms.TabPage();
@@ -59,12 +61,10 @@
 			this.editButton = new System.Windows.Forms.Button();
 			this.addButton = new System.Windows.Forms.Button();
 			this.statisticsDataGridView = new System.Windows.Forms.DataGridView();
-			this.StreamsTabPage = new System.Windows.Forms.TabPage();
-			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.nameOfStatisticColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.statisticTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.nameOfEntityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.entityTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.StreamsTabPage = new System.Windows.Forms.TabPage();
+			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.menuStrip1.SuspendLayout();
 			this.groupBoxSettings.SuspendLayout();
@@ -106,7 +106,7 @@
 			// newToolStripMenuItem
 			// 
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.newToolStripMenuItem.Text = "New";
 			this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
 			// 
@@ -120,7 +120,7 @@
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
@@ -132,7 +132,7 @@
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -208,6 +208,7 @@
 			this.buttonEditStream.TabIndex = 6;
 			this.buttonEditStream.Text = "edit";
 			this.buttonEditStream.UseVisualStyleBackColor = true;
+			this.buttonEditStream.Click += new System.EventHandler(this.buttonEditStream_Click);
 			// 
 			// buttonDeleteStream
 			// 
@@ -217,6 +218,7 @@
 			this.buttonDeleteStream.TabIndex = 5;
 			this.buttonDeleteStream.Text = "remove";
 			this.buttonDeleteStream.UseVisualStyleBackColor = true;
+			this.buttonDeleteStream.Click += new System.EventHandler(this.buttonDeleteStream_Click);
 			// 
 			// buttonAddStream
 			// 
@@ -292,6 +294,22 @@
 			this.entitiesDataGridView.ReadOnly = true;
 			this.entitiesDataGridView.Size = new System.Drawing.Size(316, 252);
 			this.entitiesDataGridView.TabIndex = 0;
+			// 
+			// nameOfEntityColumn
+			// 
+			this.nameOfEntityColumn.Frozen = true;
+			this.nameOfEntityColumn.HeaderText = "Name of Entity";
+			this.nameOfEntityColumn.Name = "nameOfEntityColumn";
+			this.nameOfEntityColumn.ReadOnly = true;
+			// 
+			// entityTypeColumn
+			// 
+			this.entityTypeColumn.FillWeight = 170F;
+			this.entityTypeColumn.Frozen = true;
+			this.entityTypeColumn.HeaderText = "Type";
+			this.entityTypeColumn.Name = "entityTypeColumn";
+			this.entityTypeColumn.ReadOnly = true;
+			this.entityTypeColumn.Width = 170;
 			// 
 			// buttonGenerate
 			// 
@@ -405,23 +423,6 @@
 			this.statisticsDataGridView.Size = new System.Drawing.Size(319, 255);
 			this.statisticsDataGridView.TabIndex = 0;
 			// 
-			// StreamsTabPage
-			// 
-			this.StreamsTabPage.Controls.Add(this.groupBoxStreams);
-			this.StreamsTabPage.Location = new System.Drawing.Point(4, 22);
-			this.StreamsTabPage.Name = "StreamsTabPage";
-			this.StreamsTabPage.Padding = new System.Windows.Forms.Padding(3);
-			this.StreamsTabPage.Size = new System.Drawing.Size(448, 289);
-			this.StreamsTabPage.TabIndex = 3;
-			this.StreamsTabPage.Text = "Streams";
-			this.StreamsTabPage.UseVisualStyleBackColor = true;
-			// 
-			// openFileDialog
-			// 
-			this.openFileDialog.DefaultExt = "xml";
-			this.openFileDialog.FileName = "openFileDialog";
-			this.openFileDialog.Filter = "XML files|*.xml";
-			// 
 			// nameOfStatisticColumn
 			// 
 			this.nameOfStatisticColumn.Frozen = true;
@@ -438,21 +439,22 @@
 			this.statisticTypeColumn.ReadOnly = true;
 			this.statisticTypeColumn.Width = 170;
 			// 
-			// nameOfEntityColumn
+			// StreamsTabPage
 			// 
-			this.nameOfEntityColumn.Frozen = true;
-			this.nameOfEntityColumn.HeaderText = "Name of Entity";
-			this.nameOfEntityColumn.Name = "nameOfEntityColumn";
-			this.nameOfEntityColumn.ReadOnly = true;
+			this.StreamsTabPage.Controls.Add(this.groupBoxStreams);
+			this.StreamsTabPage.Location = new System.Drawing.Point(4, 22);
+			this.StreamsTabPage.Name = "StreamsTabPage";
+			this.StreamsTabPage.Padding = new System.Windows.Forms.Padding(3);
+			this.StreamsTabPage.Size = new System.Drawing.Size(448, 289);
+			this.StreamsTabPage.TabIndex = 3;
+			this.StreamsTabPage.Text = "Streams";
+			this.StreamsTabPage.UseVisualStyleBackColor = true;
 			// 
-			// entityTypeColumn
+			// openFileDialog
 			// 
-			this.entityTypeColumn.FillWeight = 170F;
-			this.entityTypeColumn.Frozen = true;
-			this.entityTypeColumn.HeaderText = "Type";
-			this.entityTypeColumn.Name = "entityTypeColumn";
-			this.entityTypeColumn.ReadOnly = true;
-			this.entityTypeColumn.Width = 170;
+			this.openFileDialog.DefaultExt = "xml";
+			this.openFileDialog.FileName = "openFileDialog";
+			this.openFileDialog.Filter = "XML files|*.xml";
 			// 
 			// saveFileDialog
 			// 

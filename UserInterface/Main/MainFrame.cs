@@ -246,6 +246,7 @@ namespace WinFromInterface
 
 		private List<string> GenerateCode()
 		{
+
 			CreateSettingsNode();
 
 			GlobalModel g1 = XmlModelReader.Read(doc);
@@ -259,168 +260,13 @@ namespace WinFromInterface
 		/**************************************************************/
 		/**************************************************************/
 
-		private void buttonAddStream_Click(object sender, EventArgs e)
-		{
-			if (entitiesIdList.Length > 2)
-			{
-				StreamForm s = new StreamForm(this);
-				s.Show();
-			}
-			else
-			{
-				MessageBox.Show("You should have at least 3 entity to create Stream");
-			}
-		}
-
 		private void buttonGenerate_Click(object sender, EventArgs e)
 		{
 			CodeForm codeForm = new CodeForm(GenerateCode());
-			codeForm.Show();
+			codeForm.ShowDialog();
 		}
 
-		private void buttonDeleteNode_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void addStatisticButton_Click(object sender, EventArgs e)
-		{
-			StatisticForm addStatistic = new StatisticForm(this);
-			addStatistic.Show();
-		}
-
-		private void editStatisticButton_Click(object sender, EventArgs e)
-		{
-			string id = (string)statisticsDataGridView.CurrentRow.Cells[0].Value;
-
-			XmlNodeList statisticsList = statistics.SelectNodes("Statistic");
-
-			int i = 0;
-			for (; i < statisticsList.Count; i++)
-			{
-				if (statisticsList[i].Attributes["name"]?.Value == id)
-				{
-					break;
-				}
-			}
-
-			StatisticForm addStatistic = new StatisticForm(this, statisticsList[i]);
-			addStatistic.Show();
-		}
-
-		private void removeStatisticButton_Click(object sender, EventArgs e)
-		{
-			string id = (string)statisticsDataGridView.CurrentRow.Cells[0].Value;
-
-			XmlNodeList streamsList = streams.SelectNodes("Stream");
-			for (int i = 0; i < streamsList.Count; i++)
-			{
-				XmlNodeList movementsList = streamsList[i].SelectSingleNode("movements").SelectNodes("movement");
-				for (int j = 0; j < movementsList.Count; j++)
-				{
-					if (movementsList[j].HasChildNodes)
-					{
-						XmlNodeList statisticPointList = movementsList[j].SelectNodes("statistic");
-						for (int k = 0; k < statisticPointList.Count; k++)
-						{
-							if (statisticPointList[k].Attributes["ref"]?.Value == id)
-							{
-								MessageBox.Show(string.Format(
-								"Statistic {0} is still used in stream(s), " +
-								"remove it from stream(s) and try again", id));
-								return;
-							}
-						}
-					}
-				}
-
-				XmlNodeList statisticPointBeforeAfterList = streamsList[i].SelectSingleNode("statistics").SelectNodes("statistic");
-				for (int j = 0; j < statisticPointBeforeAfterList.Count; j++)
-				{
-					if (statisticPointBeforeAfterList[j].Attributes["ref"]?.Value == id)
-					{
-						MessageBox.Show(string.Format(
-						"Statistic {0} is still used in stream(s), " +
-						"remove it from stream(s) and try again", id));
-						return;
-					}
-				}
-			}
-
-			XmlNodeList statisticsList = statistics.SelectNodes("Statistic");
-
-			for (int i = 0; i < statisticsList.Count; i++)
-			{
-				if (statisticsList[i].Attributes["name"]?.Value == id)
-				{
-					statistics.RemoveChild(statisticsList[i]);
-					break;
-				}
-			}
-			MessageBox.Show(string.Format("Statistic {0} was removed", id));
-			UpdateStatisticsDataGradeView();
-		}
-
-		private void addEntityButton_Click(object sender, EventArgs e)
-		{
-			EntityForm addNode = new EntityForm(this);
-			addNode.Show();
-		}
-
-		private void editEntityButton_Click(object sender, EventArgs e)
-		{
-			string id = (string)entitiesDataGridView.CurrentRow.Cells[0].Value;
-
-			XmlNodeList entitiesList = entities.SelectNodes("Entity");
-			XmlNode toFind = null;
-			for (int i = 0; i < entitiesList.Count; i++)
-			{
-				if (entitiesList[i].Attributes["id"]?.Value == id)
-				{
-					toFind = (entitiesList[i]);
-					break;
-				}
-			}
-
-			EntityForm editNode = new EntityForm(this, toFind);
-			editNode.Show();
-		}
-
-		private void removeEntityButton_Click(object sender, EventArgs e)
-		{
-			string id = (string)entitiesDataGridView.CurrentRow.Cells[0].Value;
-
-			XmlNodeList streamsList = streams.SelectNodes("Stream");
-			for (int i = 0; i < streamsList.Count; i++) 
-			{
-				XmlNodeList movementsList = streamsList[i].SelectSingleNode("movements").SelectNodes("movement");
-				for (int j = 0; j < movementsList.Count; j++) 
-				{
-					if((movementsList[i].Attributes["from"]?.Value == id) ||
-						(movementsList[i].Attributes["to"]?.Value == id))
-					{
-						MessageBox.Show(string.Format(
-							"Entity {0} is still used in stream(s), " +
-							"remove it from stream(s) and try again", id));
-						return;
-					}
-				}
-			}
-
-			XmlNodeList entitiesList = entities.SelectNodes("Entity");
-
-			for (int i = 0; i < entitiesList.Count; i++)
-			{
-				if (entitiesList[i].Attributes["id"]?.Value == id)
-				{
-					entities.RemoveChild(entitiesList[i]);
-					break;
-				}
-			}
-			MessageBox.Show(string.Format("Entity {0} was removed", id));
-			UpdateEntitiesDataGradeView();
-		}
-
+		/**MENU************************************************/
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -489,6 +335,206 @@ namespace WinFromInterface
 			CreateSettingsNode();
 
 			return;
+		}
+
+		/**ENTITY************************************************/
+		private void addEntityButton_Click(object sender, EventArgs e)
+		{
+			EntityForm addNode = new EntityForm(this);
+			addNode.ShowDialog();
+		}
+
+		private void editEntityButton_Click(object sender, EventArgs e)
+		{
+			string id = (string)entitiesDataGridView.CurrentRow.Cells[0].Value;
+
+			XmlNodeList entitiesList = entities.SelectNodes("Entity");
+			XmlNode toFind = null;
+			for (int i = 0; i < entitiesList.Count; i++)
+			{
+				if (entitiesList[i].Attributes["id"]?.Value == id)
+				{
+					toFind = (entitiesList[i]);
+					break;
+				}
+			}
+
+			EntityForm editNode = new EntityForm(this, toFind);
+			editNode.ShowDialog();
+		}
+
+		private void removeEntityButton_Click(object sender, EventArgs e)
+		{
+			string id = (string)entitiesDataGridView.CurrentRow.Cells[0].Value;
+
+			XmlNodeList streamsList = streams.SelectNodes("Stream");
+			for (int i = 0; i < streamsList.Count; i++)
+			{
+				XmlNodeList movementsList = streamsList[i].SelectSingleNode("movements").SelectNodes("movement");
+				for (int j = 0; j < movementsList.Count; j++)
+				{
+					if ((movementsList[i].Attributes["from"]?.Value == id) ||
+						(movementsList[i].Attributes["to"]?.Value == id))
+					{
+						MessageBox.Show(string.Format(
+							"Entity {0} is still used in stream(s), " +
+							"remove it from stream(s) and try again", id));
+						return;
+					}
+				}
+			}
+
+			XmlNodeList entitiesList = entities.SelectNodes("Entity");
+
+			for (int i = 0; i < entitiesList.Count; i++)
+			{
+				if (entitiesList[i].Attributes["id"]?.Value == id)
+				{
+					entities.RemoveChild(entitiesList[i]);
+					break;
+				}
+			}
+			MessageBox.Show(string.Format("Entity {0} was removed", id));
+			UpdateEntitiesDataGradeView();
+		}
+
+		/**STATISTIC************************************************/
+
+		private void addStatisticButton_Click(object sender, EventArgs e)
+		{
+			StatisticForm addStatistic = new StatisticForm(this);
+			addStatistic.ShowDialog();
+		}
+
+		private void editStatisticButton_Click(object sender, EventArgs e)
+		{
+			string id = (string)statisticsDataGridView.CurrentRow.Cells[0].Value;
+
+			XmlNodeList statisticsList = statistics.SelectNodes("Statistic");
+
+			int i = 0;
+			for (; i < statisticsList.Count; i++)
+			{
+				if (statisticsList[i].Attributes["name"]?.Value == id)
+				{
+					break;
+				}
+			}
+
+			StatisticForm addStatistic = new StatisticForm(this, statisticsList[i]);
+			addStatistic.ShowDialog();
+		}
+
+		private void removeStatisticButton_Click(object sender, EventArgs e)
+		{
+			string id = (string)statisticsDataGridView.CurrentRow.Cells[0].Value;
+
+			XmlNodeList streamsList = streams.SelectNodes("Stream");
+			for (int i = 0; i < streamsList.Count; i++)
+			{
+				XmlNodeList movementsList = streamsList[i].SelectSingleNode("movements").SelectNodes("movement");
+				for (int j = 0; j < movementsList.Count; j++)
+				{
+					if (movementsList[j].HasChildNodes)
+					{
+						XmlNodeList statisticPointList = movementsList[j].SelectNodes("statistic");
+						for (int k = 0; k < statisticPointList.Count; k++)
+						{
+							if (statisticPointList[k].Attributes["ref"]?.Value == id)
+							{
+								MessageBox.Show(string.Format(
+								"Statistic {0} is still used in stream(s), " +
+								"remove it from stream(s) and try again", id));
+								return;
+							}
+						}
+					}
+				}
+
+				XmlNodeList statisticPointBeforeAfterList = streamsList[i].SelectSingleNode("statistics").SelectNodes("statistic");
+				for (int j = 0; j < statisticPointBeforeAfterList.Count; j++)
+				{
+					if (statisticPointBeforeAfterList[j].Attributes["ref"]?.Value == id)
+					{
+						MessageBox.Show(string.Format(
+						"Statistic {0} is still used in stream(s), " +
+						"remove it from stream(s) and try again", id));
+						return;
+					}
+				}
+			}
+
+			XmlNodeList statisticsList = statistics.SelectNodes("Statistic");
+
+			for (int i = 0; i < statisticsList.Count; i++)
+			{
+				if (statisticsList[i].Attributes["name"]?.Value == id)
+				{
+					statistics.RemoveChild(statisticsList[i]);
+					break;
+				}
+			}
+			MessageBox.Show(string.Format("Statistic {0} was removed", id));
+			UpdateStatisticsDataGradeView();
+		}
+
+		/**STREAM************************************************/
+		private void buttonAddStream_Click(object sender, EventArgs e)
+		{
+			if (entitiesIdList.Length > 2)
+			{
+				StreamForm s = new StreamForm(this);
+				s.ShowDialog();
+			}
+			else
+			{
+				MessageBox.Show("You should have at least 3 entity to create Stream");
+			}
+		}
+
+		private void buttonEditStream_Click(object sender, EventArgs e)
+		{
+			if (streamListBox.SelectedItem == null)
+			{
+				MessageBox.Show("Plaese select item!");
+				return;
+			}
+
+			XmlNodeList statisticsList = streams.SelectNodes("Stream");
+			int i = 0;
+			for (; i < statisticsList.Count; i++)
+			{
+				if (statisticsList[i].Attributes["id"]?.Value == (string)streamListBox.SelectedItem)
+				{
+					break;
+				}
+			}
+
+			StreamForm s = new StreamForm(this, statisticsList[i]);
+			s.ShowDialog();
+		}
+
+		private void buttonDeleteStream_Click(object sender, EventArgs e)
+		{
+			XmlNodeList statisticsList = streams.SelectNodes("Stream");
+
+			if(streamListBox.SelectedItem == null)
+			{
+				MessageBox.Show("Plaese select item!");
+				return;
+			}
+
+			for (int i = 0; i < statisticsList.Count; i++) 
+			{
+				if(statisticsList[i].Attributes["id"]?.Value == (string)streamListBox.SelectedItem)
+				{
+					streams.RemoveChild(statisticsList[i]);
+					break;
+				}
+			}
+
+			MessageBox.Show(string.Format("Stream {0} was removed", (string)streamListBox.SelectedItem));
+			UpdateStreamList();
 		}
 
 		/**************************************************************/

@@ -77,52 +77,57 @@ namespace WinFromInterface
 		{
 			try
 			{
-				if (mode == Mode.Edit)
-				{
-					mainFrame.Statistics.RemoveChild(statistic);
-				}
 
 				if (nameTextBox.Text == "")
 				{
 					MessageBox.Show("name of statistic can't be empty");
 					return;
 				}
-
-				XmlNodeList xmlStatistics = mainFrame.Statistics.SelectNodes("Statistic");
-
-				for (int i = 0; i < xmlStatistics.Count; i++)
+				if (mode == Mode.Add)
 				{
-					if (xmlStatistics[i].Attributes["name"]?.Value == nameTextBox.Text)
+					XmlNodeList xmlStatistics = mainFrame.Statistics.SelectNodes("Statistic");
+
+					for (int i = 0; i < xmlStatistics.Count; i++)
 					{
-						MessageBox.Show("name of statistic should be unique");
-						return;
+						if (xmlStatistics[i].Attributes["name"]?.Value == nameTextBox.Text)
+						{
+							MessageBox.Show("name of statistic should be unique");
+							return;
+						}
 					}
 				}
 
-				statistic = mainFrame.Doc.CreateElement("Statistic");
+				XmlNode newStatistic = mainFrame.Doc.CreateElement("Statistic");
 
 				XmlAttribute statisticId = mainFrame.Doc.CreateAttribute("name");
 				statisticId.Value = nameTextBox.Text;
 				XmlAttribute statisticType = mainFrame.Doc.CreateAttribute("type");
 				statisticType.Value = (string)comboBoxTypeOfStatistic.SelectedItem;
 
-				statistic.Attributes.Append(statisticId);
-				statistic.Attributes.Append(statisticType);
+				newStatistic.Attributes.Append(statisticId);
+				newStatistic.Attributes.Append(statisticType);
 
 				if ((string)comboBoxTypeOfStatistic.SelectedItem == GlobalVariables.INTERVAL_STATISTIC)
 				{
-					statistic.AppendChild(GetTableParamNode());
+					newStatistic.AppendChild(GetTableParamNode());
 				}
 				else if ((string)comboBoxTypeOfStatistic.SelectedItem == GlobalVariables.ONEPOINT_STATISTIC)
 				{
-					statistic.AppendChild(GetTableParamNode());
+					newStatistic.AppendChild(GetTableParamNode());
 				}
 				else
 				{
 					throw new Exception("can't understand type of statistic");
 				}
 
-				mainFrame.Statistics.AppendChild(statistic);
+				if (mode == Mode.Add)
+				{
+					mainFrame.Statistics.AppendChild(newStatistic);
+				}
+				else
+				{
+					mainFrame.Statistics.ReplaceChild(newStatistic, statistic);
+				}
 
 				mainFrame.UpdateStatisticsDataGradeView();
 

@@ -57,6 +57,7 @@
 			this.ClientSize = new System.Drawing.Size(534, 462);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.codeTextBox);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "CodeForm";
 			this.Text = "CodeForm";
 			this.ResumeLayout(false);

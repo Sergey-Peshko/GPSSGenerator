@@ -36,12 +36,12 @@
 			this.tableParamTabPage = new System.Windows.Forms.TabPage();
 			this.tableParamGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableParamDataGridView = new System.Windows.Forms.DataGridView();
-			this.tabControl = new System.Windows.Forms.TabControl();
-			this.addButton = new System.Windows.Forms.Button();
-			this.cancelButton = new System.Windows.Forms.Button();
 			this.upperBoundOfLowerFrequencyIntervalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.intervalWidthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.numberOfIntervalsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.tabControl = new System.Windows.Forms.TabControl();
+			this.addButton = new System.Windows.Forms.Button();
+			this.cancelButton = new System.Windows.Forms.Button();
 			this.tableParamTabPage.SuspendLayout();
 			this.tableParamGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.tableParamDataGridView)).BeginInit();
@@ -127,35 +127,6 @@
 			this.tableParamDataGridView.Size = new System.Drawing.Size(471, 109);
 			this.tableParamDataGridView.TabIndex = 0;
 			// 
-			// tabControl
-			// 
-			this.tabControl.Controls.Add(this.tableParamTabPage);
-			this.tabControl.Location = new System.Drawing.Point(19, 90);
-			this.tabControl.Name = "tabControl";
-			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(497, 172);
-			this.tabControl.TabIndex = 4;
-			// 
-			// addButton
-			// 
-			this.addButton.Location = new System.Drawing.Point(446, 274);
-			this.addButton.Name = "addButton";
-			this.addButton.Size = new System.Drawing.Size(75, 23);
-			this.addButton.TabIndex = 6;
-			this.addButton.Text = "Add";
-			this.addButton.UseVisualStyleBackColor = true;
-			this.addButton.Click += new System.EventHandler(this.addButton_Click);
-			// 
-			// cancelButton
-			// 
-			this.cancelButton.Location = new System.Drawing.Point(365, 274);
-			this.cancelButton.Name = "cancelButton";
-			this.cancelButton.Size = new System.Drawing.Size(75, 23);
-			this.cancelButton.TabIndex = 7;
-			this.cancelButton.Text = "Cancel";
-			this.cancelButton.UseVisualStyleBackColor = true;
-			this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-			// 
 			// upperBoundOfLowerFrequencyIntervalColumn
 			// 
 			this.upperBoundOfLowerFrequencyIntervalColumn.FillWeight = 200F;
@@ -178,6 +149,35 @@
 			this.numberOfIntervalsColumn.HeaderText = "Number Of Intervals";
 			this.numberOfIntervalsColumn.Name = "numberOfIntervalsColumn";
 			this.numberOfIntervalsColumn.ReadOnly = true;
+			// 
+			// tabControl
+			// 
+			this.tabControl.Controls.Add(this.tableParamTabPage);
+			this.tabControl.Location = new System.Drawing.Point(19, 90);
+			this.tabControl.Name = "tabControl";
+			this.tabControl.SelectedIndex = 0;
+			this.tabControl.Size = new System.Drawing.Size(497, 172);
+			this.tabControl.TabIndex = 4;
+			// 
+			// addButton
+			// 
+			this.addButton.Location = new System.Drawing.Point(446, 274);
+			this.addButton.Name = "addButton";
+			this.addButton.Size = new System.Drawing.Size(75, 23);
+			this.addButton.TabIndex = 6;
+			this.addButton.Text = "Save";
+			this.addButton.UseVisualStyleBackColor = true;
+			this.addButton.Click += new System.EventHandler(this.addButton_Click);
+			// 
+			// cancelButton
+			// 
+			this.cancelButton.Location = new System.Drawing.Point(365, 274);
+			this.cancelButton.Name = "cancelButton";
+			this.cancelButton.Size = new System.Drawing.Size(75, 23);
+			this.cancelButton.TabIndex = 7;
+			this.cancelButton.Text = "Cancel";
+			this.cancelButton.UseVisualStyleBackColor = true;
+			this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
 			// 
 			// StatisticForm
 			// 
