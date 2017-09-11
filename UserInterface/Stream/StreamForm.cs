@@ -280,7 +280,9 @@ namespace WinFromInterface
 
 			if (fromToList.Contains(fromTo))
 			{
-				MessageBox.Show("You have already had such movement, so value will be replaced");
+				MessageBox.Show("You have already had such movement, " + 
+					"if you want to change probability, please delete current " + 
+					"add insert one more!");
 				return;
 			}
 

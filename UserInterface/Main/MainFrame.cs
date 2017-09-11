@@ -216,7 +216,7 @@ namespace WinFromInterface
 			if (settings.Attributes["measure-lifecycle-by"]?.Value == "AmountOfTime")
 			{
 				isTime.Checked = true;
-			} else if (settings.Attributes["measure-lifecycle-by"]?.Value == "AmountOfTime")
+			} else if (settings.Attributes["measure-lifecycle-by"]?.Value == "NumberOfTransactions")
 			{
 				isTime.Checked = false;
 			}
@@ -271,6 +271,8 @@ namespace WinFromInterface
 		{
 			if (openFileDialog.ShowDialog() == DialogResult.OK)
 			{
+				this.Text = "GPSSHelper" + string.Format(" ~[{0}]", openFileDialog.SafeFileName);
+
 				doc.Load(openFileDialog.FileName);
 				if (doc.DocumentElement.Name != "Model")
 				{
@@ -290,6 +292,8 @@ namespace WinFromInterface
 					UpdateStreamList();
 					UpdateSettings();
 				}
+
+				openFileDialog.FileName = openFileDialog.SafeFileName;
 			}
 		}
 
@@ -302,13 +306,22 @@ namespace WinFromInterface
 		{
 			if (saveFileDialog.ShowDialog() == DialogResult.OK)
 			{
+				string safeName = saveFileDialog.FileName.Split('\\').Reverse().ElementAt(0);
+
+				this.Text = "GPSSHelper" + string.Format(" ~[{0}]", safeName);
 				CreateSettingsNode();
 				doc.Save(saveFileDialog.FileName);
+
+				saveFileDialog.FileName = safeName;
+
+				MessageBox.Show("Save success");
 			}
 		}
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			this.Text = "GPSSHelper";
+
 			MessageBox.Show("Old Model was destroyed, new Model will be created");
 			doc = new XmlDocument();
 

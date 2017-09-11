@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Model>
+  <Settings measure-lifecycle-by="NumberOfTransactions" value="10000" />
+  <Entities />
+  <Statistics />
+  <Streams />
+</Model>

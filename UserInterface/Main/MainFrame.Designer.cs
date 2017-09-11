@@ -143,7 +143,7 @@
 			this.groupBoxSettings.Controls.Add(this.numericValue);
 			this.groupBoxSettings.Location = new System.Drawing.Point(6, 6);
 			this.groupBoxSettings.Name = "groupBoxSettings";
-			this.groupBoxSettings.Size = new System.Drawing.Size(436, 277);
+			this.groupBoxSettings.Size = new System.Drawing.Size(274, 99);
 			this.groupBoxSettings.TabIndex = 1;
 			this.groupBoxSettings.TabStop = false;
 			this.groupBoxSettings.Text = "Measure life cycle by";
@@ -469,6 +469,7 @@
 			this.Controls.Add(this.buttonGenerate);
 			this.Controls.Add(this.menuStrip1);
 			this.Controls.Add(this.mainTabControl);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainFrame";
 			this.Text = "GPSSHelper";
