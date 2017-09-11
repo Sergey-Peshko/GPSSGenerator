@@ -1,5 +1,0 @@
-START Stream #0
-	S1
-	b1
-	S2
-END Stream #0

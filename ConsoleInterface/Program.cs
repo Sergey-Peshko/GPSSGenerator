@@ -11,15 +11,15 @@ namespace ConsoleInterface
 {
 	class Program
 	{
-		public static string data = "C:\\Users\\peshk\\Documents\\Visual Studio 2015\\Projects\\GPSSGenerator\\GPSSGenerator\\data\\";
-		public static string rez = "C:\\Users\\peshk\\Documents\\Visual Studio 2015\\Projects\\GPSSGenerator\\GPSSGenerator\\rez\\";
+		//public static string data = "C:\\Users\\peshk\\Documents\\Visual Studio 2015\\Projects\\GPSSGenerator\\GPSSGenerator\\data\\";
+		//public static string rez = "C:\\Users\\peshk\\Documents\\Visual Studio 2015\\Projects\\GPSSGenerator\\GPSSGenerator\\rez\\";
 
 		static void Main(string[] args)
 		{
-			//Console.Write("input file name: ");
-			//string path = Console.ReadLine();
+			Console.Write("input file name: ");
+			string path = Console.ReadLine();
 
-			GlobalModel gl = XmlModelReader.Read(data + "special.xml");
+			GlobalModel gl = XmlModelReader.Read(path);
 
 			List<string> code = gl.MakeCode();
 
@@ -28,8 +28,10 @@ namespace ConsoleInterface
 				Console.WriteLine(code[i]);
 			}
 
-			File.WriteAllLines(rez + "rez.txt", code.ToArray());
+			Console.Write("input file name to save code: ");
+			string pathToSave = Console.ReadLine();
 
+			File.WriteAllLines(pathToSave, code.ToArray());
 		}
 
 	}

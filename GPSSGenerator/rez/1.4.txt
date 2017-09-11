@@ -1,6 +1,0 @@
-START Stream #0
-	S1
-Lable_b1	b1
-	TRANSFER 0.1,Lable_S2,Lable_b1
-Lable_S2	S2
-END Stream #0
