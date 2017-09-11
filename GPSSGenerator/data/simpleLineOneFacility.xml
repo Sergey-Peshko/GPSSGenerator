@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Model>
+  <Settings measure-lifecycle-by="NumberOfTransactions" value="10000" />
+  <Entities>
+    <Entity id="g1" type="GENERATOR">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="1" />
+        <MathematicalExpectation value="10" />
+      </Distribution>
+    </Entity>
+    <Entity id="b1" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="2" />
+        <MathematicalExpectation value="9" />
+      </Distribution>
+    </Entity>
+    <Entity id="r1" type="RECEIVER">
+      <NumberOfTransactionsToBeDeleted value="1" />
+    </Entity>
+  </Entities>
+  <Statistics />
+  <Streams>
+    <Stream id="1">
+      <movements>
+        <movement from="g1" to="b1" value="1" />
+        <movement from="b1" to="r1" value="1" />
+      </movements>
+      <statistics />
+    </Stream>
+  </Streams>
+</Model>

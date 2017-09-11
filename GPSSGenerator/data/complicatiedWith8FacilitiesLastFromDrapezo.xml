@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Model>
+  <Settings measure-lifecycle-by="NumberOfTransactions" value="10000" />
+  <Entities>
+    <Entity id="g1" type="GENERATOR">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="1" />
+        <MathematicalExpectation value="10" />
+      </Distribution>
+    </Entity>
+    <Entity id="b1" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="2" />
+        <MathematicalExpectation value="1" />
+      </Distribution>
+    </Entity>
+    <Entity id="b2" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="3" />
+        <MathematicalExpectation value="2" />
+      </Distribution>
+    </Entity>
+    <Entity id="b3" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="4" />
+        <MathematicalExpectation value="3" />
+      </Distribution>
+    </Entity>
+    <Entity id="b4" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="5" />
+        <MathematicalExpectation value="4" />
+      </Distribution>
+    </Entity>
+    <Entity id="b5" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="6" />
+        <MathematicalExpectation value="5" />
+      </Distribution>
+    </Entity>
+    <Entity id="b6" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="7" />
+        <MathematicalExpectation value="6" />
+      </Distribution>
+    </Entity>
+    <Entity id="b7" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="8" />
+        <MathematicalExpectation value="7" />
+      </Distribution>
+    </Entity>
+    <Entity id="b8" type="ONECHANNEL_FACILITY">
+      <Distribution type="EXPONENTIAL">
+        <GeneratorNumber value="9" />
+        <MathematicalExpectation value="8" />
+      </Distribution>
+    </Entity>
+    <Entity id="r1" type="RECEIVER">
+      <NumberOfTransactionsToBeDeleted value="1" />
+    </Entity>
+  </Entities>
+  <Statistics />
+  <Streams>
+    <Stream id="1">
+      <movements>
+        <movement from="g1" to="b1" value="0.5" />
+        <movement from="g1" to="b4" value="0.2" />
+        <movement from="g1" to="b7" value="0.3" />
+        <movement from="b1" to="b2" value="0.7" />
+        <movement from="b1" to="b3" value="0.3" />
+        <movement from="b2" to="b1" value="1" />
+        <movement from="b3" to="r1" value="1" />
+        <movement from="b4" to="b5" value="1" />
+        <movement from="b5" to="b6" value="1" />
+        <movement from="b6" to="r1" value="1" />
+        <movement from="b7" to="b8" value="0.5" />
+        <movement from="b7" to="r1" value="0.5" />
+        <movement from="b8" to="b7" value="1" />
+      </movements>
+      <statistics />
+    </Stream>
+  </Streams>
+</Model>
