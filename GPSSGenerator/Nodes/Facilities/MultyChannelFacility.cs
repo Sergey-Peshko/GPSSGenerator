@@ -23,7 +23,7 @@ namespace GPSSGenerator.Nodes.Facilities
 		}
 
 		public MultyChannelFacility(string id, 
-			IDistribution distribution,
+			Distribution distribution,
 			int numberOfChannel) : base(id, distribution)
 		{
 			this.numberOfChannel = numberOfChannel;

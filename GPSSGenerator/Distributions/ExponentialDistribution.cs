@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Distributions
 {
-	class ExponentialDistribution : IDistribution
+	class ExponentialDistribution : Distribution
 	{
 		private float mathematicalExpectation;
 

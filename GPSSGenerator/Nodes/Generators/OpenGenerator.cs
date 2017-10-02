@@ -12,9 +12,9 @@ namespace GPSSGenerator.Nodes.Generators
 {
 	class OpenGenerator : Generator
 	{
-		IDistribution distribution;
+		Distribution distribution;
 
-		public IDistribution Distribution
+		public Distribution Distribution
 		{
 			get
 			{
@@ -22,7 +22,7 @@ namespace GPSSGenerator.Nodes.Generators
 			}
 		}
 
-		public OpenGenerator(string id, IntervalStatistic netLevelIntervalStatistic, IDistribution distribution) : base(id, netLevelIntervalStatistic)
+		public OpenGenerator(string id, IntervalStatistic netLevelIntervalStatistic, Distribution distribution) : base(id, netLevelIntervalStatistic)
 		{
 			this.distribution = distribution;
 		}

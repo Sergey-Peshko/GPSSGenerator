@@ -10,19 +10,19 @@ namespace GPSSGenerator.Nodes.Facilities
 {
 	abstract class Facility : Node
 	{
-		protected IDistribution distribution;
+		protected Distribution distribution;
 
 		protected IntervalStatistic netLevelFull;
 		protected IntervalStatistic netLevelQueue;
 
-		public Facility(string id, IDistribution distribution) : base(id)
+		public Facility(string id, Distribution distribution) : base(id)
 		{
 			netLevelFull = new IntervalStatistic(id);
 			netLevelQueue = new IntervalStatistic(id + "_queue");
 			this.distribution = distribution;
 		}
 
-		public IDistribution Distribution
+		public Distribution Distribution
 		{
 			get
 			{

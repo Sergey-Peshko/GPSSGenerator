@@ -13,7 +13,7 @@ namespace GPSSGenerator.Nodes.Facilities
 	{
 
 		public OneChannelFacility(string id,
-			IDistribution distribution) : base(id, distribution)
+			Distribution distribution) : base(id, distribution)
 		{
 
 		}

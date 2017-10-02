@@ -146,7 +146,7 @@ namespace WinFromInterface
 			upperBoundOfLowerFrequencyIntervalAttr.Value = Convert.ToUInt32(tableParamDataGridView.Rows[0].Cells[0].Value).ToString();
 			XmlAttribute intervalWidthAttr = mainFrame.Doc.CreateAttribute("IntervalWidth");
 			intervalWidthAttr.Value = Convert.ToUInt32(tableParamDataGridView.Rows[0].Cells[1].Value).ToString();
-			XmlAttribute numberOfIntervalsAttr = mainFrame.Doc.CreateAttribute("NumberOfIntervalsAttr");
+			XmlAttribute numberOfIntervalsAttr = mainFrame.Doc.CreateAttribute("NumberOfIntervals");
 			numberOfIntervalsAttr.Value = Convert.ToUInt32(tableParamDataGridView.Rows[0].Cells[2].Value).ToString();
 
 			tableParam.Attributes.Append(upperBoundOfLowerFrequencyIntervalAttr);
@@ -176,9 +176,6 @@ namespace WinFromInterface
 			{
 				throw new Exception("can't understand type of node");
 			}
-
-			
-
 		}
 
 		private void TuneOnTableParamDataGridView()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Distributions
 {
-	class UniformDistribution : IDistribution
+	class UniformDistribution : Distribution
 	{
 		private float a; // нижняя граница
 		private float b; // верхняя граница

@@ -36,12 +36,12 @@
 			this.tableParamTabPage = new System.Windows.Forms.TabPage();
 			this.tableParamGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableParamDataGridView = new System.Windows.Forms.DataGridView();
-			this.upperBoundOfLowerFrequencyIntervalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.intervalWidthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.numberOfIntervalsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.addButton = new System.Windows.Forms.Button();
 			this.cancelButton = new System.Windows.Forms.Button();
+			this.upperBoundOfLowerFrequencyIntervalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.intervalWidthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numberOfIntervalsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tableParamTabPage.SuspendLayout();
 			this.tableParamGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.tableParamDataGridView)).BeginInit();
@@ -127,29 +127,6 @@
 			this.tableParamDataGridView.Size = new System.Drawing.Size(471, 109);
 			this.tableParamDataGridView.TabIndex = 0;
 			// 
-			// upperBoundOfLowerFrequencyIntervalColumn
-			// 
-			this.upperBoundOfLowerFrequencyIntervalColumn.FillWeight = 200F;
-			this.upperBoundOfLowerFrequencyIntervalColumn.Frozen = true;
-			this.upperBoundOfLowerFrequencyIntervalColumn.HeaderText = "Upper Bound Of Lower Frequency Interval";
-			this.upperBoundOfLowerFrequencyIntervalColumn.Name = "upperBoundOfLowerFrequencyIntervalColumn";
-			this.upperBoundOfLowerFrequencyIntervalColumn.ReadOnly = true;
-			this.upperBoundOfLowerFrequencyIntervalColumn.Width = 200;
-			// 
-			// intervalWidthColumn
-			// 
-			this.intervalWidthColumn.Frozen = true;
-			this.intervalWidthColumn.HeaderText = "Interval Width";
-			this.intervalWidthColumn.Name = "intervalWidthColumn";
-			this.intervalWidthColumn.ReadOnly = true;
-			// 
-			// numberOfIntervalsColumn
-			// 
-			this.numberOfIntervalsColumn.Frozen = true;
-			this.numberOfIntervalsColumn.HeaderText = "Number Of Intervals";
-			this.numberOfIntervalsColumn.Name = "numberOfIntervalsColumn";
-			this.numberOfIntervalsColumn.ReadOnly = true;
-			// 
 			// tabControl
 			// 
 			this.tabControl.Controls.Add(this.tableParamTabPage);
@@ -178,6 +155,26 @@
 			this.cancelButton.Text = "Cancel";
 			this.cancelButton.UseVisualStyleBackColor = true;
 			this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+			// 
+			// upperBoundOfLowerFrequencyIntervalColumn
+			// 
+			this.upperBoundOfLowerFrequencyIntervalColumn.FillWeight = 200F;
+			this.upperBoundOfLowerFrequencyIntervalColumn.Frozen = true;
+			this.upperBoundOfLowerFrequencyIntervalColumn.HeaderText = "Upper Bound Of Lower Frequency Interval";
+			this.upperBoundOfLowerFrequencyIntervalColumn.Name = "upperBoundOfLowerFrequencyIntervalColumn";
+			this.upperBoundOfLowerFrequencyIntervalColumn.Width = 200;
+			// 
+			// intervalWidthColumn
+			// 
+			this.intervalWidthColumn.Frozen = true;
+			this.intervalWidthColumn.HeaderText = "Interval Width";
+			this.intervalWidthColumn.Name = "intervalWidthColumn";
+			// 
+			// numberOfIntervalsColumn
+			// 
+			this.numberOfIntervalsColumn.Frozen = true;
+			this.numberOfIntervalsColumn.HeaderText = "Number Of Intervals";
+			this.numberOfIntervalsColumn.Name = "numberOfIntervalsColumn";
 			// 
 			// StatisticForm
 			// 

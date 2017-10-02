@@ -55,7 +55,7 @@
     <Compile Include="GlobalDimension\GlobalVariables.cs" />
     <Compile Include="GlobalDimension\NetSettings.cs" />
     <Compile Include="Distributions\ExponentialDistribution.cs" />
-    <Compile Include="Distributions\IDistribution.cs" />
+    <Compile Include="Distributions\Distribution.cs" />
     <Compile Include="Distributions\UniformDistribution.cs" />
     <Compile Include="Nodes\Generators\Generator.cs" />
     <Compile Include="Nodes\IDeclarative.cs" />

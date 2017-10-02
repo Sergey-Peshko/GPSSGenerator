@@ -277,7 +277,7 @@ namespace GPSSGenerator.ModelReaders
 				throw new Exception("can't create Node");
 		}
 
-		static private IDistribution CreateDistribution(XmlNode xmlDistribution)
+		static private Distribution CreateDistribution(XmlNode xmlDistribution)
 		{
 			if (xmlDistribution.Attributes["type"]?.Value == GlobalVariables.EXPONENTIAL)
 			{
@@ -315,6 +315,7 @@ namespace GPSSGenerator.ModelReaders
 
 		static private string getPropertyValueByName(XmlNode xmlEntity, string name)
 		{
+			XmlNode kek = xmlEntity.SelectSingleNode(name);
 			return xmlEntity.SelectSingleNode(name).Attributes["value"]?.Value;
 		}
 

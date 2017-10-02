@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GPSSGenerator.Distributions
 {
-	abstract class IDistribution
+	abstract class Distribution
 	{
 		protected string description;
 		protected int numberOfGenerator;
@@ -21,7 +21,7 @@ namespace GPSSGenerator.Distributions
 			}
 		}
 
-		public IDistribution(int numberOfGenerator)
+		public Distribution(int numberOfGenerator)
 		{
 			this.numberOfGenerator = numberOfGenerator;
 		}

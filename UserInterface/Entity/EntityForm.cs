@@ -84,14 +84,14 @@ namespace WinFromInterface
 		{
 			if(distribution.Attributes["type"]?.Value == GlobalVariables.UNIFORM)
 			{
-				comboBoxTypeOfEntity.SelectedItem = GlobalVariables.UNIFORM;
+				comboBoxTypeOfDistribution.SelectedItem = GlobalVariables.UNIFORM;
 				distributionParam.Rows[0].Cells[0].Value = distribution.SelectSingleNode("GeneratorNumber").Attributes["value"]?.Value;
 				distributionParam.Rows[0].Cells[1].Value = distribution.SelectSingleNode("LowerBound").Attributes["value"]?.Value;
 				distributionParam.Rows[0].Cells[2].Value = distribution.SelectSingleNode("UpperBound").Attributes["value"]?.Value;
 			}
 			else if (distribution.Attributes["type"]?.Value == GlobalVariables.EXPONENTIAL)
 			{
-				comboBoxTypeOfEntity.SelectedItem = GlobalVariables.EXPONENTIAL;
+				comboBoxTypeOfDistribution.SelectedItem = GlobalVariables.EXPONENTIAL;
 				distributionParam.Rows[0].Cells[0].Value = distribution.SelectSingleNode("GeneratorNumber").Attributes["value"]?.Value;
 				distributionParam.Rows[0].Cells[1].Value = distribution.SelectSingleNode("MathematicalExpectation").Attributes["value"]?.Value;
 			}
@@ -303,7 +303,7 @@ namespace WinFromInterface
 				else if ((string)comboBoxTypeOfEntity.SelectedItem == GlobalVariables.MULTYCHANNEL_FACILITY)
 				{
 
-					XmlNode nodeCapasity = mainFrame.Doc.CreateElement("Capasity");
+					XmlNode nodeCapasity = mainFrame.Doc.CreateElement("Capacity");
 					XmlAttribute value = mainFrame.Doc.CreateAttribute("value");
 					value.Value = capacityNumericUpDown.Value.ToString();
 					nodeCapasity.Attributes.Append(value);
